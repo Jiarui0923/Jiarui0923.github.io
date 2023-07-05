@@ -2,16 +2,34 @@
 title: Jiarui LI
 date: 2023-07-05 16:57:20
 ---
+
+[**📑 Download PDF Version**](/resume/JiaruiLi_Resume_20230705.pdf)  
+
+
 🏠Address: Chongqing, China
 📫E-mail: jli78@tulane.edu
 🔗Github: https://github.com/jiarui0923/
-📝Resume: https://jiarui0923.github.io/
+📝Resume: https://jiarui0923.github.io/  
 
 ## Education
 <table style='border:0; padding:10px;'>
     <tr>
         <td>
-            <img src='/resume/images/unnc.png'></img>
+            <img src='/resume/images/tu.ico'></img>
+        </td>
+        <td>
+            <b>Tulane University</b><br>
+            Ph.D. Candidate in Computer Science<br>
+            <i>Research Field: Bioinformatics and Immunoinformatics</i>
+        </td>
+        <td style='font-size:16px;'>
+            Louisiana, US<br>
+            Sept. 2023 - Present
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src='/resume/images/unnc.ico'></img>
         </td>
         <td>
             <b>University of Nottingham Ningbo China</b><br>
@@ -25,7 +43,7 @@ date: 2023-07-05 16:57:20
     </tr>
     <tr>
         <td>
-            <img src='/resume/images/UoB.png'></img>
+            <img src='/resume/images/UoB.ico'></img>
         </td>
         <td>
             <b>University of Birmingham</b><br>
@@ -77,14 +95,14 @@ _Jan 2022 ‑ May 2022_
 
 ## Publications
 ### Journal Articles
-> 1. Ji, R., Li, J., Wang, D., Hirst, J., Tang, B., Ren, J. (2023, July). **Prediction of Enantioselectivity in Asymmetric Catalysis Using Attention U‑Net with UMAP Clustering and Random Forest**. _*Under Reviewing_
+> 1. Li, J., Ji, R., Wang, D., Hirst, J., Tang, B., Ren, J. (2023, July). **Prediction of Enantioselectivity in Asymmetric Catalysis Using Attention U‑Net with UMAP Clustering and Random Forest**. _*Under Reviewing_
 ### Conference Proceedings
 > 1. Ji, R., Li, J., He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
 
 ## Awards & Funding
 |Year |Award       |Authority   |Location    |
 |:---:|:-----------|:-----------|:-----------|
-|2023 |**Tulane Ph.D. Funding**|Tulane University|Zhejiang, China|
+|2023 |**Tulane Ph.D. Funding**|Tulane University|Louisiana, US|
 |2023 |**Zhejiang Excellent Graduates**|Zhejiang Provincial Government|Zhejiang, China|
 |2022 |**Best Performer**|University of Nottingham Ningbo China|Zhejiang, China|
 |2022 |**President’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
