@@ -59,6 +59,63 @@ date: 2023-07-05 16:57:20
 
 ## Experiences
 
+### Work Experiences
+
+#### ⚪ Shanghai Institution of Materia Medica, China Academy of Science
+**Internship**
+_Shanghai, China_  
+_June 2023 ‑ July 2023_
+- Learned experiments including Western Blot, Cell Formation Assay, and Protein quantitative analysis.
+- Researched SOS‑1 and SHP‑2 inhibitors
+
+### Research Experiences
+
+#### ⚪ IC50 Prediction of SOS‑1 and SHP‑2 Inhibitor
+Shanghai Institution of Materia Medica & University of Nottingham Ningbo China 
+_Zhejiang, Shanghai_  
+_Sept 2022 ‑ Jan 2023_
+- Designed a new evaluation method for algorithms.
+- Designed a multi‑stage algorithm for IC50 prediction and surpassed the STOA.
+- Designed Graph Neural Networks and Transformer for IC50 prediction.
+
+#### ⚪ Machine Learning Based Radar Gait Verification
+University of Nottingham Ningbo China 
+_Zhejiang, China_  
+_Sept 2022 ‑ Jan 2023_
+- Designed a Siamese vision transformer with mutual attention.
+- Designed a mutual attention fusion machenism.
+- Designed a time and frequency embedding method for signal processing.
+
+#### ⚪ Artificial Intelligence Based Drug Discovery Cloud Platform Provincial Grant Application 
+University of Nottingham Ningbo China 
+_Zhejiang, China_  
+_July 2021 ‑ Sept 2021_
+- Designed the architecture of the cloud platform.
+- Designed the core algorithm for structure‑activity prediction.
+
+#### ⚪ Enantiomeric Excess Prediction with Machine Learning
+University of Nottingham Ningbo China 
+_Zhejiang, China_  
+_July 2021 ‑ May 2023_
+- Analyzed the features of a dataset for asymmetric catalysis containing the quantum data for both substrates and catalysts.
+- Designed a dual stream mutual attention transformer to predict the enantiomeric excess.
+- Designed an attention U‑Net to predict the enantiomeric excess.
+- Created co‑matrices for all the substances to ensure recognizable structure and model improvement.
+
+#### ⚪ Vehicle Detection on Drone Captured Images 
+University of Nottingham Ningbo China 
+_Zhejiang, China_  
+_Jan 2021 ‑ July 2021_
+- Transplanted Yolo‑v5 to the dataset and improved its loss function to achieve better performance than STOA.
+- Studied models such as RCNN/YOLO family and model improvement methods from Efficient‑Net.
+
+#### ⚪ MRI Image Tumor Segmentation
+University of Nottingham Ningbo China 
+_Zhejiang, China_  
+_Sept 2020 ‑ Dec 2020_
+- Evaluated the datasets, including CORN, VETO, MMM‑21, and ROSE, by reading related papers for research potential.
+- Created models such as U‑Net and U‑Net++ for object detection and segmentation on medical images with PyTorch or TensorFlow.
+
 ### Project Experiences
 
 #### ⚪ Artificial Intelligence Aided Drug Discovery Cloud Platform
