@@ -10,3 +10,26 @@
   margin-right: auto;
   padding: 0 16px;
 }
+
+
+.tags .tag {
+  padding: 4px 12px 10px 12px;
+  margin: 4px;
+  font-size: 14px;
+  border-radius: 980px;
+  background-color: var(--white);
+  color: var(--black-2);
+  text-decoration: none;
+  border: 1px solid var(--border-color);
+  background-color: var(--white-1);
+}
+
+.tags .tag:hover {
+  background-color: var(--white-2);
+  color: var(--black);
+}
+
+.tags {
+  margin-bottom: 4px;
+  margin-top: -32px;
+}
