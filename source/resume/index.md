@@ -9,7 +9,7 @@ date: 2023-07-05 16:57:20
 🏠Address: Chongqing, China
 📫E-mail: jli78@tulane.edu
 🔗Github: https://github.com/jiarui0923/
-📝Resume: jiarui-li.com  
+📝Resume: http://jiarui-li.com/resume/  
 
 ## Education
 <table style='border:0; padding:10px;'>
