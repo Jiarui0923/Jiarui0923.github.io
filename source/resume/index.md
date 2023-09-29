@@ -7,6 +7,7 @@ date: 2023-07-05 16:57:20
 
 
 🏠Address: Chongqing, China
+🏢Office: Stanley Thomas Hall, Tulane University
 📫E-mail: jli78@tulane.edu
 🔗Github: https://github.com/jiarui0923/
 📝Resume: http://jiarui-li.com/resume/  
@@ -19,7 +20,7 @@ date: 2023-07-05 16:57:20
         </td>
         <td>
             <b>Tulane University</b><br>
-            Ph.D. Candidate in Computer Science<br>
+            Ph.D Student in Computer Science<br>
             <i>Research Field: Bioinformatics and Immunoinformatics</i>
         </td>
         <td style='font-size:16px;'>
@@ -69,10 +70,16 @@ _June 2023 ‑ July 2023_
 - Researched SOS‑1 and SHP‑2 inhibitors
 
 ### Research Experiences
+#### ⚪ CD4+ T Cell Epitope Prediction
+Computer Science, Tulane University of Louisiana  
+_Louisiana, US_  
+_Aug 2023 - Present_  
+- Optimize COREX/BEST algorithm strcuture.
+- Accelerate algorithm based on GPU platform.
 
 #### ⚪ IC50 Prediction of SOS‑1 and SHP‑2 Inhibitor
 Shanghai Institution of Materia Medica & University of Nottingham Ningbo China 
-_Zhejiang, Shanghai_  
+_Shanghai, China_  
 _Sept 2022 ‑ Jan 2023_
 - Designed a new evaluation method for algorithms.
 - Designed a multi‑stage algorithm for IC50 prediction and surpassed the STOA.
@@ -153,8 +160,10 @@ _Jan 2022 ‑ May 2022_
 ## Publications
 ### Journal Articles
 > 1. Li, J., Ji, R., Wang, D., Hirst, J., Tang, B., Ren, J. (2023, July). **Prediction of Enantioselectivity in Asymmetric Catalysis Using Attention U‑Net with UMAP Clustering and Random Forest**. _*Under Reviewing_
+
 ### Conference Proceedings
 > 1. Ji, R., Li, J., He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
+> 2. Li, J., Ji R., Li C., Yang X., Li J., Li Y., Xiong X., Fang Y., Ding S., Cui T. (2023, September). **Prediction of Flight Arrival Delay Time using U.S. Bureau of Transportation Statistics**. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI 2023). _[Accepted]_
 
 ## Awards & Funding
 |Year |Award       |Authority   |Location    |
@@ -174,7 +183,7 @@ _Jan 2022 ‑ May 2022_
 - **Web**: 
   - **Front-end**: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery
   - **Back-end**: Django, Flask, IIS, Apache HTTP, Docker, Nginx
-- **Machine Learning**: Pytorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy
+- **Machine Learning**: Pytorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba
 - **Big Data**:  Hadoop, Spark
 - **Documentation**: LaTeX, Markdown, Swagger, Overleaf
 - **Visualization**: Matplotlib, Plotly, Streamlit, 3DMol.js
@@ -182,7 +191,7 @@ _Jan 2022 ‑ May 2022_
 - **Internet Service Maintenance**: Rocket Chat, OpenVPN, Poste.io
 - **Environment**: Git, Anaconda
 - **Operating System**: Windows, Linux
-- **Cheminformatics & Bioinformatics**: RDKit, Vina Docking, ChemDraw, DeepChem
+- **Cheminformatics & Bioinformatics**: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB
 - **Musical Instrument**: Guqin _(Traditional Chinese String Instrument)_
 
 ## Languages
