@@ -189,7 +189,8 @@
 
 <h2 id="💠Publications"><a href="#💠Publications" class="headerlink" title="💠Publications"></a>💠Publications</h2><h3 id="Conference-Proceedings"><a href="#Conference-Proceedings" class="headerlink" title="Conference Proceedings"></a>Conference Proceedings</h3><blockquote>
 <ol>
-<li>📰 Li, J., Landry, S., &amp; Mettu, R. (2024, August). <strong>GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction</strong>. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM) (<em>Accepted</em>). IEEE.</li>
+<li>📰 Li, J., Landry, S., &amp; Mettu, R. (2024, December). <strong>GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction</strong>. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM) (<em>Accepted</em>). IEEE.</li>
+<li>📰 Li, J., Landry, S., &amp; Mettu, R. (2024, October). <strong>GPU Acceleration for Markov Chain Monte Carlo sampling</strong>.  In Proceedings of the Fourth International Conference on AI-ML Systems (<em>Accepted</em>). ACM.</li>
 <li>📰 Li, J., Ji, R., Yang, X., Li, J., Li, Y., Xiong, X., … &amp; Cui, T. (2023, December). <strong>Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics</strong>. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI) (pp. 603-608). IEEE.</li>
 <li>📰 Ji, R., Li, J., He, W., Ren, J., &amp; Jiang, X. (2023, June). <strong>Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification</strong>. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.</li>
 </ol>
@@ -478,5 +479,21 @@
             })
         </script>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
