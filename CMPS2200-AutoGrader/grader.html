@@ -275,6 +275,15 @@
             container.appendChild(counter)
             container.appendChild(table)
 
+            pytest_exit_code_map = {
+                0: 'tests passed',
+                1: 'tests failed',
+                2: 'pytest was interrupted',
+                3: 'an internal error got in the way',
+                4: 'pytest was misused',
+                5: 'pytest couldn't find tests',
+            }
+
             passed_nums = 0
             counter = document.getElementById("total-passed-counter")
             for i,test_name in enumerate(functions):
@@ -285,11 +294,11 @@
                 tims_status = document.getElementById(f"{i+1}-time")
                 tims_status.innerHTML = f'<i class="fa-regular fa-clock"></i>{t_cost:.2f} ms'
                 if retcode == 0:
-                    status.innerHTML = '<i class="fa-solid fa-check has-text-success"></i>'
+                    status.innerHTML = f'<i class="fa-solid fa-check has-text-success"></i>{pytest_exit_code_map[retcode]}'
                     passed_nums += 1
                     counter.innerHTML = passed_nums
                 else:
-                    status.innerHTML = '<i class="fa-solid fa-xmark has-text-danger"></i>'
+                    status.innerHTML = f'<i class="fa-solid fa-xmark has-text-danger"></i>{pytest_exit_code_map[retcode]}'
             saveRecord(window.repository_url, len(functions), passed_nums, window.info_owner, window.info_repo)
             renderHistory()
         except Exception as e:
