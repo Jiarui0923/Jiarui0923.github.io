@@ -67,7 +67,7 @@
         </section> -->
         <section class="hero">
             <div class="hero-body">
-                <div class="container pl-6 pr-6">
+                <div class="container">
                     <div class="card">
                         <div class="card-content">
                             <div class="content">
@@ -80,7 +80,10 @@
                                 </p>
                                 <p class="control">
                                     <button class="button" id="evaluate-button">
-                                        Submit
+                                        <span class="icon is-small">
+                                        <i class="fa-solid fa-play"></i>
+                                        </span>
+                                        <span>Submit</span>
                                     </button>
                                 </p>
                             </div>
@@ -105,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container mt-4 pl-6 pr-6" id="grader-panel" style="display:none;">
+                <div class="container mt-4" id="grader-panel" style="display:none;">
                     <div class="container">
                         <div class="tabs is-centered is-boxed">
                             <ul>
@@ -172,6 +175,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="container mt-4">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="title is-5"><i class="fa-solid fa-clock-rotate-left"></i> History</p>
+                                <p class="subtitle is-6">Your Grading History</p>
+                                <button onclick="clearRecords(); renderHistory();" class="button is-outlined is-danger is-small">
+                                    <i class="fa-solid fa-trash"></i> Clear
+                                </button>
+                                <div class="table-container">
+                                    <table class="table is-fullwidth">
+                                        <thead>
+                                            <tr><th>#</th><th>Datetime</th><th>Passed/Total</th><th>Owner</th><th>Project</th><th>URL</th></tr>
+                                        </thead>
+                                        <tbody  id="history-list">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div> 
         </section>
     </div>
@@ -197,7 +223,7 @@
         import json
         import ast
         import time
-        from js import document
+        from js import document, window, saveRecord, renderHistory
 
         def get_root_functions(filepath):
             """
@@ -258,6 +284,8 @@
                     counter.innerHTML = passed_nums
                 else:
                     status.innerHTML = '<i class="fa-solid fa-xmark has-text-danger"></i>'
+            saveRecord(window.repository_url, len(functions), passed_nums, window.info_owner, window.info_repo)
+            renderHistory()
         except Exception as e:
             container = document.getElementById("test-lists")
             container.innerHTML = '''
@@ -272,6 +300,65 @@
             '''
             raise e
         `;
+
+        // Helper: get current datetime string
+        function getFormattedDatetime() {
+            const now = new Date();
+            const pad = n => n.toString().padStart(2, '0');
+            return `${now.getFullYear()}/${pad(now.getMonth() + 1)}/${pad(now.getDate())} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+        }
+
+        // Save record into localStorage
+        function saveRecord(url, total, passed, owner, project) {
+            const datetime = getFormattedDatetime();
+            const record = { datetime, url, total, passed, owner, project };
+
+            const key = `record_${Date.now()}`;
+            localStorage.setItem(key, JSON.stringify(record));
+        }
+
+        // Clear all record entries from localStorage
+        function clearRecords() {
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith("record_")) {
+                    localStorage.removeItem(key);
+                }
+            });
+        }
+
+        // Render history table
+        function renderHistory() {
+            const container = document.getElementById("history-list");
+            container.innerHTML = ""; // Clear existing
+
+            // Collect all stored records
+            const keys = Object.keys(localStorage).filter(k => k.startsWith("record_")).sort((a, b) => Number(b.split("_")[1]) - Number(a.split("_")[1]));
+            keys.forEach((key, i) => {
+                try {
+                    const record = JSON.parse(localStorage.getItem(key));
+                    const tr = document.createElement("tr");
+
+                    const cells = [
+                        i + 1,
+                        record.datetime,
+                        `${record.passed}/${record.total}`,
+                        record.owner,
+                        record.project,
+                        record.url
+                    ];
+
+                    cells.forEach(cell => {
+                        const td = document.createElement("td");
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+
+                    container.appendChild(tr);
+                } catch (e) {
+                    console.warn("Invalid record:", key);
+                }
+            });
+        }
 
         /**
         * Fetch a requirements file from a URL, merge with a given list, and remove duplicates.
@@ -462,7 +549,8 @@
                 await autograde(repo);
             }
         };
-
+        var info_owner = "";
+        var info_repo = "";
         function loadRepoInfo(github_url) {
             document.getElementById("github-url-input").value = github_url;
             let info = githubToComponent(github_url);
@@ -471,6 +559,8 @@
             document.getElementById("repo-info-link").href = github_url;
             document.getElementById("repo-info-project").innerHTML = info["repo"];
             document.getElementById("repo-info-owner").innerHTML = info["owner"];
+            info_owner = info["owner"];
+            info_repo = info["repo"];
         };
 
         function loadConfigInfo() {
@@ -561,6 +651,7 @@
         // Call the checker on page load
         (async () => {
             await checkRepoParam();
+            renderHistory();
             loadModuleScript("https://pyscript.net/releases/2025.7.3/core.js")
             .then(() => {
                 console.log("PyScript core loaded successfully!");
