@@ -68,6 +68,12 @@
         <section class="hero">
             <div class="hero-body">
                 <div class="container">
+                    <div class="content">
+                        <p class="title">Auto Grader</p>
+                        <p class="subtitle">CMPS 2200 Introduction to Algorithm</p>
+                    </div>
+                </div>
+                <div class="container mt-6">
                     <div class="card">
                         <div class="card-content">
                             <div class="content">
@@ -528,7 +534,7 @@
             // Inject python script
             const scriptTag = document.getElementById("terminal-io");
             scriptTag.textContent = pyCode;
-        }
+        };
 
         function toggleGraderPanel(show) {
             const panel = document.getElementById("grader-panel");
