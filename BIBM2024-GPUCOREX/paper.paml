@@ -1,5 +1,3 @@
-# A YAML representation of the fullPaperData dictionary
-
 # 1. Core paper details
 paper:
   title: "GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction"
