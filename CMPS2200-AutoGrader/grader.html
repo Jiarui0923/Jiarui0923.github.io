@@ -459,11 +459,10 @@
                 }
 
                 const owner = parts[0];
+                let repo = parts[1];
                 
-                if (parts[1].endsWith(".git")) {
-                    const repo = parts[1].slice(0, -4);
-                } else {
-                    const repo = parts[1];
+                if (repo.endsWith(".git")) {
+                    repo = repo.slice(0, -4);
                 }
 
                 return `https://raw.githubusercontent.com/${owner}/${repo}/refs/heads/${branch}/`;
