@@ -30,7 +30,7 @@ links:
     icon: "fa-solid fa-file-pdf"
   - name: "Code"
     link: "https://github.com/Jiarui0923/gpuCOREX"
-    icon: "fa-solid fa-github"
+    icon: "fa-brands fa-github"
 
 # 4. Citation formats (using the pipe '|' for multi-line strings)
 citations:
@@ -50,5 +50,5 @@ citations:
 # 5. Path to the main document file
 document:
   path: "./README.pmd"
-  centered: true
+  centered: false
   footer: "CC 4.0"
