@@ -1,0 +1,109 @@
+`COREX` _(**COR**relation with hydrogen **EX**change protection factors)_ is an algorithm designed to compute comformational stability of a protein. This program is slow due to it is single-processing program. Therefore, a muilti-processing program version COREX is developed named `pCOREX`. This improves COREX efficiency significantly. However, the speed is still limited. Therefore, we are going to develop a GPU version of COREX named `gpuCOREX` to accelerate it more.
+
+The GPUCOREX can be installed use command:
+```bash
+pip install gpucorex @ git+https://github.com/Jiarui0923/gpuCOREX@0.0.2
+```
+
+![corexpipeline](./images/corex_pipeline.png)
+
+## gpuCOREX Guideline
+
+This is a brief example for how to use this gpuCOREX to compute COREX for one PDB file.
+
+## Python API
+1. Import data structure and COREX module.
+```python
+from gpucorex import Peptide
+from gpucorex import COREX
+```
+2. Load peptide data
+```python
+peptide = Peptide(
+    './3JWO.pdb',
+    window_size=10,
+    min_size=4,
+    dSbb_len_correlation = -0.12,
+    residue_constant='amino_acid_constants.csv',
+    radius_table='atom_radius.csv')
+```
+1. Initialize COREX module with adaptive Monte Carlo sampling with probability threshold 75% and adaptive rate 5%.
+```python
+corex = COREX(
+    workers=10,
+    batch_size=1000,
+    samples=10000,
+    device='cpu',
+    dtype=torch.float32,
+    sampler=sampler.adaptive_montecarlo, 
+    sampler_args=dict(
+        probability=0.75,
+        adaptive_rate=0.05,
+        min_rate=0.01
+    ),
+    base_fraction=1.0,
+    silence=False,
+    probe_radius=1.4,
+    point_number=1000,
+    sconf_weight = 0.5,
+    temperature = 298.15,
+    temp_zero = 273.15+60,
+    aCp = 0.44,
+    bCp = -0.26,
+    adeltaH = -8.44,
+    bdeltaH = 31.4,
+    TsPolar = 335.15,
+    TsApolar = 385.15,
+    context_method='spawn'
+)
+```
+1. Calculate COREX for the peptide.
+```python
+corex_values = corex(peptide)
+```
+1. Auto search a reasonable entropy weight (`sconf_weight`).
+```python
+from gpucorex import MaxMinCriterion
+corex = COREX(
+    workers=10,
+    batch_size=1000,
+    samples=10000,
+    device='cpu',
+    dtype=torch.float32,
+    sampler=sampler.adaptive_montecarlo, 
+    sampler_args=dict(
+        probability=0.75,
+        adaptive_rate=0.05,
+        min_rate=0.01
+    ),
+    base_fraction=1.0,
+    silence=False,
+    probe_radius=1.4,
+    point_number=1000,
+    sconf_weight=MaxMinCriterion(1.0, 0.1, (0.01, 2.0)),
+    temperature=298.15,
+    temp_zero=273.15+60,
+    aCp = 0.44,
+    bCp = -0.26,
+    adeltaH = -8.44,
+    bdeltaH = 31.4,
+    TsPolar = 335.15,
+    TsApolar = 385.15,
+    context_method='spawn'
+)
+```
+Set the sconf_weight to a `Criterion`, the algorithm will automatically search for an entropy factor (sconf_weight).
+Then, this factor will be used to compute COREX.
+
+## Commandline Interface
+```bash
+python -m gpucorex -p {PDBfile.pdb}
+```
+or
+```bash
+gpucorex -p {PDBfile.pdb}
+```
+for command help, please check
+```bash
+gpucorex --help
+```

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paper</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked-base-url"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <style>
+    .hover-expand .text {
+      opacity: 0;
+      max-width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity 0.3s ease, max-width 0.3s ease;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .hover-expand:hover .text {
+      opacity: 1;
+      max-width: 200px; /* adjust for text length */
+    }
+    .sup {
+    font-size: 0.7em;
+    vertical-align: super;
+    }
+
+    /* Optional: if you want symbols too */
+    .sup[data-symbol="plus"]::after {
+    content: "⁺";
+    }
+    .sup[data-symbol="minus"]::after {
+    content: "⁻";
+    }
+    .sup[data-symbol="star"]::after {
+    content: "*"; /* or × */
+    }
+    .sup[data-number="1"]::after { content: "¹"; }
+    .sup[data-number="2"]::after { content: "²"; }
+    .sup[data-number="3"]::after { content: "³"; }
+    .sup[data-number="4"]::after { content: "⁴"; }
+    .sup[data-number="5"]::after { content: "⁵"; }
+    .sup[data-number="6"]::after { content: "⁶"; }
+    .sup[data-number="7"]::after { content: "⁷"; }
+    .sup[data-number="8"]::after { content: "⁸"; }
+    .sup[data-number="9"]::after { content: "⁹"; }
+    .sup[data-number="0"]::after { content: "⁰"; }
+
+    /* 1. Make the container fixed and centered */
+  .navbar-container {
+      position: fixed; /* Pins the navbar to the viewport, preventing scroll */
+      bottom: 1rem;       /* Adds a margin from the top edge (the "float" effect) */
+      left: 50%;       /* Start at the horizontal center */
+      transform: translateX(-50%); /* Shift it left by half its width to truly center it */
+      width: 90%;      /* Set a fixed width to prevent it from touching the left/right edges */
+      max-width: 1200px; /* Optional: cap the maximum width */
+      z-index: 1000;   /* Ensure it stays above other content */
+      border-radius: 2rem; /* Rounded corners for the "floating" look */
+      border-color: lightgrey;
+      border-width: 0.5pt;
+      border-style: solid;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      overflow: hidden; /* Important for containing the frosted effect */
+  }
+
+  /* 2. Apply the frosted glass effect to the Bulma navbar element */
+  .custom-frosted-navbar {
+      background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+      backdrop-filter: blur(5px); /* The 'frosted glass' blur effect */
+      -webkit-backdrop-filter: blur(5px); /* Safari support */
+      
+      /* Override Bulma's default styles for the 'float' look */
+      border-radius: 1rem; 
+      padding-left: 1rem;
+      padding-right: 1rem;
+      height: 100%; /* Fill the container's height */
+  }
+
+  /* 3. Ensure the inner items are visible and contrast well */
+  .custom-frosted-navbar .navbar-item {
+      background-color: transparent !important; /* Important to keep the blur visible */
+  }
+  </style>
+</head>
+<body class="is-family-sans-serif">
+  <div class="navbar-container">
+    <nav class="navbar custom-frosted-navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <p class="is-size-5 has-text-weight-bold " id="Nav-Publication-Name-Container">Conference</p>
+        </div>
+      </div>
+
+      <div id="navbarMenu" class="navbar-menu">
+
+        <div class="navbar-end">
+          <div class="navbar-item" id="link-buttons-container">
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <!-- Hero / Header Section (is-fullheight-with-navbar) -->
+  <section class="hero is-bold is-halfheight mt-6">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        
+        <div class="content">
+          <span id="paper-title-container">
+            <!-- Title and subtitle rendered here -->
+          </span>
+          <p id="author-list-container"></p>
+          <p id="affiliation-explanation-container"></p>
+          <p id="link-buttons-header-container">
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Overview / Abstract Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="content" id="markdown-output-container"> </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+        <h2 class="title is-4" id="cite">Cite This Work</h2>
+        
+        <!-- Tabs will be inserted here -->
+        <div class="tabs mb-0" id="citation-tabs">
+        <ul></ul>
+        </div>
+        
+        <!-- Pre content will be inserted here -->
+        <pre id="citation-content"></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p id="footer-note-container"></p>
+      <p>
+        Template created by <a href="http://jiarui.li">Jiarui Li</a>.
+      </p>
+      <a id="theme-toggle" class="button">
+        <span class="icon">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </span>
+      </a>
+    </div>
+  </footer>
+
+  <script>
+  const tabsContainer = document.querySelector("#citation-tabs ul");
+  const contentContainer = document.getElementById("citation-content");
+
+  // Function to create tabs
+  function createCitationTabs(citations) {
+    
+    let first = true;
+    for (const tabName in citations) {
+      const li = document.createElement("li");
+      if (first) li.classList.add("is-active"); // first tab active by default
+      const a = document.createElement("a");
+      a.textContent = tabName;
+      a.href = "#";
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        switchTab(citations, tabName);
+      });
+      li.appendChild(a);
+      tabsContainer.appendChild(li);
+      first = false;
+    }
+  }
+
+  // Function to switch tab content
+  function switchTab(citations, tabName) {
+    // Update active class
+    document.querySelectorAll("#citation-tabs li").forEach(li => li.classList.remove("is-active"));
+    const activeLi = Array.from(document.querySelectorAll("#citation-tabs li"))
+      .find(li => li.textContent === tabName);
+    if (activeLi) activeLi.classList.add("is-active");
+
+    // Update pre content
+    contentContainer.textContent = citations[tabName];
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        e.preventDefault(); // prevent default jump
+        targetElement.scrollIntoView({ behavior: 'smooth' }); // smooth scroll
+      }
+    });
+  });
+
+  function renderHeader(paperData, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Header container with ID "${containerId}" not found.`);
+            return;
+        }
+
+        const headerHtml = `
+            <h1 class="title">
+                ${paperData.title}
+            </h1>
+            <p class="subtitle">
+                ${paperData.publication}<br>
+                ${paperData.date}
+            </p>
+            <br>
+        `;
+        container.innerHTML = headerHtml;
+        document.getElementById("Nav-Publication-Name-Container").innerHTML = paperData.publication;
+        document.title = `[${paperData.publication}] ${paperData.title}`;
+    }
+
+  function renderLinkButtons(links, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Container with ID "${containerId}" not found.`);
+            return;
+        }
+
+        // 1. Start the main 'buttons has-addons' wrapper
+        let buttonsHtml = '<div class="buttons has-addons is-centered">';
+
+        // 2. Generate dynamic buttons from the input array
+        links.forEach(link => {
+            const iconHtml = `<span class="icon" style="margin-right: -5pt;"><i class="${link.icon}"></i></span>`;
+            const textHtml = `<span class="text">&nbsp;&nbsp;${link.name}</span>`;
+
+            // Dynamic links have default styling: hover-expand, is-small
+            let expand_tag = ``;
+            if (link.expand) { expand_tag = ``; }
+            else { expand_tag = `hover-expand`; }
+            buttonsHtml += `
+                <a class="button ${expand_tag} is-small" href="${link.link}">
+                    ${iconHtml}
+                    ${textHtml}
+                </a>
+            `;
+        });
+
+        // 3. Append the fixed "Cite" button (must be at the end)
+        // This button has specific Bulma modifiers: is-link and is-outlined
+        buttonsHtml += `
+            <a class="button hover-expand is-link is-outlined is-small" href="#cite">
+                <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>
+                <span class="text">&nbsp;&nbsp;Cite</span>
+            </a>
+        `;
+
+        // 4. Close the wrapper and inject into the DOM
+        buttonsHtml += '</div>';
+        container.innerHTML = buttonsHtml;
+    }
+
+  function renderAuthors(authors) {
+        const authorListContainer = document.getElementById('author-list-container');
+        const explanationContainer = document.getElementById('affiliation-explanation-container');
+        if (!authorListContainer || !explanationContainer) {
+            console.error('Author or explanation container not found.');
+            return;
+        }
+
+        // --- Step 1: Map affiliations to unique, numbered keys ---
+        const affiliationMap = {};
+        let affiliationCounter = 1;
+        const usedLabels = { plus: false, star: false };
+
+        authors.forEach(author => {
+            // Assign a unique number to each unique affiliation string
+            if (!affiliationMap[author.affiliation]) {
+                affiliationMap[author.affiliation] = {
+                    number: affiliationCounter++,
+                    name: author.affiliation
+                };
+            }
+            author.affilNumber = affiliationMap[author.affiliation].number;
+
+            // Track usage of special symbols
+            if (author.equal) usedLabels.plus = true;
+            if (author.corresponding) usedLabels.star = true;
+        });
+
+        // --- Step 2: Build Author List HTML ---
+        let authorListHtml = '';
+        authors.forEach((author, index) => {
+            const separator = index < authors.length - 1 ? ' &middot;\n' : '';
+            
+            // Start with the author's name
+            let authorEntry = `<strong>${author.name}</strong>`;
+            if (author.link) {
+              authorEntry = `<a href="${author.link}">${authorEntry}</a>`;
+            }
+
+            // Add affiliation number superscript
+            if (author.affilNumber) {
+                authorEntry += `<span class="sup" data-number="${author.affilNumber}"></span>`;
+            }
+
+            // Add equal contribution symbol (plus)
+            if (author.equal) {
+                authorEntry += `<span class="sup" data-symbol="plus"></span>`; // † dagger symbol, commonly used for equal contribution
+            }
+
+            // Add corresponding author symbol (star)
+            if (author.corresponding) {
+                authorEntry += `<span class="sup" data-symbol="star"></span>`; // * asterisk symbol
+            }
+            
+            authorListHtml += authorEntry + separator;
+        });
+
+        authorListContainer.innerHTML = authorListHtml;
+
+
+        // --- Step 3: Build Affiliation/Explanation HTML ---
+        let explanationHtml = '';
+
+        // Affiliation list (sorted by number 1, 2, 3...)
+        const sortedAffiliations = Object.values(affiliationMap).sort((a, b) => a.number - b.number);
+        
+        sortedAffiliations.forEach((affil, index) => {
+            explanationHtml += `<span class="sup" data-number="${affil.number}"></span>${affil.name}<br>`;
+        });
+
+        // Add special label explanations only if they were used
+        
+        if (usedLabels.plus) {
+            explanationHtml += `<span class="sup" data-symbol="plus"></span>equal contribution<br>`;
+        }
+        
+        if (usedLabels.star) {
+            explanationHtml += `<span class="sup" data-symbol="star"></span>corresponding author<br>`;
+        }
+
+        explanationContainer.innerHTML = explanationHtml;
+    };
+
+    function renderMarkdown(markdown, containerId, basePath = '', centered=false) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        marked.use(markedBaseUrl.baseUrl(basePath));
+        // Use marked.parse() to safely and robustly convert Markdown to HTML
+        const html = marked.parse(markdown);
+        
+        container.innerHTML = html;
+        if (centered) {
+            container.classList.add("has-text-centered");
+        } else {
+            // Ensure the class is removed if centered is false (for dynamic updates)
+            container.classList.remove("has-text-centered"); 
+        }
+    };
+
+    function getBaseUrl(url) {
+
+      // Dynamically determine the base path from the file URL:
+      // 1. Find the index of the last '/'.
+      const lastSlashIndex = url.lastIndexOf('/');
+      // 2. Take the substring from the beginning up to and including that last slash.
+      const baseUrl = url.substring(0, lastSlashIndex + 1);
+      return baseUrl;
+    };
+
+    async function fetchAndRenderMarkdown(url, containerId, centered) {
+
+        let markdownText = '';
+        
+        try {
+            // NOTE: In a real environment, you would use:
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            markdownText = await response.text();
+
+        } catch (error) {
+            console.error(`Failed to load markdown from ${url}: `, error);
+            markdownText = '## Error Loading Content\nCould not load the markdown file. Please check the network path.';
+        }
+
+        // Render the content once loaded
+        renderMarkdown(markdownText, containerId, getBaseUrl(url), centered);
+    };
+
+    
+
+  const toggleBtn = document.getElementById('theme-toggle');
+  const htmlEl = document.documentElement;
+
+  // Theme states: 'light', 'dark', 'auto'
+  let theme = localStorage.getItem('theme') || 'auto';
+
+  function updateThemeButton() {
+    toggleBtn.innerHTML = ''; // clear icon
+    const icon = document.createElement('i');
+    icon.classList.add('fa-solid');
+    if (theme === 'light') icon.classList.add('fa-sun');
+    else if (theme === 'dark') icon.classList.add('fa-moon');
+    else icon.classList.add('fa-circle-half-stroke');
+    toggleBtn.appendChild(icon);
+  }
+
+  function applyTheme() {
+    if (theme === 'light') htmlEl.setAttribute('data-theme', 'light');
+    else if (theme === 'dark') htmlEl.setAttribute('data-theme', 'dark');
+    else htmlEl.removeAttribute('data-theme'); // auto
+    updateThemeButton();
+    localStorage.setItem('theme', theme);
+  }
+
+  // Cycle theme: auto → light → dark → auto
+  toggleBtn.addEventListener('click', () => {
+    if (theme === 'auto') theme = 'light';
+    else if (theme === 'light') theme = 'dark';
+    else theme = 'auto';
+    applyTheme();
+  });
+
+  function renderFooter(content) {
+    const container = document.getElementById("footer-note-container");
+    if (content) {
+      container.innerHTML = content;
+    }
+  };
+  
+  function enableSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  }
+
+  function initPaperPage(paperData) {
+    renderHeader(paperData.paper, 'paper-title-container');
+    renderAuthors(paperData.authors);
+    renderLinkButtons(paperData.links, "link-buttons-container");
+    renderLinkButtons(paperData.links, "link-buttons-header-container");
+    fetchAndRenderMarkdown(paperData.document.path, "markdown-output-container", paperData.document.centered);
+    renderFooter(paperData.document.footer);
+    createCitationTabs(paperData.citations);
+    switchTab(paperData.citations, Object.keys(paperData.citations)[0]);
+  };
+
+  // Function to get a URL parameter
+  function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+  }
+
+  // Use a self-executing async function to keep the script scope clean
+  (async function() {
+      let yamlDataString = '';
+      
+      // 1. Determine the path
+      const configParam = getQueryParam('paper');
+      // If the 'config' parameter exists, use its value, otherwise default to './config.yaml'
+      const yamlPath = configParam || './paper.paml';
+      
+      // NOTE: In a production environment, the following fetch block is required:
+      try {
+          const response = await fetch(yamlPath);
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            yamlDataString = await response.text();
+      } catch (fetchError) {
+            console.error("Error fetching YAML file:", fetchError);
+            return;
+      }
+
+      // Check if jsyaml is loaded before attempting to use it
+      if (typeof jsyaml === 'undefined' || !jsyaml.load) {
+          throw new Error("js-yaml library is not loaded. Cannot parse YAML.");
+      }
+
+      // --- YAML Parsing ---
+      const fullPaperData = jsyaml.load(yamlDataString);
+      await initPaperPage(fullPaperData);
+      applyTheme();
+      enableSmoothScroll();
+})();
+  
+  
+</script>
+</body>
+</html>
+
