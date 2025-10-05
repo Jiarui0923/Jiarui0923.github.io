@@ -54,6 +54,9 @@
                 </a>
             </div>
             <div class="navbar-end">
+                <a class="navbar-item" id="theme-toggle-btn">
+                    <i class="fas fa-circle-half-stroke"></i>
+                </a>
                 <a class="navbar-item">
                     Introduction to Algorithm <b>CMPS 2200</b>
                 </a>
@@ -683,6 +686,37 @@
             .catch(err => console.error(err));
         })();
         
+        const btn = document.getElementById('theme-toggle-btn');
+        const html = document.documentElement;
+
+        // Define the three modes
+        const modes = ['auto', 'light', 'dark'];
+        const icons = {
+            'auto': 'fa-circle-half-stroke', // half-moon
+            'light': 'fa-sun',
+            'dark': 'fa-moon'
+        };
+
+        // Load initial mode from localStorage or default to auto
+        let currentMode = localStorage.getItem('theme-mode') || 'auto';
+        applyMode(currentMode);
+
+        btn.addEventListener('click', () => {
+            // Cycle through the modes
+            const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
+            currentMode = modes[nextIndex];
+            applyMode(currentMode);
+            localStorage.setItem('theme-mode', currentMode);
+        });
+
+        function applyMode(mode) {
+            // Update html data attribute
+            html.setAttribute('data-theme', mode);
+
+            // Update icon
+            const icon = btn.querySelector('i');
+            icon.className = `fas ${icons[mode]}`;
+        }
     </script>
     <!-- This script tag bootstraps PyScript -->
     <!-- <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script> -->
