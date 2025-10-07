@@ -28,8 +28,8 @@ authors:
 
 # 3. External links and resources
 links:
-  - name: "Main Paper"
-    link: "https://ieeexplore.ieee.org/abstract/document/10821831"
+  - name: "Paper"
+    link: "https://arxiv.org/abs/2509.17305"
     icon: "fa-solid fa-file-lines"
     expand: true
   - name: "PDF"

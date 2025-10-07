@@ -22,7 +22,7 @@ authors:
 
 # 3. External links and resources
 links:
-  - name: "Main Paper"
+  - name: "Paper"
     link: "https://ieeexplore.ieee.org/abstract/document/10821831"
     icon: "fa-solid fa-file-lines"
     expand: true
