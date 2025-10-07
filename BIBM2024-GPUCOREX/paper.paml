@@ -1,8 +1,11 @@
 # 1. Core paper details
 paper:
   title: "GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction"
-  publication: "BIBM"
-  date: "(2024 December)"
+  publication: "International Conference on Bioinformatics and Biomedicine"
+  date:
+    month: December
+    year: 2024
+  abbr: "BIBM"
 
 # 2. Author list
 authors:
@@ -26,7 +29,7 @@ links:
   - name: "PDF"
     link: "li2024gpu.pdf"
     icon: "fa-solid fa-file-pdf"
-  - name: "Code"
+  - name: "GitHub"
     link: "https://github.com/Jiarui0923/gpuCOREX"
     icon: "fa-brands fa-github"
 
@@ -49,4 +52,4 @@ citations:
 document:
   path: "./README.pmd"
   centered: false
-  footer: "CC 4.0"
+  footer: "CC BY 4.0"
