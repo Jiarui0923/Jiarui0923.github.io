@@ -6,6 +6,7 @@
     <title>Paper</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/marked"></script>
@@ -442,7 +443,7 @@
             `;
             // Update other elements directly
             document.getElementById("Nav-Publication-Name-Container").textContent = `${paperData.abbr} ${paperData.date.year}`;
-            document.title = `[${paperData.publication}] ${paperData.title}`;
+            document.title = `[${paperData.abbr}] ${paperData.title}`;
         }
 
         function renderLinkButtons(links, containerId, size="is-small", ignoreExpand=false) {
@@ -462,6 +463,7 @@
                 // Simplified logic: link.expand is used to *disable* the default hover-expand
                 const expand_tag = link.expand && !ignoreExpand ? '' : 'hover-expand';
                 
+                
                 buttonsHtml += `
                     <a class="button is-rounded frosted-button ${expand_tag} ${size}" href="${link.link}">
                         ${iconHtml}
@@ -471,7 +473,8 @@
             });
 
             // Append the fixed "Cite" button
-            const expand_tag = !ignoreExpand ? '' : 'hover-expand';
+            // const expand_tag = !ignoreExpand ? '' : 'hover-expand';
+            const expand_tag = 'hover-expand';
             buttonsHtml += `
                 <a class="button is-rounded frosted-button ${expand_tag} is-link is-outlined ${size}" href="#cite">
                     <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>

@@ -24,7 +24,7 @@ authors:
 links:
   - name: "Paper"
     link: "https://ieeexplore.ieee.org/abstract/document/10821831"
-    icon: "fa-solid fa-file-lines"
+    icon: "ai ai-ieee"
     expand: true
   - name: "PDF"
     link: "li2024gpu.pdf"

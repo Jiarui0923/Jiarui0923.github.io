@@ -29,9 +29,12 @@ authors:
 # 3. External links and resources
 links:
   - name: "Paper"
-    link: "https://arxiv.org/abs/2509.17305"
-    icon: "fa-solid fa-file-lines"
+    link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12486057/"
+    icon: "ai ai-pubmed"
     expand: true
+  - name: "arXiv"
+    link: "https://arxiv.org/abs/2509.17305"
+    icon: "ai ai-arxiv"
   - name: "PDF"
     link: "li2025rational.pdf"
     icon: "fa-solid fa-file-pdf"
