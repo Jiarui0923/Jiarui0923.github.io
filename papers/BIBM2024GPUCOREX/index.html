@@ -150,8 +150,8 @@
                       </div>
                     </div>
                 </div>
-                <div class="navbar-end">
-                    <div class="navbar-item" id="link-buttons-container"></div>
+                <div class="navbar-end" id="link-buttons-container">
+                    <!-- <div class="navbar-item" id="link-buttons-container"></div> -->
                 </div>
             </div>
         </nav>
@@ -486,6 +486,45 @@
             container.innerHTML = buttonsHtml;
         }
 
+        function renderNavLinkButtons(links, containerId, size="is-small", ignoreExpand=false) {
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error(`Container with ID "${containerId}" not found.`);
+                return;
+            }
+
+            // Build all HTML once, then inject
+            let buttonsHtml = '';
+
+            links.forEach(link => {
+                const iconHtml = `<span class="icon" style="margin-right: -5pt;"><i class="${link.icon}"></i></span>`;
+                const textHtml = `<span class="text">&nbsp;&nbsp;${link.name}</span>`;
+
+                // Simplified logic: link.expand is used to *disable* the default hover-expand
+                const expand_tag = link.expand && !ignoreExpand ? '' : 'hover-expand';
+                
+                
+                buttonsHtml += `
+                    <a class="navbar-item ${expand_tag} ${size}" href="${link.link}">
+                        ${iconHtml}
+                        ${textHtml}
+                    </a>
+                `;
+            });
+
+            // Append the fixed "Cite" button
+            // const expand_tag = !ignoreExpand ? '' : 'hover-expand';
+            const expand_tag = 'hover-expand';
+            buttonsHtml += `
+                <a class="navbar-item button is-ghost ${expand_tag} is-link is-outlined" href="#cite">
+                    <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>
+                    <span class="text">&nbsp;&nbsp;Cite</span>
+                </a>
+            `;
+
+            container.innerHTML = buttonsHtml;
+        }
+
         function renderAuthors(authors) {
             if (!authorListContainer || !explanationContainer) {
                 console.error('Author or explanation container not found.');
@@ -638,7 +677,7 @@
             renderHeader(paperData.paper, 'paper-title-container');
             renderAuthors(paperData.authors);
             // Render buttons for both header and navbar
-            renderLinkButtons(paperData.links, "link-buttons-container", "is-small", true);
+            renderNavLinkButtons(paperData.links, "link-buttons-container", "is-small", true);
             renderLinkButtons(paperData.links, "link-buttons-header-container", "");
             
             // Note: This relies on marked being loaded via 'defer' before this is called
