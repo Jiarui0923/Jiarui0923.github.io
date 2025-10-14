@@ -14,16 +14,15 @@ authors:
     link: "https://www.jiarui-li.com/"
   - name: "Zixiang Yin"
     affiliation: "Department of Computer Science, Tulane University"
-    link: "https://www.zachyin.com/"
   - name: "Zhengming Ding"
     affiliation: "Department of Computer Science, Tulane University"
     link: "https://www.cs.tulane.edu/~zding1/"
   - name: "Samuel J. Landry"
     affiliation: "Department of Biochemistry and Molecular Biology, Tulane University School of Medicine"
-    link: "https://www2.tulane.edu/~biochem/faculty/landry.htm"
+    link: "https://medicine.tulane.edu/departments/biochemistry-molecular-biology-tulane-cancer-center-debakey/faculty/samuel-j-landry-phd"
   - name: "Ramgopal R. Mettu"
     affiliation: "Department of Computer Science, Tulane University"
-    link: "http://www.cs.tulane.edu/~mettu"
+    link: "https://ramgopalmettu.org/"
     corresponding: true
 
 # 3. External links and resources
