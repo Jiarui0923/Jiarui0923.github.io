@@ -44,13 +44,14 @@ links:
 # 4. Citation formats (using the pipe '|' for multi-line strings)
 citations:
   Bibtex: |
-    @article{li2025rational,
+    @inproceedings{li2025rational,
       title={Rational Multi-Modal Transformers for TCR-pMHC Prediction},
       author={Li, Jiarui and Yin, Zixiang and Ding, Zhengming and Landry, Samuel J and Mettu, Ramgopal R},
-      journal={arXiv preprint arXiv:2509.17305},
+      booktitle={Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics},
+      pages={1--10},
       year={2025}
     }
-  APA: "Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). Rational Multi-Modal Transformers for TCR-pMHC Prediction. arXiv preprint arXiv:2509.17305."
+  APA: "Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). Rational Multi-Modal Transformers for TCR-pMHC Prediction.  In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics (pp. 1-10)."
 
 # 5. Path to the main document file
 document:
