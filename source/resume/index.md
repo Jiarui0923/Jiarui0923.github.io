@@ -1,19 +1,24 @@
 ---
-title: Jiarui LI
-date: 2023-07-05 16:57:20
+title: Jiarui (Jerry) LI
+date: 2025-10-05 19:10:20
 ---
-
-[**📑 Download PDF Version**](/resume/JiaruiLi_Resume_20230705.pdf)  
 
 
 🏠Address: Chongqing, China
-🏢Office: Stanley Thomas Hall, Tulane University
-📫E-mail: jli78@tulane.edu
+🏢Office: Paul Hall 309, Tulane University
+📫E-mail: me@jiarui.li
+📫School E-mail: jli78@tulane.edu
 🔗Github: https://github.com/jiarui0923/
-📝Resume: http://jiarui-li.com/resume/  
+🔗Linkedin: https://www.linkedin.com/in/li-jiarui/
+🔗Google Scholar: https://scholar.google.com/citations?user=9lcAfL8AAAAJ
+🔗ORCID: https://orcid.org/0009-0001-1055-4424
+📝Resume: http://resume.jiarui.li
 
-## Education
+## 💠Education
 <table style='border:0; padding:10px;'>
+    <tr>
+        <td colspan="3">🎓 Doctorate</td>
+    </tr>
     <tr>
         <td>
             <img src='/resume/images/tu.ico'></img>
@@ -21,12 +26,16 @@ date: 2023-07-05 16:57:20
         <td>
             <b>Tulane University</b><br>
             Ph.D Student in Computer Science<br>
-            <i>Research Field: Bioinformatics and Immunoinformatics</i>
+            <i>Research Field: Immunoinformatics & XAI</i><br>
+            <i>Advised by: <a href="https://ramgopalmettu.org/">Prof. Mettu</a></i>
         </td>
         <td style='font-size:16px;'>
             Louisiana, US<br>
             Sept. 2023 - Present
         </td>
+    </tr>
+    <tr>
+        <td colspan="3">🎓 Bachelor</td>
     </tr>
     <tr>
         <td>
@@ -35,7 +44,7 @@ date: 2023-07-05 16:57:20
         <td>
             <b>University of Nottingham Ningbo China</b><br>
             BSc Hons Computer Science with Artificial Intelligence<br>
-            <i>First Class with Honors</i>
+            <i>(First Class with Honors)</i>
         </td>
         <td style='font-size:16px;'>
             Zhejiang, China<br>
@@ -49,43 +58,104 @@ date: 2023-07-05 16:57:20
         <td>
             <b>University of Birmingham</b><br>
             UG Aff Computer Science with Software Engineering<br>
-            <i>Average Score 92</i>
+            <i>(Exchange Program)</i>
         </td>
         <td style='font-size:16px;'>
             Birmingham, UK<br>
-            Sept. 2021 - Jun. 2021
+            Sept. 2020 - Jun. 2021
         </td>
     </tr>
 </table>
 
-## Experiences
+## 💠Publications
+### Conference Proceedings
+> 1. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding**. In Proceedings of The Fourteenth International Conference on Learning Representations (_Accepted_).
+>    [[📰 Paper](https://arxiv.org/abs/2507.03197)]
+> 2. Yin, Z.，**Li, J**., & Ding, Z. (2025). **iMIND: Insightful Multi-subject Invariant Neural Decoding**. Advances in Neural Information Processing Systems.
+>    [[📰 Paper](https://neurips.cc/virtual/2025/poster/119508), [🌐 Web Page](https://zachyin.com/imind/)]
+> 3. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
+>    [[📰 Paper](https://arxiv.org/abs/2509.17305v1),[🌐 Web Page](/papers/BCB2025EGM/),[📦 Code](https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational)]
+> 4. **Li, J.**, Landry, S., & Mettu, R. (2024, December). **GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction**. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE.
+>    [[📰 Paper](https://ieeexplore.ieee.org/abstract/document/10821831),[🌐 Web Page](/papers/BIBM2024GPUCOREX/),[📦 Code](https://github.com/Jiarui0923/gpuCOREX)]
+> 5. **Li, J.**, Landry, S., & Mettu, R. (2024, October). **GPU Acceleration for Markov Chain Monte Carlo Sampling**.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
+>    [[📰 Paper](https://dl.acm.org/doi/10.1145/3703412.3703428)]
+> 6. **Li, J.**, Ji, R., Yang, X., Li, J., Li, Y., Xiong, X., ... & Cui, T. (2023, December). **Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics**. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI) (pp. 603-608). IEEE.
+>    [[📰 Paper](https://ieeexplore.ieee.org/document/10371912)]
+> 7. Ji, R., **Li, J.**, He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
+>    [[📰 Paper](https://ieeexplore.ieee.org/document/10095141)]
 
+### Conference Abstracts
+> 1. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Post-hoc Explanation for TCR-pMHC Prediction**. ACM-BCB 2025:The 3rd Workshop on Advances in Systems Immunology.
+> 2. Paynter, A., **Li, J.**, Carbullido, M., Mettu, R., Landry, S., & Gragert, L. (2025). **370 Improving risk stratification in kidney transplant outcomes by modeling antigen processing to inform prediction of T-cell epitopes derived from mismatched HLA proteins**. Journal of Clinical and Translational Science, 9(s1), 114-115.
+>    [[📰 Paper](https://www.cambridge.org/core/journals/journal-of-clinical-and-translational-science/article/370-improving-risk-stratification-in-kidney-transplant-outcomes-by-modeling-antigen-processing-to-inform-prediction-of-tcell-epitopes-derived-from-mismatched-hla-proteins/5AD1FFEEDB98F5AA21F625A5F6273430)]
+
+### Preprints
+> 1. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **TCR-EML: Explainable Model Layers for TCR-pMHC Prediction**. arXiv preprint arXiv:2510.04377.
+>    [[📰 Paper](https://arxiv.org/abs/2510.04377)]
+
+### Conference Orals
+> 1. 📰 **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
+> 2. 📰 **Li, J.**, Landry, S., & Mettu, R. (2024, October). **GPU Acceleration for Markov Chain Monte Carlo sampling**.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
+> 3. 📰 **Li, J.**, Landry, S., & Mettu, R. (2024, June). **GPU Acceleration of Conformational Stability Computation for CD4+ T Cell Epitope Prediction**. In Next Gen. Conversations: Albany at Tech 2024: The 21st Conversation. Albany.
+
+## 💠Services
+|Year |Conference                |Role        | 
+|:---:|:-------------------------|:-----------|
+|2026 |**📒CVPR 2026**          |Reviewer    |
+|2025 |**📒ICLR 2026**          |Reviewer    |
+
+## 💠Grant & Funding
+|Year |Grant                                            |Authority        |Amount     |
+|:---:|:------------------------------------------------|:----------------|:----------|
+|2025 |**🏅Google Cloud Research Credits Program**      |Google GCP       |$1,000.00  |
+|2024 |**🏅AWS Public Sector Cloud Credit for Research**|Amazon AWS       |$4,984.00  |
+|2023 |**🏅Tulane Ph.D. Funding**                       |Tulane University|-          | 
+
+## 💠Awards
+|Year |Award       |Authority   |Location    |
+|:---:|:-----------|:-----------|:-----------|
+|2023 |**🏆Zhejiang Excellent Graduates**|Zhejiang Provincial Government|Zhejiang, China|
+|2022 |**🏆Best Performer**|University of Nottingham Ningbo China|Zhejiang, China|
+|2022 |**🏆President’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
+|2022 |**🏆Zhejiang Provincial Scholarship**|Zhejiang Provincial Government |Zhejiang, China|
+|2021 |**🏆Provost’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
+|2021 |**🏆Government Scholarship for Mobility Out**|Ningbo Municipal Government|Zhejiang, China|
+
+## 💠Experiences
 ### Work Experiences
+#### 🗃️ Computer Science Department, Tulane University
+**Teaching Assistant**
+_New Orleans, LA, US_  
+_Aug 2024 - Present_  
+- CMPS 2200 Introduction to Algorithm.
 
-#### ⚪ Shanghai Institution of Materia Medica, China Academy of Science
+**Research Assistant**
+_New Orleans, LA, US_  
+_Aug 2023 - Aug 2024_  
+
+#### 🗃️ Shanghai Institution of Materia Medica, China Academy of Science
 **Internship**
 _Shanghai, China_  
 _June 2023 ‑ July 2023_
-- Learned experiments including Western Blot, Cell Formation Assay, and Protein quantitative analysis.
 - Researched SOS‑1 and SHP‑2 inhibitors
 
 ### Research Experiences
-#### ⚪ CD4+ T Cell Epitope Prediction
+
+#### 🔬 T-Cell Receptor (TCR) Modeling
+_New Orleans, LA, US_ 
+_July 2024 - Present_  
+- Model adaptive immunity using explainable machine learning (XAI)
+
+#### 🔬 COREX Optimization
 Computer Science, Tulane University of Louisiana  
-_Louisiana, US_  
+_New Orleans, LA, US_ 
 _Aug 2023 - Present_  
 - Optimize COREX/BEST algorithm strcuture.
 - Accelerate algorithm based on GPU platform.
+- Design GUI for COREX Algorithm.
+- Design new sampling algorithm for microstates sampling.
 
-#### ⚪ IC50 Prediction of SOS‑1 and SHP‑2 Inhibitor
-Shanghai Institution of Materia Medica & University of Nottingham Ningbo China 
-_Shanghai, China_  
-_Sept 2022 ‑ Jan 2023_
-- Designed a new evaluation method for algorithms.
-- Designed a multi‑stage algorithm for IC50 prediction and surpassed the STOA.
-- Designed Graph Neural Networks and Transformer for IC50 prediction.
-
-#### ⚪ Machine Learning Based Radar Gait Verification
+#### 🔬 Machine Learning Based Radar Gait Verification
 University of Nottingham Ningbo China 
 _Zhejiang, China_  
 _Sept 2022 ‑ Jan 2023_
@@ -93,14 +163,7 @@ _Sept 2022 ‑ Jan 2023_
 - Designed a mutual attention fusion machenism.
 - Designed a time and frequency embedding method for signal processing.
 
-#### ⚪ Artificial Intelligence Based Drug Discovery Cloud Platform Provincial Grant Application 
-University of Nottingham Ningbo China 
-_Zhejiang, China_  
-_July 2021 ‑ Sept 2021_
-- Designed the architecture of the cloud platform.
-- Designed the core algorithm for structure‑activity prediction.
-
-#### ⚪ Enantiomeric Excess Prediction with Machine Learning
+#### 🔬 Enantiomeric Excess Prediction with Machine Learning
 University of Nottingham Ningbo China 
 _Zhejiang, China_  
 _July 2021 ‑ May 2023_
@@ -109,91 +172,28 @@ _July 2021 ‑ May 2023_
 - Designed an attention U‑Net to predict the enantiomeric excess.
 - Created co‑matrices for all the substances to ensure recognizable structure and model improvement.
 
-#### ⚪ Vehicle Detection on Drone Captured Images 
-University of Nottingham Ningbo China 
-_Zhejiang, China_  
-_Jan 2021 ‑ July 2021_
-- Transplanted Yolo‑v5 to the dataset and improved its loss function to achieve better performance than STOA.
-- Studied models such as RCNN/YOLO family and model improvement methods from Efficient‑Net.
 
-#### ⚪ MRI Image Tumor Segmentation
-University of Nottingham Ningbo China 
-_Zhejiang, China_  
-_Sept 2020 ‑ Dec 2020_
-- Evaluated the datasets, including CORN, VETO, MMM‑21, and ROSE, by reading related papers for research potential.
-- Created models such as U‑Net and U‑Net++ for object detection and segmentation on medical images with PyTorch or TensorFlow.
+## 💠Skills
+### Techniqual
+- 🗜️ **Programming**: C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net, CUDA
+- 🗜️ **Database**: MySQL, SQLite, MongoDB, Redis
+- 🗜️ **Web**: 
+    > - **Front-end**: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery
+    > - **Back-end**: Django, Flask, IIS, Apache HTTP, Docker, Nginx
+    > - **Internet Service Maintenance**: Rocket Chat, OpenVPN, Poste.io
+- 🗜️ **Algorithm**:
+    > - **Machine Learning**: Pytorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba
+    > - **Big Data**:  Hadoop, Spark
+    > - **Visualization**: Matplotlib, Plotly, Streamlit, 3DMol.js
+- 🗜️ **Documentation**: LaTeX, Markdown, Swagger, Overleaf
+- 🗜️ **Hardward**: Arduino, Raspberry Pi, STM32, Digital Logical Circuit
+- 🗜️ **Environment**: Git, Anaconda
+- 🗜️ **Cheminformatics & Bioinformatics**: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB, Biotite
+- 🎵 **Musical Instrument**: Guqin _(Traditional Chinese String Instrument)_
 
-### Project Experiences
-
-#### ⚪ Artificial Intelligence Aided Drug Discovery Cloud Platform
-University of Nottingham Ningbo China  
-_Zhejiang, China_  
-_Jan 2022 ‑ June 2022_
-- Implemented fast access on million data based on MongoDB and Redis
-- Designed the model flow structure and implemented basic REST‑API.
-- Designed the front‑end of the platform.
-
-#### ⚪ Flight Foresight
-University of Nottingham Ningbo China  
-_Zhejiang, China_  
-_Apr 2022 ‑ May 2022_
-- Built aircraft delay prediction model utilizing Spark.
-- Designed front‑end for the software.
-
-#### ⚪ X-Room
-University of Nottingham Ningbo China
-_Zhejiang, China_  
-_March 2022 ‑ May 2022_
-- Utilized YOLOv8 for lecturer tracking and super resolution.
-- Created flow model to allow automatic parallel.
-- Implemented optical character recognition and automatic note.
-
-#### ⚪ HirePrep
-University of Birmingham
-_Birmingham, UK_
-_Jan 2022 ‑ May 2022_
-- Designed and implemented REST API, voice control
-- Designed user interface appearance and animation.
-- Utilized the APIs of GPT‑3 from OPENAI to generate interview questions and evaluate the answers from users.
-
-
-## Publications
-### Journal Articles
-> 1. Li, J., Ji, R., Wang, D., Hirst, J., Tang, B., Ren, J. (2023, July). **Prediction of Enantioselectivity in Asymmetric Catalysis Using Attention U‑Net with UMAP Clustering and Random Forest**. _*Under Reviewing_
-
-### Conference Proceedings
-> 1. Ji, R., Li, J., He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
-> 2. Li, J., Ji R., Li C., Yang X., Li J., Li Y., Xiong X., Fang Y., Ding S., Cui T. (2023, September). **Prediction of Flight Arrival Delay Time using U.S. Bureau of Transportation Statistics**. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI 2023). _[Accepted]_
-
-## Awards & Funding
-|Year |Award       |Authority   |Location    |
-|:---:|:-----------|:-----------|:-----------|
-|2023 |**Tulane Ph.D. Funding**|Tulane University|Louisiana, US|
-|2023 |**Zhejiang Excellent Graduates**|Zhejiang Provincial Government|Zhejiang, China|
-|2022 |**Best Performer**|University of Nottingham Ningbo China|Zhejiang, China|
-|2022 |**President’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
-|2022 |**Zhejiang Provincial Scholarship**|Zhejiang Provincial Government |Zhejiang, China|
-|2021 |**Provost’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
-|2021 |**Government Scholarship for Mobility Out**|Ningbo Municipal Government|Zhejiang, China|
-|2020|**Outstanding Staff**|UNNC Science and Technology Student Association|Zhejiang, China|
-
-## Skills
-- **Programming**: C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net
-- **Database**: MySQL, SQLite, MongoDB, Redis
-- **Web**: 
-  - **Front-end**: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery
-  - **Back-end**: Django, Flask, IIS, Apache HTTP, Docker, Nginx
-- **Machine Learning**: Pytorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba
-- **Big Data**:  Hadoop, Spark
-- **Documentation**: LaTeX, Markdown, Swagger, Overleaf
-- **Visualization**: Matplotlib, Plotly, Streamlit, 3DMol.js
-- **Hardward**: Arduino, Raspberry Pi, STM32, Digital Logical Circuit
-- **Internet Service Maintenance**: Rocket Chat, OpenVPN, Poste.io
-- **Environment**: Git, Anaconda
-- **Operating System**: Windows, Linux
-- **Cheminformatics & Bioinformatics**: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB
-- **Musical Instrument**: Guqin _(Traditional Chinese String Instrument)_
-
-## Languages
-- **Chinese** Native proficiency
-- **English** Professional proficiency
+### Languages
+- 📓 **Chinese** Native proficiency
+  - 📓 **Mandarin**
+  - 📓 **Chongqing Dialect** I am a Chongqing citizen definetely.
+- 📓 **English** Professional proficiency
+- 📓 **French** Loyal Duolingo user

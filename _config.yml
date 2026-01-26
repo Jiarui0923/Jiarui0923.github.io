@@ -5,7 +5,7 @@
 # Site
 title: Jiarui LI
 subtitle: 'Jiarui Li Website'
-description: 'Jiarui Li Resume Is Here'
+description: "Find Jiarui Li's Resume Here"
 keywords:
 author: Jiarui LI
 language: en
@@ -93,6 +93,7 @@ pagination_dir: page
 include:
 exclude:
 ignore:
+  
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
