@@ -6,6 +6,7 @@ paper:
     month: December
     year: 2025
   abbr: "ACM BCB"
+  pubicon: "images/ACMBCB-2025.jpg"
 
 # 2. Author list
 authors:

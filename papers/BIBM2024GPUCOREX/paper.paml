@@ -6,6 +6,7 @@ paper:
     month: December
     year: 2024
   abbr: "BIBM"
+  pubicon: "images/IEEEBIBM-2024-logo-color.jpg"
 
 # 2. Author list
 authors:

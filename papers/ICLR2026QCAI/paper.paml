@@ -6,6 +6,7 @@ paper:
     month: April
     year: 2026
   abbr: "ICLR"
+  pubicon: "./images/iclr-navbar-logo.svg"
 
 # 2. Author list
 authors:
