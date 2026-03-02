@@ -1,11 +1,11 @@
 # 1. Core paper details
 paper:
-  title: "Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding"
-  publication: "The Fourteenth International Conference on Learning Representations"
+  title: "TCR-EML: Explainable Model Layers for TCR-pMHC Prediction"
+  publication: "Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026"
   date:
     month: April
     year: 2026
-  abbr: "ICLR"
+  abbr: "LMRL"
   pubicon: "./images/iclr-navbar-logo.svg"
 
 # 2. Author list
@@ -16,9 +16,6 @@ authors:
   - name: "Zixiang Yin"
     affiliation: "Department of Computer Science, Tulane University"
     link: "https://zachyin.com/"
-  - name: "Haley Smith"
-    affiliation: "Department of Biochemistry and Molecular Biology, Tulane University School of Medicine"
-    link: "https://www.linkedin.com/in/haley-smith-b72640123/"
   - name: "Zhengming Ding"
     affiliation: "Department of Computer Science, Tulane University"
     link: "https://www.cs.tulane.edu/~zding1/"
@@ -33,30 +30,27 @@ authors:
 # 3. External links and resources
 links:
   - name: "Paper"
-    link: "https://openreview.net/forum?id=S3kSOFhs5m"
+    link: "https://openreview.net/forum?id=lBS6Kg648t"
     icon: "fa-regular fa-file"
     expand: true
   - name: "arXiv"
-    link: "https://arxiv.org/abs/2507.03197"
+    link: "https://arxiv.org/abs/2510.04377"
     icon: "ai ai-arxiv"
   - name: "PDF"
-    link: "li2026quantifying.pdf"
+    link: "li2026tcreml.pdf"
     icon: "fa-solid fa-file-pdf"
-  - name: "GitHub"
-    link: "https://github.com/Jiarui0923/QCAI"
-    icon: "fa-brands fa-github"
 
 # 4. Citation formats (using the pipe '|' for multi-line strings)
 citations:
   Bibtex: |
-    @inproceedings{"li2026quantifying,
-      title={Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding},
-      author={Li, Jiarui and Yin, Zixiang and Smith, Haley and Ding, Zhengming and Landry, Samuel J and Mettu, Ramgopal R},
-      booktitle={In Proceedings of The Fourteenth International Conference on Learning Representations},
+    @inproceedings{"li2026tcreml,
+      title={TCR-EML: Explainable Model Layers for TCR-pMHC Prediction},
+      author={Li, Jiarui and Yin, Zixiang and Ding, Zhengming and Landry, Samuel J and Mettu, Ramgopal R},
+      booktitle={Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026},
       pages={1--10},
       year={2026}
     }
-  APA: "Li, J., Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding.  In Proceedings of The Fourteenth International Conference on Learning Representations (pp. 1-10)."
+  APA: "Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). TCR-EML: Explainable Model Layers for TCR-pMHC Prediction. Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026 (pp. 1-10)."
 
 # 5. Path to the main document file
 document:
