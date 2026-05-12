@@ -39,12 +39,16 @@ links:
   - name: "arXiv"
     link: "https://arxiv.org/abs/2507.03197"
     icon: "ai ai-arxiv"
-  - name: "PDF"
-    link: "li2026quantifying.pdf"
-    icon: "fa-solid fa-file-pdf"
   - name: "GitHub"
     link: "https://github.com/Jiarui0923/QCAI"
     icon: "fa-brands fa-github"
+  - name: "Poster"
+    link: "ICLR2026QCAI_POSTER_20260416_04.pdf"
+    icon: "fa-solid fa-image"
+  - name: "PDF"
+    link: "li2026quantifying.pdf"
+    icon: "fa-solid fa-file-pdf"
+  
 
 # 4. Citation formats (using the pipe '|' for multi-line strings)
 citations:

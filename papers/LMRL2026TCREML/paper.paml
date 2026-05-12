@@ -36,6 +36,15 @@ links:
   - name: "arXiv"
     link: "https://arxiv.org/abs/2510.04377"
     icon: "ai ai-arxiv"
+  - name: "GitHub"
+    link: "https://github.com/Tulane-Mettu-Landry-Lab/tcr-eml"
+    icon: "fa-brands fa-github"
+  - name: "HuggingFace"
+    link: "https://huggingface.co/jli78/TCR-EML/"
+    icon: "fa-brands fa-hugging-face"
+  - name: "Poster"
+    link: "LMRL2026TCREML_POSTER_20260416_02.pdf"
+    icon: "fa-solid fa-image"
   - name: "PDF"
     link: "li2026tcreml.pdf"
     icon: "fa-solid fa-file-pdf"
@@ -61,4 +70,4 @@ document:
 nav:
   Home: "#"
   XAI4Immuno: "#"
-  QCAI: null
+  TCREML: null

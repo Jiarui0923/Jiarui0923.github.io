@@ -3,3 +3,5 @@ T cell receptor (TCR) recognition of peptide-MHC (pMHC) complexes is a central c
 ![intro](./images/intro.png)
 _**Explainable Model Layers (TCR-EML)** include a Feature Enhancement and Fusion (FEF) block and contact prototype layers, which not only predict TCR-pMHC binding but also provide contact scores corresponding to contact distances. In the absence of experimental TCR-pMHC structures, the contact prototype illuminates TCR-pMHC binding patterns._
 
+![poster](./images/LMRL2026TCREML_POSTER_20260416_02.png)
+

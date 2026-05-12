@@ -4,3 +4,4 @@ Most existing post-hoc explainable AI (XAI) methods are confined to encoder-only
 ![intro](./images/intro.png)
 _**Quantifying Cross-Attention Interaction (QCAI)** is a post-hoc explanation method designed for cross-attention mechanisms. In this paper, we show that QCAI enables insight into the structural basis for TCR-pMHC binding._
 
+![poster](./images/ICLR2026QCAI_POSTER_20260416_04.png)
