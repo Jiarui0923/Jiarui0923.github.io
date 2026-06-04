@@ -69,19 +69,21 @@ date: 2025-10-05 19:10:20
 
 ## 💠Publications
 ### Conference Proceedings
-> 1. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding**. In Proceedings of The Fourteenth International Conference on Learning Representations (_Accepted_).
->    [[📰 Paper](https://arxiv.org/abs/2507.03197)]
-> 2. Yin, Z.，**Li, J**., & Ding, Z. (2025). **iMIND: Insightful Multi-subject Invariant Neural Decoding**. Advances in Neural Information Processing Systems.
->    [[📰 Paper](https://neurips.cc/virtual/2025/poster/119508), [🌐 Web Page](https://zachyin.com/imind/)]
-> 3. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
+> 1. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **TCR-EML: Explainable Model Layers for TCR-pMHC Prediction**. Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026.
+>    [[📰 Paper](https://openreview.net/forum?id=lBS6Kg648t),[🌐 Web Page](https://jiarui-li.com/papers/LMRL2026TCREML/)]
+> 2. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding**. In Proceedings of The Fourteenth International Conference on Learning Representations (_Accepted_).
+>    [[📰 Paper](https://openreview.net/forum?id=S3kSOFhs5m),[🌐 Web Page](https://jiarui-li.com/papers/ICLR2026QCAI/),[📦 Code](https://github.com/Jiarui0923/QCAI)]  
+> 3. Yin, Z.，**Li, J**., & Ding, Z. (2025). **iMIND: Insightful Multi-subject Invariant Neural Decoding**. Advances in Neural Information Processing Systems.
+>    [[📰 Paper](https://neurips.cc/virtual/2025/poster/119508),[🌐 Web Page](https://zachyin.com/imind/)]
+> 4. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
 >    [[📰 Paper](https://arxiv.org/abs/2509.17305v1),[🌐 Web Page](/papers/BCB2025EGM/),[📦 Code](https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational)]
-> 4. **Li, J.**, Landry, S., & Mettu, R. (2024, December). **GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction**. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE.
+> 5. **Li, J.**, Landry, S., & Mettu, R. (2024, December). **GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction**. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE.
 >    [[📰 Paper](https://ieeexplore.ieee.org/abstract/document/10821831),[🌐 Web Page](/papers/BIBM2024GPUCOREX/),[📦 Code](https://github.com/Jiarui0923/gpuCOREX)]
-> 5. **Li, J.**, Landry, S., & Mettu, R. (2024, October). **GPU Acceleration for Markov Chain Monte Carlo Sampling**.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
+> 6. **Li, J.**, Landry, S., & Mettu, R. (2024, October). **GPU Acceleration for Markov Chain Monte Carlo Sampling**.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
 >    [[📰 Paper](https://dl.acm.org/doi/10.1145/3703412.3703428)]
-> 6. **Li, J.**, Ji, R., Yang, X., Li, J., Li, Y., Xiong, X., ... & Cui, T. (2023, December). **Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics**. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI) (pp. 603-608). IEEE.
+> 7. **Li, J.**, Ji, R., Yang, X., Li, J., Li, Y., Xiong, X., ... & Cui, T. (2023, December). **Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics**. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI) (pp. 603-608). IEEE.
 >    [[📰 Paper](https://ieeexplore.ieee.org/document/10371912)]
-> 7. Ji, R., **Li, J.**, He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
+> 8. Ji, R., **Li, J.**, He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
 >    [[📰 Paper](https://ieeexplore.ieee.org/document/10095141)]
 
 ### Conference Abstracts
@@ -89,9 +91,6 @@ date: 2025-10-05 19:10:20
 > 2. Paynter, A., **Li, J.**, Carbullido, M., Mettu, R., Landry, S., & Gragert, L. (2025). **370 Improving risk stratification in kidney transplant outcomes by modeling antigen processing to inform prediction of T-cell epitopes derived from mismatched HLA proteins**. Journal of Clinical and Translational Science, 9(s1), 114-115.
 >    [[📰 Paper](https://www.cambridge.org/core/journals/journal-of-clinical-and-translational-science/article/370-improving-risk-stratification-in-kidney-transplant-outcomes-by-modeling-antigen-processing-to-inform-prediction-of-tcell-epitopes-derived-from-mismatched-hla-proteins/5AD1FFEEDB98F5AA21F625A5F6273430)]
 
-### Preprints
-> 1. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **TCR-EML: Explainable Model Layers for TCR-pMHC Prediction**. arXiv preprint arXiv:2510.04377.
->    [[📰 Paper](https://arxiv.org/abs/2510.04377)]
 
 ### Conference Orals
 > 1. 📰 **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
@@ -101,19 +100,30 @@ date: 2025-10-05 19:10:20
 ## 💠Services
 |Year |Conference                |Role        | 
 |:---:|:-------------------------|:-----------|
+|2026 |**📒MLSCB@ISMB 2026**    |Reviewer    |
+|2026 |**📒ICML 2026**          |Reviewer    |
+|2026 |**📒LMRL@ICLR 2026**     |Reviewer    |
 |2026 |**📒CVPR 2026**          |Reviewer    |
 |2025 |**📒ICLR 2026**          |Reviewer    |
+
+|Journal                            |Role        |Review Date(s) |
+|:----------------------------------|:-----------|:--------------|
+|**📒PLoS Computational Biology**  |Reviewer     |`2026/05`      |
 
 ## 💠Grant & Funding
 |Year |Grant                                            |Authority        |Amount     |
 |:---:|:------------------------------------------------|:----------------|:----------|
+|2025 |**🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence** (Explainable Machine Learning for Immunotherapy)|Tulane University|- |
 |2025 |**🏅Google Cloud Research Credits Program**      |Google GCP       |$1,000.00  |
+|2024 |**🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence** (Computational Epitope Prediction)|Tulane University|- |
 |2024 |**🏅AWS Public Sector Cloud Credit for Research**|Amazon AWS       |$4,984.00  |
 |2023 |**🏅Tulane Ph.D. Funding**                       |Tulane University|-          | 
 
 ## 💠Awards
 |Year |Award       |Authority   |Location    |
 |:---:|:-----------|:-----------|:-----------|
+|2026 |**🏆CS TA Award**|Department of Computer Science, Tulane University|LA, US| 
+|2026 |**🏆Best Research Poster**|Department of Computer Science, Tulane University|LA, US| 
 |2023 |**🏆Zhejiang Excellent Graduates**|Zhejiang Provincial Government|Zhejiang, China|
 |2022 |**🏆Best Performer**|University of Nottingham Ningbo China|Zhejiang, China|
 |2022 |**🏆President’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|

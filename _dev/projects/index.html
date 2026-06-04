@@ -1,0 +1,791 @@
+layout: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Paper</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔬</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked-base-url"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <style>
+        :root {
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-dserif: 'DM Serif Text', serif;
+            --hero-bg-color: #f5f5f5; /* light gray */
+            --hero-text-color: #222;  /* almost black */
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-dserif); }
+        body {
+            font-family: var(--font-sans);
+        }
+
+        .is-dmserif {
+            font-family: var(--font-dserif);
+        }
+
+        .is-mono {
+            font-family: var(--font-mono);
+        }
+        /* CSS is generally kept the same as it's small and well-structured */
+        .hover-expand .text {
+            opacity: 0;
+            max-width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: opacity 0.3s ease, max-width 0.3s ease;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hover-expand:hover .text {
+            opacity: 1;
+            max-width: 200px; /* adjust for text length */
+        }
+        .sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+        /* Optional: if you want symbols too */
+        .sup[data-symbol="plus"]::after { content: "⁺"; }
+        .sup[data-symbol="minus"]::after { content: "⁻"; }
+        .sup[data-symbol="star"]::after { content: "*"; /* or × */ }
+        .sup[data-number="1"]::after { content: "¹"; }
+        .sup[data-number="2"]::after { content: "²"; }
+        .sup[data-number="3"]::after { content: "³"; }
+        .sup[data-number="4"]::after { content: "⁴"; }
+        .sup[data-number="5"]::after { content: "⁵"; }
+        .sup[data-number="6"]::after { content: "⁶"; }
+        .sup[data-number="7"]::after { content: "⁷"; }
+        .sup[data-number="8"]::after { content: "⁸"; }
+        .sup[data-number="9"]::after { content: "⁹"; }
+        .sup[data-number="0"]::after { content: "⁰"; }
+
+        /* Floating Navbar Styles */
+        .navbar-container {
+            position: fixed;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1000;
+            border-radius: 2rem;
+            border-color: lightgrey;
+            border-width: 0.5pt;
+            border-style: solid;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .custom-frosted-navbar {
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            height: 100%;
+        }
+        .custom-frosted-navbar .navbar-item {
+            background-color: transparent !important;
+        }
+
+        /* --- Frosted Glass Style for Button --- */
+        .frosted-button {
+            /* Ensure the outlined button background is transparent for the blur to show */
+            background-color: transparent !important;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Optional: Apply a subtle effect on hover */
+        .frosted-button:hover {
+            background-color: rgba(50, 152, 220, 0.1) !important; /* Semi-transparent link color background */
+        }
+
+        /* --- Dynamic Section Indicator Styles (NEW) --- */
+        .navbar-center {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: center;
+            min-width: 0; 
+        }
+
+        #section-indicator-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Base style for all animated section links */
+        .section-nav-link {
+            display: inline-block;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 15vw; /* Prevent previous/next from taking too much space */
+        }
+        
+        /* Style for the current (active) section */
+        .section-nav-link.is-active {
+            transform: scale(1.05);
+            max-width: 30vw; /* Give active link more space */
+        }
+
+        #citation-content {
+            white-space: pre-wrap;       /* Allow wrapping while preserving whitespace */
+            word-wrap: break-word;       /* Break long words if needed */
+            overflow-wrap: break-word;   /* Modern alternative for word-wrap */
+            max-width: 100%;             /* Don’t exceed parent’s width */
+            box-sizing: border-box;      /* Include padding in total width */
+        }
+
+        .hero-bordered {
+            border-top: 2px solid #ccc;   /* top rule */
+            border-bottom: 2px solid #ccc; /* bottom rule */
+        }
+
+        .hero-body-relative {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Right-pinned image container */
+        .hero-image-right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-right: 1.5rem;
+        }
+
+        /* Image sizing */
+        .hero-image-right img {
+            max-height: 100%;
+            max-width: 50vw;
+            object-fit: contain;
+        }
+
+        /* Static vertical fade (top & bottom) */
+        .fade-vertical {
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                transparent 0%,
+                black 18%,
+                black 82%,
+                transparent 100%
+            );
+            mask-image: linear-gradient(
+                to bottom,
+                transparent 0%,
+                black 18%,
+                black 82%,
+                transparent 100%
+            );
+        }
+
+        .paper-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(92, 92, 92, 0.75);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .paper-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(92, 92, 92, 0.5);
+        }
+
+        .paper-card .card-content {
+            flex-grow: 1;
+        }
+
+        .paper-card .card-footer {
+            justify-content: flex-end;
+        }
+
+        .colored-underline {
+            text-decoration: none;
+            border-bottom: 2px solid var(--bulma-link);
+            display: inline-block;
+            padding-bottom: 0.025em;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar-container">
+        <nav class="navbar custom-frosted-navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <h1 class="is-size-5 has-text-weight-bold" id="Nav-Publication-Name-Container">Conference</h1>
+                </div>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <!-- Center Section Indicator (NEW) -->
+                <div class="navbar-end is-flex-mobile">
+                    <div class="navbar-item is-flex-mobile">
+                      <div class="buttons has-addons is-centered" id="section-indicator-container">
+
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="hero is-small">
+        <nav class="hero-body">
+            <article class="media">
+                <span id="top-nav-icon">
+                   
+                </span>
+                
+                <div class="media-content is-hidden-mobile">
+                    <h1 class="subtitle" id="top-nav-title">lab name</h1>
+                </div>
+                <div class="media-content is-hidden-tablet">
+                    <h1 class="subtitle" id="top-nav-title-abbr">lab name</h1>
+                </div>
+                
+                </article>
+        </nav>
+    </div>
+
+    <section class="hero is-bold is-halfheight mt-0">
+        <div class="hero-body hero-body-relative">
+
+            <!-- TEXT -->
+            <div class="container hero-inner">
+                
+                <div class="content">
+                    <span id="paper-title-container"></span>
+                    <p id="short-desc-container" class="is-dmserif mb-0"></p>
+                </div>
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                    <ul id="breadcrumb-container"></ul>
+                </nav>
+            </div>
+
+            <!-- IMAGE -->
+            <span id="paper-title-image-container">
+            </span>
+            
+
+        </div>
+    </section>
+
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="content" id="markdown-output-container"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="content">
+                <h2 class="title is-4">Publications and Presentations</h2>
+            </div>
+            <div class="columns is-multiline" id="papers-container">
+            <!-- Cards will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p id="footer-note-container"></p>
+            <p>
+                Build <a href="https://github.com/Jiarui0923/paperpage">PaperPage</a> for your paper.
+            </p>
+            <a id="theme-toggle" class="button">
+                <span class="icon">
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                </span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Caching for efficiency
+        const toggleBtn = document.getElementById('theme-toggle');
+        const htmlEl = document.documentElement;
+
+        // New Global State for Section Tracking
+        let sectionData = [];
+        let isSectionDataReady = false;
+        let scrollTimeout;
+
+        // Theme state
+        let theme = localStorage.getItem('theme') || 'auto';
+
+        // --- Utility Functions ---
+
+        /**
+         * Safely gets a URL parameter.
+         */
+        function getQueryParam(name) {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+
+        /**
+         * Extracts the base path (directory) from a full URL.
+         */
+        function getBaseUrl(url) {
+            const lastSlashIndex = url.lastIndexOf('/');
+            return url.substring(0, lastSlashIndex + 1);
+        }
+
+        // --- Theme Functions (optimized) ---
+
+        function updateThemeButton() {
+            // Get the inner <i> tag
+            const icon = toggleBtn.querySelector('.icon i');
+            // Remove all specific theme icons
+            icon.classList.remove('fa-sun', 'fa-moon', 'fa-circle-half-stroke');
+
+            if (theme === 'light') icon.classList.add('fa-sun');
+            else if (theme === 'dark') icon.classList.add('fa-moon');
+            else icon.classList.add('fa-circle-half-stroke'); // auto
+        }
+
+        function applyTheme() {
+            if (theme === 'light') htmlEl.setAttribute('data-theme', 'light');
+            else if (theme === 'dark') htmlEl.setAttribute('data-theme', 'dark');
+            else htmlEl.removeAttribute('data-theme'); // auto
+            updateThemeButton();
+            localStorage.setItem('theme', theme);
+        }
+
+        // Cycle theme: auto → light → dark → auto
+        toggleBtn.addEventListener('click', () => {
+            if (theme === 'auto') theme = 'light';
+            else if (theme === 'light') theme = 'dark';
+            else theme = 'auto';
+            applyTheme();
+        });
+
+
+        /**
+         * Switches the active citation tab and updates content.
+         * @param {Object} citations - Object mapping tab names to citation content.
+         * @param {string} tabName - Name of the tab to switch to.
+         */
+        function switchTab(citations, tabName) {
+            // Update active class
+            document.querySelectorAll("#citation-tabs li").forEach(li => li.classList.remove("is-active"));
+            const activeLi = Array.from(document.querySelectorAll("#citation-tabs li"))
+                .find(li => li.textContent === tabName);
+            if (activeLi) activeLi.classList.add("is-active");
+
+            // Update pre content
+            contentContainer.textContent = citations[tabName];
+        }
+
+        // --- Section Navigation Functions (MODIFIED) ---
+        /** Simple slugifier to create reliable IDs */
+        function slugify(text) {
+            return text.toLowerCase()
+                .trim()
+                // Remove all non-word characters (including spaces) and replace with a single dash
+                .replace(/[\s\W-]+/g, '-') 
+                // Remove leading/trailing dashes
+                .replace(/^-+|-+$/g, ''); 
+        }
+
+        /** Extracts headings and calculates their scroll position. */
+        function extractSections() {
+            sectionData = [];
+            const mainContent = document.getElementById('markdown-output-container');
+            // Offset to activate the section slightly before it hits the top edge
+            const scrollOffset = 150; 
+            const usedIds = new Set(); // To ensure ID uniqueness
+
+            if (mainContent) {
+                // Look for H1, H2, H3 elements in the markdown output
+                mainContent.querySelectorAll('h1, h2, h3').forEach(heading => {
+                    const text = heading.textContent.trim();
+                    if (!text) return; // Skip empty headings
+
+                    let id = heading.id;
+
+                    // 1. Generate a unique ID if missing or if the existing ID is duplicated
+                    if (!id || usedIds.has(id)) {
+                        id = slugify(text);
+                        
+                        // Handle potential duplicate slugs (e.g., two sections named "Introduction")
+                        let uniqueId = id;
+                        let counter = 1;
+                        while (usedIds.has(uniqueId)) {
+                            uniqueId = `${id}-${counter++}`;
+                        }
+                        id = uniqueId;
+
+                        // 2. Assign the generated ID to the heading element
+                        heading.id = id;
+                    }
+
+                    usedIds.add(id);
+                    
+                    // Calculate offset from top of document
+                    const rect = heading.getBoundingClientRect();
+                    const documentTop = rect.top + window.scrollY;
+                    
+                    sectionData.push({
+                        id: id,
+                        title: text,
+                        // OffsetTop is document scroll position where section becomes "active"
+                        offsetTop: documentTop - scrollOffset
+                    });
+                });
+            }
+            
+            // Sort by offsetTop
+            sectionData.sort((a, b) => a.offsetTop - b.offsetTop);
+
+            isSectionDataReady = sectionData.length > 0;
+            // Immediate update for initial state
+            updateSectionIndicator(); 
+        }
+
+
+
+        /** Updates the three section links in the navbar based on scroll position. */
+        function updateSectionIndicator() {
+            const indicatorContainer = document.getElementById('section-indicator-container');
+            if (!isSectionDataReady || !indicatorContainer) return;
+
+            // Debounce the function for performance during scrolling
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                
+                const currentScroll = window.scrollY;
+                let activeIndex = 0;
+
+                // Find the current active section (the last one whose offsetTop is <= currentScroll)
+                for (let i = sectionData.length - 1; i >= 0; i--) {
+                    // Check if current scroll position is past the section's activation point
+                    if (currentScroll >= sectionData[i].offsetTop) {
+                        activeIndex = i;
+                        break;
+                    }
+                }
+
+                const currentSection = sectionData[activeIndex];
+                const prevSection = sectionData[activeIndex - 1];
+                const nextSection = sectionData[activeIndex + 1];
+
+                let html = '';
+
+                // Previous link
+                if (prevSection) {
+                    html += `<a class="button is-ghost section-nav-link is-prev" href="#${prevSection.id}"><i class="fa-solid fa-arrow-left"></i></a>`;
+                }
+
+                // Current link (always present if sectionData is not empty)
+                html += `<a class="button is-ghost section-nav-link is-active" href="#${currentSection.id}">${currentSection.title.toUpperCase()}</a>`;
+
+                // Next link
+                if (nextSection) {
+                    html += `<a class="button is-ghost section-nav-link is-next" href="#${nextSection.id}"><i class="fa-solid fa-arrow-right"></i></a>`;
+                }
+
+                // Only update the DOM if the active section has changed
+                if (indicatorContainer.dataset.activeId !== currentSection.id) {
+                    indicatorContainer.innerHTML = html;
+                    indicatorContainer.dataset.activeId = currentSection.id;
+                    enableSmoothScroll(); // Re-enable smooth scroll for the newly created links
+                }
+            }, 50); // Small debounce time
+        }
+
+        // --- Rendering Functions ---
+
+        function renderHeader(projectData, labData, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) {
+                console.error(`Header container with ID "${containerId}" not found.`);
+                return;
+            }
+
+            // Use innerHTML for the main header block
+            container.innerHTML = `
+                <h4 class="subtitle" style="font-weight: 400; color: #555;">
+                    ${projectData.category}
+                </h4>
+                <h1 class="title mt-0">${projectData.title}</h1>
+            `;
+            // Update other elements directly
+            document.getElementById("Nav-Publication-Name-Container").textContent = `${projectData.abbr}`;
+            document.getElementById("top-nav-title").innerHTML = `${labData.name}`;
+            document.getElementById("top-nav-title-abbr").innerHTML = `${labData.name}`;
+            document.getElementById("short-desc-container").innerHTML = `${projectData.desc}`
+
+            if (projectData.figure) {
+                document.getElementById("paper-title-image-container").innerHTML = `
+                <div class="hero-image-right is-hidden-mobile fade-vertical">
+                <img src="${projectData.figure}" alt="Hero image">
+                </div>
+                `
+            }
+            
+            if (labData.icon) {
+                document.getElementById("top-nav-icon").innerHTML = `
+                <figure class="media-left">
+                    <div class="logo-container" style="height:21pt;">
+                        <img src="${labData.icon}" style="max-width: auto;height: 100%;display: block;">
+                    </div>
+                </figure>
+                `
+            }
+            
+            document.title = `[${projectData.abbr}] ${projectData.title}`;
+        }
+
+        function renderPapers(papers) {
+            const container = document.getElementById('papers-container');
+
+            papers.forEach(paper => {
+            // Create column (responsive)
+            const col = document.createElement('div');
+            col.className = 'column is-one-third-desktop is-full-mobile';
+
+            const link = document.createElement('a');
+            link.href = paper.link;
+            link.className = 'paper-card-link';
+            link.style.display = 'block';
+
+            // Create card
+            const card = document.createElement('div');
+            card.className = 'card paper-card is-dmserif';
+
+            // Card content
+            const cardContent = document.createElement('div');
+            cardContent.className = 'card-content';
+
+            cardContent.innerHTML = `
+                <p class="has-text-weight-bold colored-underline">
+                    ${paper.year} ${paper.month}
+                </p>
+                <p class="title is-5 mt-2">${paper.title}</p>
+                <p class="subtitle is-6 mt-1">${paper.publication}</p>
+                <p class="">${paper.authors}</p>
+            `;
+
+            // Assemble card
+            card.appendChild(cardContent);
+            link.appendChild(card)
+            col.appendChild(link);
+            container.appendChild(col);
+            });
+        }
+
+        function renderBreadcrumb(breadcrumbData) {
+            const nav = document.getElementById('breadcrumb-nav');
+            const container = document.getElementById('breadcrumb-container');
+
+            // Guard: null, undefined, or empty object
+            if (
+                !breadcrumbData ||
+                typeof breadcrumbData !== 'object' ||
+                Object.keys(breadcrumbData).length === 0
+            ) {
+                nav.style.display = 'none';
+                return;
+            }
+
+            const entries = Object.entries(breadcrumbData);
+
+            entries.forEach(([label, href], index) => {
+                const li = document.createElement('li');
+
+                // Active breadcrumb (last or null href)
+                if (index === entries.length - 1 || href === null) {
+                li.className = 'is-active';
+
+                const a = document.createElement('a');
+                a.textContent = label;
+                a.setAttribute('aria-current', 'page');
+                li.appendChild(a);
+                } else {
+                const a = document.createElement('a');
+                a.href = href;
+                a.textContent = label;
+                li.appendChild(a);
+                }
+
+                container.appendChild(li);
+            });
+        }
+
+        function renderMarkdown(markdown, containerId, basePath = '', centered = false) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            // Check if marked and markedBaseUrl are loaded
+            if (typeof marked === 'undefined' || typeof markedBaseUrl === 'undefined') {
+                console.error("Markdown libraries are not loaded.");
+                container.innerHTML = '## Error Rendering Content\nMarkdown renderer is not available.';
+                return;
+            }
+            
+            marked.use(markedBaseUrl.baseUrl(basePath));
+            // Use marked.parse() for rendering
+            const html = marked.parse(markdown);
+            
+            container.innerHTML = html;
+
+            // Manage centered class without using ternary operator for clarity
+            if (centered) {
+                container.classList.add("has-text-centered");
+            } else {
+                container.classList.remove("has-text-centered"); 
+            }
+        };
+
+        async function fetchAndRenderMarkdown(url, containerId, centered) {
+            let markdownText = '';
+            
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                markdownText = await response.text();
+            } catch (error) {
+                console.error(`Failed to load markdown from ${url}: `, error);
+                markdownText = '## Error Loading Content\nCould not load the markdown file. Please check the network path.';
+            }
+
+            renderMarkdown(markdownText, containerId, getBaseUrl(url), centered);
+        };
+
+        function renderFooter(content) {
+            const container = document.getElementById("footer-note-container");
+            if (container && content) {
+                container.innerHTML = content;
+            }
+        };
+        
+        /**
+         * Attaches smooth scroll behavior to all anchor links.
+         */
+        function enableSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                // Ensure we only add the listener once. The original code added listeners inside a loop 
+                // in the global scope AND inside initPaperPage, leading to potential duplicates. 
+                // This version centralizes it in initPaperPage.
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        };
+
+        // --- Initialization Function ---
+
+        async function initPaperPage(projectData) {
+            // Check for required data
+            if (!projectData || !projectData.project || !projectData.lab || !projectData.document) {
+                console.error("Incomplete paperData structure received.");
+                return;
+            }
+
+            renderHeader(projectData.project, projectData.lab, 'paper-title-container');
+            renderPapers(projectData.papers);
+            renderBreadcrumb(projectData.nav);
+            
+            // Note: This relies on marked being loaded via 'defer' before this is called
+            await fetchAndRenderMarkdown(projectData.document.path, "markdown-output-container", projectData.document.centered);
+
+            // NEW: Extract sections only from the rendered markdown
+            extractSections();
+            window.addEventListener('scroll', updateSectionIndicator);
+            window.addEventListener('resize', extractSections); // Re-calculate offsets on resize
+            
+            renderFooter(projectData.document.footer);
+            
+            // Set initial citation tab
+            const firstCitationKey = Object.keys(projectData.citations)[0];
+            if (firstCitationKey) {
+                switchTab(projectData.citations, firstCitationKey);
+            }
+            
+            applyTheme();
+            enableSmoothScroll();
+        };
+
+        // --- Main Execution Block (optimized) ---
+
+        (async function() {
+            let yamlDataString = '';
+            
+            // 1. Determine the path
+            const configParam = getQueryParam('project');
+            const yamlPath = configParam || './project.paml';
+            
+            // 2. Fetch the data
+            try {
+                const response = await fetch(yamlPath);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                yamlDataString = await response.text();
+            } catch (fetchError) {
+                console.error("Error fetching YAML file. Template rendering stopped.", fetchError);
+                return;
+            }
+
+            // 3. Parse the data (Wait for js-yaml to load if deferred)
+            // A simple busy-wait loop is generally discouraged, but in a non-module scenario 
+            // with defer, we rely on the library being available shortly after the main script starts.
+            if (typeof jsyaml === 'undefined' || !jsyaml.load) {
+                // For a more robust solution, this would use a module loader or a check-and-wait loop.
+                console.error("js-yaml library is not loaded. Cannot parse YAML.");
+                return;
+            }
+
+            try {
+                const fullPaperData = jsyaml.load(yamlDataString);
+                // 4. Initialize the page
+                initPaperPage(fullPaperData);
+            } catch (parseError) {
+                console.error("Error parsing YAML data:", parseError);
+            }
+        })();
+    </script>
+</body>
+</html>
