@@ -4,7 +4,20 @@ title: Jiarui (Jerry) Li
 date: 2026-06-10 19:10:20
 toc: false
 ---
-<p>
+<p style="display:flex; align-items:center;">
+<i class="fa-regular fa-building"></i> Paul Hall 309, Tulane University
+&nbsp;
+<i class="fa-solid fa-house"></i> Chongqing, China
+&nbsp;
+<i class="fa-solid fa-envelope"></i> <a href="mailto:jli78@tulane.edu">jli78@tulane.edu</a>
+&nbsp;
+<i class="fa-solid fa-pen-fancy"></i>
+<img src='images/namechn.png' style="width:6rem;margin-left:-0.7rem;">
+
+</p>
+
+<p style="display:flex; align-items:center;">
+<span>
 <a href="https://github.com/jiarui0923/" target="_blank" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
 &nbsp;&nbsp;<a href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
 &nbsp;&nbsp;
@@ -19,15 +32,9 @@ toc: false
 <a href="https://www.researchgate.net/profile/Jiarui-Li-89" target="_blank" title="ResearchGate"><i class="ai ai-researchgate"></i></a>
 &nbsp;&nbsp;
 <a href="https://www.semanticscholar.org/author/Jiarui-Li/2339547605" target="_blank" title="Semantic Scholar"><i class="ai ai-semantic-scholar"></i></a>
+</span>
 </p>
 
-<p>
-<i class="fa-regular fa-building"></i> Paul Hall 309, Tulane University
-&nbsp;&nbsp;
-<i class="fa-solid fa-house"></i> Chongqing, China
-&nbsp;&nbsp;
-<i class="fa-solid fa-envelope"></i> <a href="mailto:jli78@tulane.edu">jli78@tulane.edu</a>
-</p>
 
 ## 💠Education
 <table style='border:0; padding:10px;'>
