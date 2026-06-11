@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Jiarui LI
-subtitle: 'Jiarui Li Website'
-description: "Find Jiarui Li's Resume Here"
-keywords:
-author: Jiarui LI
+title: Jiarui Li
+subtitle: "Here is Jiarui Li"
+description: "Advancing Scientific Discovery Through Explainable AI"
+keywords: XAI, Immunology, Computational Biology, Machine Learning, Artificial Intelligence, Explainability, Interpretability
+author: Jiarui Li
 language: en
 timezone: ''
 
