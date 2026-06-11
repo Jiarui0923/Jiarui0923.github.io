@@ -1,3 +1,44 @@
+/* --- Full-page scrolling background --- */
+.index-bg-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+.index-bg-track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    animation: index-bg-scroll 240s linear infinite;
+}
+.index-bg-tile {
+    flex: 1;
+    height: 100%;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+/* Light theme */
+body[data-color-scheme="auto"] .index-bg-tile,
+body[data-color-scheme="light"] .index-bg-tile {
+    background-image: url('/images/background_white.png');
+}
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .index-bg-tile {
+        background-image: url('/images/background_black.png');
+    }
+}
+body[data-color-scheme="dark"] .index-bg-tile {
+    background-image: url('/images/background_black.png');
+}
+@keyframes index-bg-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 .hero {
     height: calc(100vh - 56px);
     display: grid;
@@ -6,17 +47,35 @@
 
 .hero .group {
     width: 100%;
+    background: rgba(232, 232, 232, 0.15);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    border-radius: 2rem;
+    padding: 4rem;
+    border-width: 0px;
+}
+/* Dark theme frosted glass */
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .hero .group {
+        background: rgba(0, 0, 0, 0.2);
+    }
+}
+body[data-color-scheme="dark"] .hero .group {
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .hero .sub {
     font-size: 2.5rem;
-    color: var(--black-4);
+    color: var(--black-3);
     font-weight: 100;
     margin: 0;
     transition: font-size 0.5s;
     align-items: center;
     display: flex;
     gap: 0.5rem;
+}
+.hero .sub img {
+    width:3rem;
 }
 .hero .sublink {
     font-size: 1.5rem;
