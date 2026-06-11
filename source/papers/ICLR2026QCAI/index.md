@@ -1,4 +1,7 @@
-# 1. Core paper details
+---
+layout: paper
+has_breadcrumb: true
+has_is_mono: true
 paper:
   title: "Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding"
   publication: "The Fourteenth International Conference on Learning Representations"
@@ -7,8 +10,6 @@ paper:
     year: 2026
   abbr: "ICLR"
   pubicon: "./images/iclr-navbar-logo.svg"
-
-# 2. Author list
 authors:
   - name: "Jiarui Li"
     affiliation: "Department of Computer Science, Tulane University"
@@ -29,8 +30,6 @@ authors:
     affiliation: "Department of Computer Science, Tulane University"
     link: "https://ramgopalmettu.org/"
     corresponding: true
-
-# 3. External links and resources
 links:
   - name: "Paper"
     link: "https://openreview.net/forum?id=S3kSOFhs5m"
@@ -48,9 +47,6 @@ links:
   - name: "PDF"
     link: "li2026quantifying.pdf"
     icon: "fa-solid fa-file-pdf"
-  
-
-# 4. Citation formats (using the pipe '|' for multi-line strings)
 citations:
   Bibtex: |
     @inproceedings{"li2026quantifying,
@@ -60,15 +56,20 @@ citations:
       pages={1--10},
       year={2026}
     }
-  APA: "Li, J., Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding.  In Proceedings of The Fourteenth International Conference on Learning Representations (pp. 1-10)."
-
-# 5. Path to the main document file
+  APA: "Li, J., Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding. In Proceedings of The Fourteenth International Conference on Learning Representations (pp. 1-10)."
 document:
-  path: "./README.pmd"
   centered: false
   footer: "CC BY 4.0"
-
 nav:
-  Home: "#"
-  XAI4Immuno: "#"
-  QCAI: null
+  Home: "/"
+  Papers: "/papers/"
+  ICLR 2026: null
+---
+
+CD8+ killer T cells and CD4+ helper T cells play a central role in the adaptive immune system by recognizing antigens presented by Major Histocompatibility Complex (pMHC) molecules via T Cell Receptors (TCRs). Modeling binding between T cells and the pMHC complex is fundamental to understanding basic mechanisms of human immune response as well as in developing therapies. While transformer-based  models such as TULIP have achieved impressive performance in this domain, their black-box nature precludes  interpretability and thus limits a deeper mechanistic understanding of T cell response. 
+Most existing post-hoc explainable AI (XAI) methods are confined to encoder-only, co-attention, or model-specific architectures and cannot handle encoder-decoder transformers used in TCR-pMHC modeling. To address this gap, we propose Quantifying Cross-Attention Interaction (QCAI), a new post-hoc method designed to interpret the cross-attention mechanisms in transformer decoders. Quantitative evaluation is a challenge for XAI methods; we have compiled TCR-XAI, a benchmark consisting of 274 experimentally determined TCR-pMHC structures to serve as ground truth for binding. Using these structures we compute physical distances between relevant amino acid residues in the TCR-pMHC interaction region and evaluate how well our method and others estimate the importance of residues in this region across the dataset. We show that QCAI achieves state-of-the-art performance on both interpretability and prediction accuracy under the TCR-XAI benchmark. 
+
+![intro](./images/intro.png)
+_**Quantifying Cross-Attention Interaction (QCAI)** is a post-hoc explanation method designed for cross-attention mechanisms. In this paper, we show that QCAI enables insight into the structural basis for TCR-pMHC binding._
+
+![poster](./images/ICLR2026QCAI_POSTER_20260416_04.png)

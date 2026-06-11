@@ -1,4 +1,7 @@
-# 1. Core paper details
+---
+layout: paper
+has_breadcrumb: true
+has_is_mono: true
 paper:
   title: "Rational Multi-Modal Transformers for TCR-pMHC Prediction"
   publication: "The ACM Conference on Bioinformatics, Computational Biology, and Health Informatics"
@@ -7,8 +10,6 @@ paper:
     year: 2025
   abbr: "ACM BCB"
   pubicon: "images/ACMBCB-2025.jpg"
-
-# 2. Author list
 authors:
   - name: "Jiarui Li"
     affiliation: "Department of Computer Science, Tulane University"
@@ -26,8 +27,6 @@ authors:
     affiliation: "Department of Computer Science, Tulane University"
     link: "https://ramgopalmettu.org/"
     corresponding: true
-
-# 3. External links and resources
 links:
   - name: "Paper"
     link: "https://dl.acm.org/doi/10.1145/3765612.3767194"
@@ -49,9 +48,6 @@ links:
   - name: "PDF"
     link: "li2025rational.pdf"
     icon: "fa-solid fa-file-pdf"
-  
-
-# 4. Citation formats (using the pipe '|' for multi-line strings)
 citations:
   Bibtex: |
     @inproceedings{li2025rational,
@@ -61,15 +57,17 @@ citations:
       pages={1--10},
       year={2025}
     }
-  APA: "Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). Rational Multi-Modal Transformers for TCR-pMHC Prediction.  In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics (pp. 1-10)."
-
-# 5. Path to the main document file
+  APA: "Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). Rational Multi-Modal Transformers for TCR-pMHC Prediction. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics (pp. 1-10)."
 document:
-  path: "./README.pmd"
   centered: false
   footer: "CC BY 4.0"
-
 nav:
-  Home: "#"
-  XAI4Immuno: "#"
-  EGM: null
+  Home: "/"
+  Papers: "/papers/"
+  ACM BCB 2025: null
+---
+
+T cell receptor (TCR) recognition of peptide-MHC (pMHC) complexes is central to immunity and T cell-based therapies. We introduce an explanation-driven framework that uses a new post-hoc analysis method to guide the design of a novel encoder-decoder transformer for TCR-pMHC prediction. By revealing the most informative TCR-epitope features, our method optimizes cross-attention design, auxiliary objectives, and an explanation-based early-stopping strategy. The resulting model achieves state-of-the-art accuracy with improved robustness and interpretability, offering new insight into sequence-level binding mechanisms.
+
+![pipeline-intro](./images/intro.png)
+_The overall pipline of development of a multi-modal transformer model for TCR-pMHC binding prediction._

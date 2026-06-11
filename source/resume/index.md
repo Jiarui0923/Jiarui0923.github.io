@@ -1,23 +1,31 @@
 ---
+layout: resume
 title: Jiarui (Jerry) LI
 date: 2025-10-05 19:10:20
+toc: false
 ---
 
+<p>
+<i class="fa-regular fa-building"></i> Paul Hall 309, Tulane University<br>
+<i class="fa-solid fa-house"></i> Chongqing, China<br>
+<i class="fa-solid fa-envelope"></i> <a href="mailto:jli78@tulane.edu">jli78@tulane.edu</a>
+</p>
 
-🏠Address: Chongqing, China
-🏢Office: Paul Hall 309, Tulane University
-📫E-mail: me@jiarui.li
-📫School E-mail: jli78@tulane.edu
-🔗Github: https://github.com/jiarui0923/
-🔗Linkedin: https://www.linkedin.com/in/li-jiarui/
-🔗Google Scholar: https://scholar.google.com/citations?user=9lcAfL8AAAAJ
-🔗ORCID: https://orcid.org/0009-0001-1055-4424
-📝Resume: http://resume.jiarui.li
+<p>
+<a href="https://github.com/jiarui0923/" target="_blank" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
+&nbsp;&nbsp;<a href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
+&nbsp;&nbsp;
+<a href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap fa-lg"></i></a>
+&nbsp;&nbsp;
+<a href="https://orcid.org/0009-0001-1055-4424" target="_blank" title="ORCID"><i class="fab fa-orcid fa-lg"></i></a>
+&nbsp;&nbsp;
+<a href="http://resume.jiarui.li" target="_blank" title="Resume"><i class="fas fa-file-alt fa-lg"></i></a>
+</p>
 
 ## 💠Education
 <table style='border:0; padding:10px;'>
     <tr>
-        <td colspan="3">🎓 Doctorate</td>
+        <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Doctorate</td>
     </tr>
     <tr>
         <td>
@@ -35,7 +43,7 @@ date: 2025-10-05 19:10:20
         </td>
     </tr>
     <tr>
-        <td colspan="3">🎓 Bachelor</td>
+        <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Bachelor</td>
     </tr>
     <tr>
         <td>
@@ -70,21 +78,21 @@ date: 2025-10-05 19:10:20
 ## 💠Publications
 ### Conference Proceedings
 > 1. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **TCR-EML: Explainable Model Layers for TCR-pMHC Prediction**. Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026.
->    [[📰 Paper](https://openreview.net/forum?id=lBS6Kg648t),[🌐 Web Page](https://jiarui-li.com/papers/LMRL2026TCREML/)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://openreview.net/forum?id=lBS6Kg648t),[<i class="fa-solid fa-circle-nodes"></i> Web Page](https://jiarui-li.com/papers/LMRL2026TCREML/)]
 > 2. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding**. In Proceedings of The Fourteenth International Conference on Learning Representations (_Accepted_).
->    [[📰 Paper](https://openreview.net/forum?id=S3kSOFhs5m),[🌐 Web Page](https://jiarui-li.com/papers/ICLR2026QCAI/),[📦 Code](https://github.com/Jiarui0923/QCAI)]  
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://openreview.net/forum?id=S3kSOFhs5m),[<i class="fa-solid fa-circle-nodes"></i> Web Page](https://jiarui-li.com/papers/ICLR2026QCAI/),[<i class="fa-solid fa-code-branch"></i> Code](https://github.com/Jiarui0923/QCAI)]  
 > 3. Yin, Z.，**Li, J**., & Ding, Z. (2025). **iMIND: Insightful Multi-subject Invariant Neural Decoding**. Advances in Neural Information Processing Systems.
->    [[📰 Paper](https://neurips.cc/virtual/2025/poster/119508),[🌐 Web Page](https://zachyin.com/imind/)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://neurips.cc/virtual/2025/poster/119508),[<i class="fa-solid fa-circle-nodes"></i> Web Page](https://zachyin.com/imind/)]
 > 4. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
->    [[📰 Paper](https://arxiv.org/abs/2509.17305v1),[🌐 Web Page](/papers/BCB2025EGM/),[📦 Code](https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://arxiv.org/abs/2509.17305v1),[<i class="fa-solid fa-circle-nodes"></i> Web Page](/papers/BCB2025EGM/),[<i class="fa-solid fa-code-branch"></i> Code](https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational)]
 > 5. **Li, J.**, Landry, S., & Mettu, R. (2024, December). **GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction**. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE.
->    [[📰 Paper](https://ieeexplore.ieee.org/abstract/document/10821831),[🌐 Web Page](/papers/BIBM2024GPUCOREX/),[📦 Code](https://github.com/Jiarui0923/gpuCOREX)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://ieeexplore.ieee.org/abstract/document/10821831),[<i class="fa-solid fa-circle-nodes"></i> Web Page](/papers/BIBM2024GPUCOREX/),[<i class="fa-solid fa-code-branch"></i> Code](https://github.com/Jiarui0923/gpuCOREX)]
 > 6. **Li, J.**, Landry, S., & Mettu, R. (2024, October). **GPU Acceleration for Markov Chain Monte Carlo Sampling**.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
->    [[📰 Paper](https://dl.acm.org/doi/10.1145/3703412.3703428)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://dl.acm.org/doi/10.1145/3703412.3703428)]
 > 7. **Li, J.**, Ji, R., Yang, X., Li, J., Li, Y., Xiong, X., ... & Cui, T. (2023, December). **Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics**. In 2023 IEEE Symposium Series on Computational Intelligence (SSCI) (pp. 603-608). IEEE.
->    [[📰 Paper](https://ieeexplore.ieee.org/document/10371912)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://ieeexplore.ieee.org/document/10371912)]
 > 8. Ji, R., **Li, J.**, He, W., Ren, J., & Jiang, X. (2023, June). **Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification**. In ICASSP 2023-2023 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) (pp. 1-5). IEEE.
->    [[📰 Paper](https://ieeexplore.ieee.org/document/10095141)]
+>    [[<i class="fa-solid fa-paperclip"></i> Paper](https://ieeexplore.ieee.org/document/10095141)]
 
 ### Conference Abstracts
 > 1. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Post-hoc Explanation for TCR-pMHC Prediction**. ACM-BCB 2025:The 3rd Workshop on Advances in Systems Immunology.
@@ -105,6 +113,7 @@ date: 2025-10-05 19:10:20
 |2026 |**📒LMRL@ICLR 2026**     |Reviewer    |
 |2026 |**📒CVPR 2026**          |Reviewer    |
 |2025 |**📒ICLR 2026**          |Reviewer    |
+
 
 |Journal                            |Role        |Review Date(s) |
 |:----------------------------------|:-----------|:--------------|
