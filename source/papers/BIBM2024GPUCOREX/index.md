@@ -59,6 +59,6 @@ CD4+ T cells play a crucial role in adaptive immunity and are a significant comp
 ![corexpipeline](./images/corex_pipeline.png)
 
 The GPUCOREX can be installed use command:
-```bash
+```shell
 pip install gpucorex @ git+https://github.com/Jiarui0923/gpuCOREX@0.0.2
 ```
