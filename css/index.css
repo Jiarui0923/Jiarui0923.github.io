@@ -9,8 +9,17 @@
 }
 
 .hero .sub {
-    text-transform: uppercase;
-    font-size: 24px;
+    font-size: 2.5rem;
+    color: var(--black-4);
+    font-weight: 100;
+    margin: 0;
+    transition: font-size 0.5s;
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+}
+.hero .sublink {
+    font-size: 1.5rem;
     color: var(--black-4);
     font-weight: 100;
     margin: 0;
@@ -18,7 +27,7 @@
 }
 
 .hero .large {
-    font-size: 128px;
+    font-size: 4.2rem;
     color: var(--black-2);
     margin: 0;
     transition: font-size 0.5s;
