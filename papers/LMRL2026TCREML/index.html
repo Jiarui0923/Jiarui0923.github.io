@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/material-darker.min.css">
     <style>
         :root {
@@ -65,6 +66,8 @@
         .section-nav-link.is-active { transform: scale(1.05); max-width: 30vw; }
         #citation-content { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; }
         .hero-bordered { border-top: 2px solid #ccc; border-bottom: 2px solid #ccc; }
+        .CodeMirror { font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace; height: auto !important; }
+        .CodeMirror-scroll { overflow: hidden !important; min-height: auto; }
     </style>
 <meta name="generator" content="Hexo 6.3.0"></head>
 <body>
@@ -261,14 +264,7 @@
 
                         </ul>
                     </div>
-                    <pre id="citation-content" class="is-mono">@inproceedings{&#34;li2026tcreml,
-  title={TCR-EML: Explainable Model Layers for TCR-pMHC Prediction},
-  author={Li, Jiarui and Yin, Zixiang and Ding, Zhengming and Landry, Samuel J and Mettu, Ramgopal R},
-  booktitle={Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026},
-  pages={1--10},
-  year={2026}
-}
-</pre>
+                    <div id="citation-content-wrapper" style="min-height:100px;"></div>
                 </div>
                 <div class="cell has-text-centered is-flex is-justify-content-center is-align-items-center">
                     <div id="share-col"></div>
@@ -292,23 +288,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/python/python.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/shell/shell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/stex/stex.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/yaml/yaml.min.js"></script>
     <script>
     (function(){
-        // Citation tabs
-        var tabsUl = document.querySelector('#citation-tabs ul');
-        var citPre = document.getElementById('citation-content');
-        var citData = {"Bibtex":"@inproceedings{\"li2026tcreml,\n  title={TCR-EML: Explainable Model Layers for TCR-pMHC Prediction},\n  author={Li, Jiarui and Yin, Zixiang and Ding, Zhengming and Landry, Samuel J and Mettu, Ramgopal R},\n  booktitle={Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026},\n  pages={1--10},\n  year={2026}\n}\n","APA":"Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). TCR-EML: Explainable Model Layers for TCR-pMHC Prediction. Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026 (pp. 1-10)."};
-        tabsUl.addEventListener('click', function(e) {
-            e.preventDefault();
-            var a = e.target.closest('a');
-            if (!a) return;
-            tabsUl.querySelectorAll('li').forEach(function(l){ l.classList.remove('is-active'); });
-            a.parentElement.classList.add('is-active');
-            citPre.textContent = citData[a.textContent] || '';
-        });
-
-        // Theme toggle
+        // Theme toggle — must run first so data-theme is correct before CM init
         var toggleBtn = document.getElementById('theme-toggle');
         var htmlEl = document.documentElement;
         var theme = localStorage.getItem('theme') || 'auto';
@@ -328,6 +312,46 @@
         toggleBtn.addEventListener('click', function() {
             theme = theme === 'auto' ? 'light' : theme === 'light' ? 'dark' : 'auto';
             applyTheme();
+        });
+
+        // CodeMirror theme depends on restored page theme
+        var cmTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
+        var cmInstances = [];
+        var citCM = null;
+
+        // Citation tabs with CodeMirror (no line numbers, bibtex syntax highlight)
+        var tabsUl = document.querySelector('#citation-tabs ul');
+        var citWrapper = document.getElementById('citation-content-wrapper');
+        var citData = {"Bibtex":"@inproceedings{\"li2026tcreml,\n  title={TCR-EML: Explainable Model Layers for TCR-pMHC Prediction},\n  author={Li, Jiarui and Yin, Zixiang and Ding, Zhengming and Landry, Samuel J and Mettu, Ramgopal R},\n  booktitle={Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026},\n  pages={1--10},\n  year={2026}\n}\n","APA":"Li, J., Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). TCR-EML: Explainable Model Layers for TCR-pMHC Prediction. Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026 (pp. 1-10)."};
+        function initCitCM(initialTab) {
+            if (typeof CodeMirror === 'undefined') { setTimeout(function(){ initCitCM(initialTab); }, 100); return; }
+            var val = initialTab ? citData[initialTab] || '' : '';
+            citCM = CodeMirror(citWrapper, {
+                value: val,
+                mode: initialTab === 'Bibtex' ? 'stex' : '',
+                theme: cmTheme,
+                readOnly: true,
+                lineNumbers: false,
+                lineWrapping: true,
+                viewportMargin: Infinity
+            });
+            setTimeout(function(){ if (citCM) citCM.refresh(); }, 50);
+        }
+        var firstKey = Object.keys(citData)[0];
+        initCitCM(firstKey);
+        tabsUl.addEventListener('click', function(e) {
+            e.preventDefault();
+            var a = e.target.closest('a');
+            if (!a) return;
+            tabsUl.querySelectorAll('li').forEach(function(l){ l.classList.remove('is-active'); });
+            a.parentElement.classList.add('is-active');
+            var tabName = a.textContent;
+            var newVal = citData[tabName] || '';
+            if (citCM) {
+                citCM.setValue(newVal);
+                citCM.setOption('mode', tabName === 'Bibtex' ? 'stex' : '');
+                setTimeout(function(){ citCM.refresh(); }, 10);
+            }
         });
 
         // Section indicator (scroll nav)
@@ -378,10 +402,22 @@
             if (a) { e.preventDefault(); var el = document.getElementById(a.getAttribute('href').substring(1)); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
         });
 
-        // QR code
-        new QRCode(document.getElementById('share-col'), { text: window.location.href, width: 200, height: 200, colorDark: '#000', colorLight: '#fff', correctLevel: QRCode.CorrectLevel.H });
+        // QR code — colors follow page theme
+        var isDark = htmlEl.getAttribute('data-theme') === 'dark';
+        var qrDark = isDark ? '#000' : '#fff';
+        var qrLight = isDark ? '#1a1a1a' : '#fff';
+        var qrEl = document.getElementById('share-col');
+        var qr = new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: qrDark, colorLight: qrLight, correctLevel: QRCode.CorrectLevel.H });
+        // Update QR on theme change
+        var origApply = applyTheme;
+        applyTheme = function() {
+            origApply();
+            var d = htmlEl.getAttribute('data-theme') === 'dark';
+            qrEl.innerHTML = '';
+            qr = new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: d ? '#fff' : '#000', colorLight: d ? '#1a1a1a' : '#fff', correctLevel: QRCode.CorrectLevel.H });
+        };
 
-        // CodeMirror
+        // CodeMirror for code blocks with auto-height
         (function initCM() {
             if (typeof CodeMirror === 'undefined') { setTimeout(initCM, 100); return; }
             var mm = { python:'python', py:'python', javascript:'javascript', js:'javascript', bash:'shell', sh:'shell', shell:'shell', yaml:'yaml', yml:'yaml' };
@@ -390,17 +426,49 @@
             var blocks = cnt.querySelectorAll('figure.highlight');
             if (!blocks.length) blocks = cnt.querySelectorAll('pre');
             Array.from(blocks).forEach(function(el) {
-                var code = el.textContent;
-                var cls = el.className + ' ' + ((el.querySelector('code')||{}).className||'');
-                var m = cls.match(/(?:highlight\s+|language-)([a-zA-Z0-9_+-]+)/);
-                var lang = m ? m[1].toLowerCase() : '';
+                // Extract code only (skip Hexo gutter line numbers)
+                var codeEl = el.querySelector('.code pre') || el.querySelector('pre code') || el.querySelector('code');
+                var code = codeEl ? codeEl.textContent : el.textContent;
+                // Trim trailing newline to fix extra line number
+                code = code.replace(/\n$/, '');
+                // Detect language: figure.highlight.{lang} or code.language-{lang}
+                var lang = '';
+                var figMatch = el.className.match(/highlight\s+([a-zA-Z0-9_+-]+)/);
+                if (figMatch) lang = figMatch[1].toLowerCase();
+                if (!lang && el.querySelector('code')) {
+                    var codeMatch = el.querySelector('code').className.match(/language-([a-zA-Z0-9_+-]+)/);
+                    if (codeMatch) lang = codeMatch[1].toLowerCase();
+                }
                 var mode = mm[lang] || lang || '';
                 var div = document.createElement('div');
                 el.parentNode.insertBefore(div, el);
                 el.parentNode.removeChild(el);
-                CodeMirror(div, { value: code, mode: mode, theme: 'material-darker', readOnly: true, lineNumbers: true, viewportMargin: Infinity });
+                var cm = CodeMirror(div, {
+                    value: code,
+                    mode: mode,
+                    theme: cmTheme,
+                    readOnly: true,
+                    lineNumbers: true,
+                    viewportMargin: Infinity
+                });
+                cmInstances.push(cm);
             });
+            // Auto-height: refresh after render
+            setTimeout(function() {
+                cmInstances.forEach(function(cm) { cm.refresh(); });
+            }, 50);
         })();
+
+        // Theme change: switch CodeMirror themes (including citation)
+        var observer = new MutationObserver(function() {
+            var newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
+            if (newTheme !== cmTheme) {
+                cmTheme = newTheme;
+                cmInstances.forEach(function(cm) { cm.setOption('theme', cmTheme); });
+                if (citCM) citCM.setOption('theme', cmTheme);
+            }
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     })();
     </script>
 </body>
