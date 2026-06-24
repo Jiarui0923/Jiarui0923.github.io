@@ -3,186 +3,263 @@ layout: resume
 title: Jiarui (Jerry) Li
 date: 2026-06-10 19:10:20
 toc: false
+
+contact:
+  - icon: "fa-regular fa-building"
+    text: "Paul Hall 309, Tulane University"
+  - icon: "fa-solid fa-house"
+    text: "Chongqing, China"
+  - icon: "fa-solid fa-envelope"
+    text: "jli78@tulane.edu"
+    link: "mailto:jli78@tulane.edu"
+  - icon: "fa-solid fa-pen-fancy"
+    image: "images/namechn.png"
+
+socials:
+  - title: "GitHub"
+    link: "https://github.com/jiarui0923/"
+    icon: "fab fa-github fa-lg"
+  - title: "LinkedIn"
+    link: "https://www.linkedin.com/in/li-jiarui/"
+    icon: "fab fa-linkedin fa-lg"
+  - title: "Google Scholar"
+    link: "https://scholar.google.com/citations?user=9lcAfL8AAAAJ"
+    icon: "ai ai-google-scholar"
+  - title: "ORCID"
+    link: "https://orcid.org/0009-0001-1055-4424"
+    icon: "fab fa-orcid fa-lg"
+  - title: "Resume"
+    link: "http://resume.jiarui.li"
+    icon: "fas fa-file-alt fa-lg"
+  - title: "DBLP"
+    link: "https://dblp.org/pid/177/2287-1.html"
+    icon: "ai ai-dblp"
+  - title: "ResearchGate"
+    link: "https://www.researchgate.net/profile/Jiarui-Li-89"
+    icon: "ai ai-researchgate"
+  - title: "Semantic Scholar"
+    link: "https://www.semanticscholar.org/author/Jiarui-Li/2339547605"
+    icon: "ai ai-semantic-scholar"
+
+education:
+  - degree: "Doctorate"
+    icon: "fa-solid fa-graduation-cap"
+    entries:
+      - logo: "/resume/images/tu.ico"
+        institution: "Tulane University"
+        detail: "Ph.D Student in Computer Science"
+        notes:
+          - "<i>Research Field: Immunoinformatics &amp; XAI</i>"
+          - "<i>Advised by: <a href=\"https://ramgopalmettu.org/\">Prof. Mettu</a></i>"
+        location: "Louisiana, US"
+        date: "Sept. 2023 - Present"
+  - degree: "Bachelor"
+    icon: "fa-solid fa-graduation-cap"
+    entries:
+      - logo: "/resume/images/unnc.ico"
+        institution: "University of Nottingham Ningbo China"
+        detail: "BSc Hons Computer Science with Artificial Intelligence"
+        notes:
+          - "<i>(First Class with Honors)</i>"
+        location: "Zhejiang, China"
+        date: "Sept. 2019 - Jun. 2023"
+      - logo: "/resume/images/UoB.ico"
+        institution: "University of Birmingham"
+        detail: "UG Aff Computer Science with Software Engineering"
+        notes:
+          - "<i>(Exchange Program)</i>"
+        location: "Birmingham, UK"
+        date: "Sept. 2020 - Jun. 2021"
+
+publications_link:
+  text: "Check my full publication list."
+  link: "/papers/"
+  icon: "fa-solid fa-paper-plane"
+
+publications:
+  - section: "Latest Work"
+    items:
+      - authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Yin, Z." }
+          - { name: "Ding, Z." }
+          - { name: "Landry, S. J." }
+          - { name: "Mettu, R. R." }
+        year: 2026
+        title: "Why Does It Look There? Structured Explanations for Image Classification"
+        venue: "preprint."
+        links:
+          - { name: "Paper", link: "https://arxiv.org/abs/2603.10234", icon: "fa-solid fa-paperclip" }
+  - section: "Selected Papers"
+    items:
+      - authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Yin, Z." }
+          - { name: "Smith, H." }
+          - { name: "Ding, Z." }
+          - { name: "Landry, S. J." }
+          - { name: "Mettu, R. R." }
+        year: 2026
+        title: "Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding"
+        venue: "In Proceedings of The Fourteenth International Conference on Learning Representations."
+        links:
+          - { name: "Paper", link: "https://openreview.net/forum?id=S3kSOFhs5m", icon: "fa-solid fa-paperclip" }
+          - { name: "Web Page", link: "https://jiarui-li.com/papers/ICLR2026QCAI/", icon: "fa-solid fa-circle-nodes" }
+          - { name: "Code", link: "https://github.com/Jiarui0923/QCAI", icon: "fa-solid fa-code-branch" }
+      - authors:
+          - { name: "Yin, Z." }
+          - { name: "Li, J.", me: true }
+          - { name: "Ding, Z." }
+        year: 2025
+        title: "iMIND: Insightful Multi-subject Invariant Neural Decoding"
+        venue: "Advances in Neural Information Processing Systems."
+        links:
+          - { name: "Paper", link: "https://neurips.cc/virtual/2025/poster/119508", icon: "fa-solid fa-paperclip" }
+          - { name: "Web Page", link: "https://zachyin.com/imind/", icon: "fa-solid fa-circle-nodes" }
+      - authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Yin, Z." }
+          - { name: "Ding, Z." }
+          - { name: "Landry, S. J." }
+          - { name: "Mettu, R. R." }
+        year: 2025
+        title: "Rational Multi-Modal Transformers for TCR-pMHC Prediction"
+        venue: "In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics."
+        links:
+          - { name: "Paper", link: "https://arxiv.org/abs/2509.17305v1", icon: "fa-solid fa-paperclip" }
+          - { name: "Web Page", link: "/papers/BCB2025EGM/", icon: "fa-solid fa-circle-nodes" }
+          - { name: "Code", link: "https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational", icon: "fa-solid fa-code-branch" }
+      - authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Landry, S." }
+          - { name: "Mettu, R." }
+        year: "2024, December"
+        title: "GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction"
+        venue: "In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE."
+        links:
+          - { name: "Paper", link: "https://ieeexplore.ieee.org/abstract/document/10821831", icon: "fa-solid fa-paperclip" }
+          - { name: "Web Page", link: "/papers/BIBM2024GPUCOREX/", icon: "fa-solid fa-circle-nodes" }
+          - { name: "Code", link: "https://github.com/Jiarui0923/gpuCOREX", icon: "fa-solid fa-code-branch" }
+  - section: "Conference Orals"
+    items:
+      - prefix: "📰"
+        authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Yin, Z." }
+          - { name: "Ding, Z." }
+          - { name: "Landry, S. J." }
+          - { name: "Mettu, R. R." }
+        year: 2025
+        title: "Rational Multi-Modal Transformers for TCR-pMHC Prediction"
+        venue: "In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics."
+      - prefix: "📰"
+        authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Landry, S." }
+          - { name: "Mettu, R." }
+        year: "2024, October"
+        title: "GPU Acceleration for Markov Chain Monte Carlo sampling"
+        venue: "In Proceedings of the Fourth International Conference on AI-ML Systems. ACM."
+      - prefix: "📰"
+        authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Landry, S." }
+          - { name: "Mettu, R." }
+        year: "2024, June"
+        title: "GPU Acceleration of Conformational Stability Computation for CD4+ T Cell Epitope Prediction"
+        venue: "In Next Gen. Conversations: Albany at Tech 2024: The 21st Conversation. Albany."
+
+services:
+  - subsection: "Conferences"
+    columns: ["Year", "Conference", "Role"]
+    align: ["center", "left", "left"]
+    rows:
+      - ["2026", "<b>📒MLSCB@ISMB 2026</b>", "Reviewer"]
+      - ["2026", "<b>📒ICML 2026</b>", "Reviewer"]
+      - ["2026", "<b>📒LMRL@ICLR 2026</b>", "Reviewer"]
+      - ["2026", "<b>📒CVPR 2026</b>", "Reviewer"]
+      - ["2025", "<b>📒ICLR 2026</b>", "Reviewer"]
+  - subsection: "Journals"
+    columns: ["Journal", "Role", "Review Date(s)"]
+    align: ["left", "left", "left"]
+    rows:
+      - ["<b>📒PLoS Computational Biology</b>", "Reviewer", "<code>2026/05</code>"]
+
+grants:
+  columns: ["Year", "Grant", "Authority", "Amount"]
+  align: ["center", "left", "left", "left"]
+  rows:
+    - ["2025", "<b>🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence</b> (Explainable Machine Learning for Immunotherapy)", "Tulane University", "-"]
+    - ["2025", "<b>🏅Google Cloud Research Credits Program</b>", "Google GCP", "$1,000.00"]
+    - ["2024", "<b>🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence</b> (Computational Epitope Prediction)", "Tulane University", "-"]
+    - ["2024", "<b>🏅AWS Public Sector Cloud Credit for Research</b>", "Amazon AWS", "$4,984.00"]
+    - ["2023", "<b>🏅Tulane Ph.D. Funding</b>", "Tulane University", "-"]
+
+awards:
+  columns: ["Year", "Award", "Authority", "Location"]
+  align: ["center", "left", "left", "left"]
+  rows:
+    - ["2026", "<b>🏆CS TA Award</b>", "Department of Computer Science, Tulane University", "LA, US"]
+    - ["2026", "<b>🏆Best Research Poster</b>", "Department of Computer Science, Tulane University", "LA, US"]
+    - ["2023", "<b>🏆Zhejiang Excellent Graduates</b>", "Zhejiang Provincial Government", "Zhejiang, China"]
+    - ["2022", "<b>🏆Best Performer</b>", "University of Nottingham Ningbo China", "Zhejiang, China"]
+    - ["2022", "<b>🏆President’s Scholarship</b>", "University of Nottingham Ningbo China", "Zhejiang, China"]
+    - ["2022", "<b>🏆Zhejiang Provincial Scholarship</b>", "Zhejiang Provincial Government", "Zhejiang, China"]
+    - ["2021", "<b>🏆Provost’s Scholarship</b>", "University of Nottingham Ningbo China", "Zhejiang, China"]
+    - ["2021", "<b>🏆Government Scholarship for Mobility Out</b>", "Ningbo Municipal Government", "Zhejiang, China"]
+
+experiences:
+  - subsection: "Work Experiences"
+    columns: ["Position", "Institution", "Location", "Date"]
+    align: ["left", "left", "left", "left"]
+    rows:
+      - ["🗃️Teaching Assistant", "Department of Computer Science, <br>Tulane University", "LA, US", "Aug 2024 - <i>Present</i>"]
+      - ["🗃️Research Assistant", "Department of Computer Science, <br>Tulane University", "LA, US", "Aug 2023 - Aug 2024"]
+      - ["🗃️Research Internship", "Shanghai Institution of Materia Medica, <br>China Academy of Science", "Shanghai, China", "<i>June 2023 ‑ July 2023</i>"]
+  - subsection: "Teaching Experiences"
+    columns: ["Semester", "Course", "Institution", "Role"]
+    align: ["left", "left", "left", "left"]
+    rows:
+      - ["2026 Spring", "CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
+      - ["2025 Fall", "CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
+      - ["2025 Spring", "CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
+      - ["2024 Fall", "CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
+
+skills:
+  - subsection: "Techniques"
+    items:
+      - label: "🗜️ <b>Vibe Coding</b>"
+        value: "Cline, Codex"
+      - label: "🗜️ <b>Programming</b>"
+        value: "C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net, CUDA"
+      - label: "🗜️ <b>Database</b>"
+        value: "MySQL, SQLite, PostgreSQL, MongoDB, Redis"
+      - label: "🗜️ <b>Web</b>"
+        children:
+          - { label: "<b>Front-end</b>", value: "HTML, CSS, Bulma, Tailwind, JavaScript, JQuery" }
+          - { label: "<b>Back-end</b>", value: "Django, Flask, IIS, Apache HTTP, Docker, Nginx" }
+      - label: "🗜️ <b>Algorithm</b>"
+        children:
+          - { label: "<b>Machine Learning</b>", value: "PyTorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba" }
+          - { label: "<b>Big Data</b>", value: "Hadoop, Spark" }
+          - { label: "<b>Visualization</b>", value: "Matplotlib, Plotly, Streamlit, 3DMol.js" }
+      - label: "🗜️ <b>Documentation</b>"
+        value: "LaTeX, Markdown, Swagger, Overleaf"
+      - label: "🗜️ <b>Hardward</b>"
+        value: "Arduino, Raspberry Pi, STM32"
+      - label: "🗜️ <b>Environment</b>"
+        value: "Git, Anaconda"
+      - label: "🗜️ <b>Cheminformatics &amp; Bioinformatics</b>"
+        value: "RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB, Biotite"
+      - label: "🎵 <b>Musical Instrument</b>"
+        value: "Guqin <i>(Traditional Chinese String Instrument)</i>"
+  - subsection: "Languages"
+    items:
+      - label: "📓 <b>Chinese</b>"
+        value: "Native proficiency"
+        children:
+          - { label: "📓 <b>Mandarin</b>" }
+          - { label: "📓 <b>Chongqing Dialect</b>", value: "I am a Chongqing citizen definetely." }
+      - label: "📓 <b>English</b>"
+        value: "Professional proficiency"
 ---
-<p style="display:flex; align-items:center;">
-<i class="fa-regular fa-building"></i> Paul Hall 309, Tulane University
-&nbsp;
-<i class="fa-solid fa-house"></i> Chongqing, China
-&nbsp;
-<i class="fa-solid fa-envelope"></i> <a href="mailto:jli78@tulane.edu">jli78@tulane.edu</a>
-&nbsp;
-<i class="fa-solid fa-pen-fancy"></i>
-<img src='images/namechn.png' style="width:6rem;margin-left:-0.7rem;">
-
-</p>
-
-<p style="display:flex; align-items:center;">
-<span>
-<a href="https://github.com/jiarui0923/" target="_blank" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
-&nbsp;&nbsp;<a href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-&nbsp;&nbsp;
-<a href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
-&nbsp;&nbsp;
-<a href="https://orcid.org/0009-0001-1055-4424" target="_blank" title="ORCID"><i class="fab fa-orcid fa-lg"></i></a>
-&nbsp;&nbsp;
-<a href="http://resume.jiarui.li" target="_blank" title="Resume"><i class="fas fa-file-alt fa-lg"></i></a>
-&nbsp;&nbsp;
-<a href="https://dblp.org/pid/177/2287-1.html" target="_blank" title="DBLP"><i class="ai ai-dblp"></i></a>
-&nbsp;&nbsp;
-<a href="https://www.researchgate.net/profile/Jiarui-Li-89" target="_blank" title="ResearchGate"><i class="ai ai-researchgate"></i></a>
-&nbsp;&nbsp;
-<a href="https://www.semanticscholar.org/author/Jiarui-Li/2339547605" target="_blank" title="Semantic Scholar"><i class="ai ai-semantic-scholar"></i></a>
-</span>
-</p>
-
-
-## 💠Education
-<table style='border:0; padding:10px;'>
-    <tr>
-        <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Doctorate</td>
-    </tr>
-    <tr>
-        <td>
-            <img src='/resume/images/tu.ico'></img>
-        </td>
-        <td>
-            <b>Tulane University</b><br>
-            Ph.D Student in Computer Science<br>
-            <i>Research Field: Immunoinformatics & XAI</i><br>
-            <i>Advised by: <a href="https://ramgopalmettu.org/">Prof. Mettu</a></i>
-        </td>
-        <td style='font-size:16px;'>
-            Louisiana, US<br>
-            Sept. 2023 - Present
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Bachelor</td>
-    </tr>
-    <tr>
-        <td>
-            <img src='/resume/images/unnc.ico'></img>
-        </td>
-        <td>
-            <b>University of Nottingham Ningbo China</b><br>
-            BSc Hons Computer Science with Artificial Intelligence<br>
-            <i>(First Class with Honors)</i>
-        </td>
-        <td style='font-size:16px;'>
-            Zhejiang, China<br>
-            Sept. 2019 - Jun. 2023
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src='/resume/images/UoB.ico'></img>
-        </td>
-        <td>
-            <b>University of Birmingham</b><br>
-            UG Aff Computer Science with Software Engineering<br>
-            <i>(Exchange Program)</i>
-        </td>
-        <td style='font-size:16px;'>
-            Birmingham, UK<br>
-            Sept. 2020 - Jun. 2021
-        </td>
-    </tr>
-</table>
-
-## 💠Publications
-[<i class="fa-solid fa-paper-plane"></i> Check my full publication list.](/papers/)
-
-### Latest Work
-> 1. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **Why Does It Look There? Structured Explanations for Image Classification**. preprint.
->    [[<i class="fa-solid fa-paperclip"></i> Paper](https://arxiv.org/abs/2603.10234)]
-
-### Selected Papers
-> 1. **Li, J.**, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). **Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding**. In Proceedings of The Fourteenth International Conference on Learning Representations.
->    [[<i class="fa-solid fa-paperclip"></i> Paper](https://openreview.net/forum?id=S3kSOFhs5m),[<i class="fa-solid fa-circle-nodes"></i> Web Page](https://jiarui-li.com/papers/ICLR2026QCAI/),[<i class="fa-solid fa-code-branch"></i> Code](https://github.com/Jiarui0923/QCAI)]  
-> 2. Yin, Z.，**Li, J**., & Ding, Z. (2025). **iMIND: Insightful Multi-subject Invariant Neural Decoding**. Advances in Neural Information Processing Systems.
->    [[<i class="fa-solid fa-paperclip"></i> Paper](https://neurips.cc/virtual/2025/poster/119508),[<i class="fa-solid fa-circle-nodes"></i> Web Page](https://zachyin.com/imind/)]
-> 3. **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
->    [[<i class="fa-solid fa-paperclip"></i> Paper](https://arxiv.org/abs/2509.17305v1),[<i class="fa-solid fa-circle-nodes"></i> Web Page](/papers/BCB2025EGM/),[<i class="fa-solid fa-code-branch"></i> Code](https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational)]
-> 4. **Li, J.**, Landry, S., & Mettu, R. (2024, December). **GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction**. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE.
->    [[<i class="fa-solid fa-paperclip"></i> Paper](https://ieeexplore.ieee.org/abstract/document/10821831),[<i class="fa-solid fa-circle-nodes"></i> Web Page](/papers/BIBM2024GPUCOREX/),[<i class="fa-solid fa-code-branch"></i> Code](https://github.com/Jiarui0923/gpuCOREX)]
-
-### Conference Orals
-> 1. 📰 **Li, J.**, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). **Rational Multi-Modal Transformers for TCR-pMHC Prediction**. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
-> 2. 📰 **Li, J.**, Landry, S., & Mettu, R. (2024, October). **GPU Acceleration for Markov Chain Monte Carlo sampling**.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
-> 3. 📰 **Li, J.**, Landry, S., & Mettu, R. (2024, June). **GPU Acceleration of Conformational Stability Computation for CD4+ T Cell Epitope Prediction**. In Next Gen. Conversations: Albany at Tech 2024: The 21st Conversation. Albany.
-
-## 💠Services
-### Conferences
-|Year |Conference                |Role        | 
-|:---:|:-------------------------|:-----------|
-|2026 |**📒MLSCB@ISMB 2026**    |Reviewer    |
-|2026 |**📒ICML 2026**          |Reviewer    |
-|2026 |**📒LMRL@ICLR 2026**     |Reviewer    |
-|2026 |**📒CVPR 2026**          |Reviewer    |
-|2025 |**📒ICLR 2026**          |Reviewer    |
-### Journals
-|Journal                            |Role        |Review Date(s) |
-|:----------------------------------|:-----------|:--------------|
-|**📒PLoS Computational Biology**  |Reviewer     |`2026/05`      |
-
-## 💠Grant & Funding
-|Year |Grant                                            |Authority        |Amount     |
-|:---:|:------------------------------------------------|:----------------|:----------|
-|2025 |**🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence** (Explainable Machine Learning for Immunotherapy)|Tulane University|- |
-|2025 |**🏅Google Cloud Research Credits Program**      |Google GCP       |$1,000.00  |
-|2024 |**🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence** (Computational Epitope Prediction)|Tulane University|- |
-|2024 |**🏅AWS Public Sector Cloud Credit for Research**|Amazon AWS       |$4,984.00  |
-|2023 |**🏅Tulane Ph.D. Funding**                       |Tulane University|-          | 
-
-## 💠Awards
-|Year |Award       |Authority   |Location    |
-|:---:|:-----------|:-----------|:-----------|
-|2026 |**🏆CS TA Award**|Department of Computer Science, Tulane University|LA, US| 
-|2026 |**🏆Best Research Poster**|Department of Computer Science, Tulane University|LA, US| 
-|2023 |**🏆Zhejiang Excellent Graduates**|Zhejiang Provincial Government|Zhejiang, China|
-|2022 |**🏆Best Performer**|University of Nottingham Ningbo China|Zhejiang, China|
-|2022 |**🏆President’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
-|2022 |**🏆Zhejiang Provincial Scholarship**|Zhejiang Provincial Government |Zhejiang, China|
-|2021 |**🏆Provost’s Scholarship**|University of Nottingham Ningbo China|Zhejiang, China|
-|2021 |**🏆Government Scholarship for Mobility Out**|Ningbo Municipal Government|Zhejiang, China|
-
-## 💠Experiences
-### Work Experiences
-|Position  |Institution   |Location    |Date    |
-|:---------|:-------------|:-----------|:-------|
-|🗃️Teaching Assistant|Department of Computer Science, <br>Tulane University|LA, US|Aug 2024 - _Present_ |
-|🗃️Research Assistant|Department of Computer Science, <br>Tulane University|LA, US|Aug 2023 - Aug 2024 |
-|🗃️Research Internship|Shanghai Institution of Materia Medica, <br>China Academy of Science|Shanghai, China|_June 2023 ‑ July 2023_ |
-
-### Teaching Experiences
-|Semester  |Course        |Institution |Role    |
-|:---------|:-------------|:-----------|:-------|
-|2026 Spring|CMPS 2200 Introduction to Algorithm|Tulane University|Teaching Assistant |
-|2025 Fall|CMPS 2200 Introduction to Algorithm|Tulane University|Teaching Assistant |
-|2025 Spring|CMPS 2200 Introduction to Algorithm|Tulane University|Teaching Assistant |
-|2024 Fall|CMPS 2200 Introduction to Algorithm|Tulane University|Teaching Assistant |
-
-
-## 💠Skills
-### Techniques
-- 🗜️ **Vibe Coding**: Cline, Codex
-- 🗜️ **Programming**: C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net, CUDA
-- 🗜️ **Database**: MySQL, SQLite, PostgreSQL, MongoDB, Redis
-- 🗜️ **Web**: 
-    > - **Front-end**: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery
-    > - **Back-end**: Django, Flask, IIS, Apache HTTP, Docker, Nginx
-- 🗜️ **Algorithm**:
-    > - **Machine Learning**: PyTorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba
-    > - **Big Data**:  Hadoop, Spark
-    > - **Visualization**: Matplotlib, Plotly, Streamlit, 3DMol.js
-- 🗜️ **Documentation**: LaTeX, Markdown, Swagger, Overleaf
-- 🗜️ **Hardward**: Arduino, Raspberry Pi, STM32
-- 🗜️ **Environment**: Git, Anaconda
-- 🗜️ **Cheminformatics & Bioinformatics**: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB, Biotite
-- 🎵 **Musical Instrument**: Guqin _(Traditional Chinese String Instrument)_
-
-### Languages
-- 📓 **Chinese** Native proficiency
-  - 📓 **Mandarin**
-  - 📓 **Chongqing Dialect** I am a Chongqing citizen definetely.
-- 📓 **English** Professional proficiency
