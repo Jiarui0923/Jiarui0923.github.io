@@ -164,19 +164,19 @@ toc: false
 
 
 ## 💠Skills
-### Techniqual
+### Techniques
+- 🗜️ **Vibe Coding**: Cline, Codex
 - 🗜️ **Programming**: C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net, CUDA
-- 🗜️ **Database**: MySQL, SQLite, MongoDB, Redis
+- 🗜️ **Database**: MySQL, SQLite, PostgreSQL, MongoDB, Redis
 - 🗜️ **Web**: 
     > - **Front-end**: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery
     > - **Back-end**: Django, Flask, IIS, Apache HTTP, Docker, Nginx
-    > - **Internet Service Maintenance**: Rocket Chat, OpenVPN, Poste.io
 - 🗜️ **Algorithm**:
-    > - **Machine Learning**: Pytorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba
+    > - **Machine Learning**: PyTorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba
     > - **Big Data**:  Hadoop, Spark
     > - **Visualization**: Matplotlib, Plotly, Streamlit, 3DMol.js
 - 🗜️ **Documentation**: LaTeX, Markdown, Swagger, Overleaf
-- 🗜️ **Hardward**: Arduino, Raspberry Pi, STM32, Digital Logical Circuit
+- 🗜️ **Hardward**: Arduino, Raspberry Pi, STM32
 - 🗜️ **Environment**: Git, Anaconda
 - 🗜️ **Cheminformatics & Bioinformatics**: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB, Biotite
 - 🎵 **Musical Instrument**: Guqin _(Traditional Chinese String Instrument)_
