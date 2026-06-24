@@ -41,18 +41,33 @@ body[data-color-scheme="dark"] .index-bg-tile {
 
 .hero {
     height: calc(100vh - 56px);
+    height: calc(100dvh - 56px);
     display: grid;
     place-items: center;
 }
 
 .hero .group {
     width: 100%;
+    box-sizing: border-box;
     background: rgba(232, 232, 232, 0.15);
     backdrop-filter: blur(3px);
     -webkit-backdrop-filter: blur(3px);
     border-radius: 2rem;
     padding: 4rem;
     border-width: 0px;
+}
+/* Let the hero card break out of the 980px container and run wider on desktop.
+   Make .hero full-bleed (centered via the full-bleed margin trick), then the
+   grid's place-items:center keeps the card centered in the viewport. */
+@media screen and (min-width: 1024px) {
+    .hero {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+    }
+    .hero .group {
+        width: 90vw;
+        max-width: 1280px;
+    }
 }
 /* Dark theme frosted glass */
 @media (prefers-color-scheme: dark) {
@@ -72,10 +87,12 @@ body[data-color-scheme="dark"] .hero .group {
     transition: font-size 0.5s;
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 .hero .sub img {
     width:3rem;
+    transition: width 0.5s;
 }
 .hero .sublink {
     font-size: 1.5rem;
@@ -90,13 +107,53 @@ body[data-color-scheme="dark"] .hero .group {
     color: var(--black-2);
     margin: 0;
     transition: font-size 0.5s;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-wrap: balance;
 }
 
 @media screen and (max-width: 800px) {
+    .hero .group {
+        padding: 2.5rem;
+    }
     .hero .sub {
-        font-size: 16px;
+        font-size: 1.6rem;
+    }
+    .hero .sub img {
+        width: 2rem;
+    }
+    .hero .sublink {
+        font-size: 1.2rem;
     }
     .hero .large {
-        font-size: 84px;
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .hero .group {
+        padding: 1.75rem;
+        border-radius: 1.5rem;
+    }
+    .hero .sub {
+        font-size: 1.3rem;
+    }
+    .hero .sub img {
+        width: 1.6rem;
+    }
+    .hero .sublink {
+        font-size: 1.1rem;
+    }
+    .hero .large {
+        font-size: 2.3rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .hero .group {
+        padding: 1.25rem;
+    }
+    .hero .large {
+        font-size: 1.9rem;
     }
 }

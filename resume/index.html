@@ -129,388 +129,457 @@
     </div>
 
     <div class="content">
-        <p style="display:flex; align-items:center;">
-<i class="fa-regular fa-building"></i> Paul Hall 309, Tulane University
-&nbsp;
-<i class="fa-solid fa-house"></i> Chongqing, China
-&nbsp;
-<i class="fa-solid fa-envelope"></i> <a href="mailto:jli78@tulane.edu">jli78@tulane.edu</a>
-&nbsp;
-<i class="fa-solid fa-pen-fancy"></i>
-<img src='images/namechn.png' style="width:6rem;margin-left:-0.7rem;">
+        <style>
+            /* Contact: each icon stays glued to its content on one line; items wrap as a group */
+            .resume-contact {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.4rem 1.1rem;
+                max-width: 800px;
+                margin: 0.5rem auto;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .resume-contact-item {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                white-space: nowrap;
+            }
+            .resume-contact-item img {
+                width: 6rem;
+                margin-left: -0.5rem;
+            }
 
-</p>
+            /* Socials: collapsed pill (icon only) that smoothly expands on hover to reveal the name */
+            .resume-socials {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 0.5rem;
+                max-width: 800px;
+                margin: 0.5rem auto 1rem;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            a.resume-social,
+            a.resume-social:link,
+            a.resume-social:visited {
+                display: inline-flex;
+                align-items: center;
+                height: 2.4rem;
+                max-width: 2.4rem;
+                overflow: hidden;
+                border-radius: 1.2rem;
+                background: var(--white-2);
+                color: var(--black-2);
+                text-decoration: none;
+                transition: max-width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+                            background-color 0.25s ease, color 0.25s ease;
+            }
+            a.resume-social .rs-icon {
+                flex: 0 0 2.4rem;
+                width: 2.4rem;
+                height: 2.4rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1rem;
+            }
+            a.resume-social .rs-label {
+                padding-right: 1rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+            }
+            a.resume-social:hover,
+            a.resume-social:focus {
+                max-width: 16rem;
+                background: var(--link);
+                color: #fff;
+                text-decoration: none;
+            }
 
-<p style="display:flex; align-items:center;">
-<span>
-<a href="https://github.com/jiarui0923/" target="_blank" title="GitHub"><i class="fab fa-github fa-lg"></i></a>
-&nbsp;&nbsp;<a href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin fa-lg"></i></a>
-&nbsp;&nbsp;
-<a href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
-&nbsp;&nbsp;
-<a href="https://orcid.org/0009-0001-1055-4424" target="_blank" title="ORCID"><i class="fab fa-orcid fa-lg"></i></a>
-&nbsp;&nbsp;
-<a href="http://resume.jiarui.li" target="_blank" title="Resume"><i class="fas fa-file-alt fa-lg"></i></a>
-&nbsp;&nbsp;
-<a href="https://dblp.org/pid/177/2287-1.html" target="_blank" title="DBLP"><i class="ai ai-dblp"></i></a>
-&nbsp;&nbsp;
-<a href="https://www.researchgate.net/profile/Jiarui-Li-89" target="_blank" title="ResearchGate"><i class="ai ai-researchgate"></i></a>
-&nbsp;&nbsp;
-<a href="https://www.semanticscholar.org/author/Jiarui-Li/2339547605" target="_blank" title="Semantic Scholar"><i class="ai ai-semantic-scholar"></i></a>
-</span>
-</p>
+            @media screen and (max-width: 600px) {
+                .resume-contact,
+                .resume-socials { padding: 0 16px; }
+                .resume-contact { gap: 0.3rem 0.8rem; }
+                .resume-contact-item img { width: 4.5rem; }
+                a.resume-social,
+                a.resume-social:link,
+                a.resume-social:visited { height: 2.1rem; max-width: 2.1rem; }
+                a.resume-social .rs-icon { flex-basis: 2.1rem; width: 2.1rem; height: 2.1rem; }
+            }
+        </style>
 
+        
+        <div class="resume-contact">
+            
+            <span class="resume-contact-item">
+                <i class="fa-regular fa-building"></i><span>Paul Hall 309, Tulane University</span>
+            </span>
+            
+            <span class="resume-contact-item">
+                <i class="fa-solid fa-house"></i><span>Chongqing, China</span>
+            </span>
+            
+            <span class="resume-contact-item">
+                <i class="fa-solid fa-envelope"></i><a href="mailto:jli78@tulane.edu">jli78@tulane.edu</a>
+            </span>
+            
+            <span class="resume-contact-item">
+                <i class="fa-solid fa-pen-fancy"></i><img src="images/namechn.png">
+            </span>
+            
+        </div>
+        
 
-<h2 id="💠Education"><a href="#💠Education" class="headerlink" title="💠Education"></a>💠Education</h2><table style='border:0; padding:10px;'>
-    <tr>
-        <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Doctorate</td>
-    </tr>
-    <tr>
-        <td>
-            <img src='/resume/images/tu.ico'></img>
-        </td>
-        <td>
-            <b>Tulane University</b><br>
-            Ph.D Student in Computer Science<br>
-            <i>Research Field: Immunoinformatics & XAI</i><br>
-            <i>Advised by: <a target="_blank" rel="noopener" href="https://ramgopalmettu.org/">Prof. Mettu</a></i>
-        </td>
-        <td style='font-size:16px;'>
-            Louisiana, US<br>
-            Sept. 2023 - Present
-        </td>
-    </tr>
-    <tr>
-        <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Bachelor</td>
-    </tr>
-    <tr>
-        <td>
-            <img src='/resume/images/unnc.ico'></img>
-        </td>
-        <td>
-            <b>University of Nottingham Ningbo China</b><br>
-            BSc Hons Computer Science with Artificial Intelligence<br>
-            <i>(First Class with Honors)</i>
-        </td>
-        <td style='font-size:16px;'>
-            Zhejiang, China<br>
-            Sept. 2019 - Jun. 2023
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <img src='/resume/images/UoB.ico'></img>
-        </td>
-        <td>
-            <b>University of Birmingham</b><br>
-            UG Aff Computer Science with Software Engineering<br>
-            <i>(Exchange Program)</i>
-        </td>
-        <td style='font-size:16px;'>
-            Birmingham, UK<br>
-            Sept. 2020 - Jun. 2021
-        </td>
-    </tr>
-</table>
+        
+        <div class="resume-socials">
+            
+            <a class="resume-social" href="https://github.com/jiarui0923/" target="_blank" title="GitHub">
+                <span class="rs-icon"><i class="fab fa-github fa-lg"></i></span>
+                <span class="rs-label">GitHub</span>
+            </a>
+            
+            <a class="resume-social" href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn">
+                <span class="rs-icon"><i class="fab fa-linkedin fa-lg"></i></span>
+                <span class="rs-label">LinkedIn</span>
+            </a>
+            
+            <a class="resume-social" href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar">
+                <span class="rs-icon"><i class="ai ai-google-scholar"></i></span>
+                <span class="rs-label">Google Scholar</span>
+            </a>
+            
+            <a class="resume-social" href="https://orcid.org/0009-0001-1055-4424" target="_blank" title="ORCID">
+                <span class="rs-icon"><i class="fab fa-orcid fa-lg"></i></span>
+                <span class="rs-label">ORCID</span>
+            </a>
+            
+            <a class="resume-social" href="http://resume.jiarui.li" target="_blank" title="Resume">
+                <span class="rs-icon"><i class="fas fa-file-alt fa-lg"></i></span>
+                <span class="rs-label">Resume</span>
+            </a>
+            
+            <a class="resume-social" href="https://dblp.org/pid/177/2287-1.html" target="_blank" title="DBLP">
+                <span class="rs-icon"><i class="ai ai-dblp"></i></span>
+                <span class="rs-label">DBLP</span>
+            </a>
+            
+            <a class="resume-social" href="https://www.researchgate.net/profile/Jiarui-Li-89" target="_blank" title="ResearchGate">
+                <span class="rs-icon"><i class="ai ai-researchgate"></i></span>
+                <span class="rs-label">ResearchGate</span>
+            </a>
+            
+            <a class="resume-social" href="https://www.semanticscholar.org/author/Jiarui-Li/2339547605" target="_blank" title="Semantic Scholar">
+                <span class="rs-icon"><i class="ai ai-semantic-scholar"></i></span>
+                <span class="rs-label">Semantic Scholar</span>
+            </a>
+            
+        </div>
+        
 
-<h2 id="💠Publications"><a href="#💠Publications" class="headerlink" title="💠Publications"></a>💠Publications</h2><p><a href="/papers/"><i class="fa-solid fa-paper-plane"></i> Check my full publication list.</a></p>
-<h3 id="Latest-Work"><a href="#Latest-Work" class="headerlink" title="Latest Work"></a>Latest Work</h3><blockquote>
-<ol>
-<li><strong>Li, J.</strong>, Yin, Z., Ding, Z., Landry, S. J., &amp; Mettu, R. R. (2026). <strong>Why Does It Look There? Structured Explanations for Image Classification</strong>. preprint.<br>[<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2603.10234"><i class="fa-solid fa-paperclip"></i> Paper</a>]</li>
-</ol>
-</blockquote>
-<h3 id="Selected-Papers"><a href="#Selected-Papers" class="headerlink" title="Selected Papers"></a>Selected Papers</h3><blockquote>
-<ol>
-<li><strong>Li, J.</strong>, Yin, Z., Smith, H., Ding, Z., Landry, S. J., &amp; Mettu, R. R. (2026). <strong>Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding</strong>. In Proceedings of The Fourteenth International Conference on Learning Representations.<br>[<a target="_blank" rel="noopener" href="https://openreview.net/forum?id=S3kSOFhs5m"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a href="https://jiarui-li.com/papers/ICLR2026QCAI/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>,<a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/QCAI"><i class="fa-solid fa-code-branch"></i> Code</a>]  </li>
-<li>Yin, Z.，<strong>Li, J</strong>., &amp; Ding, Z. (2025). <strong>iMIND: Insightful Multi-subject Invariant Neural Decoding</strong>. Advances in Neural Information Processing Systems.<br>[<a target="_blank" rel="noopener" href="https://neurips.cc/virtual/2025/poster/119508"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a target="_blank" rel="noopener" href="https://zachyin.com/imind/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>]</li>
-<li><strong>Li, J.</strong>, Yin, Z., Ding, Z., Landry, S. J., &amp; Mettu, R. R. (2025). <strong>Rational Multi-Modal Transformers for TCR-pMHC Prediction</strong>. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.<br>[<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2509.17305v1"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a href="/papers/BCB2025EGM/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>,<a target="_blank" rel="noopener" href="https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational"><i class="fa-solid fa-code-branch"></i> Code</a>]</li>
-<li><strong>Li, J.</strong>, Landry, S., &amp; Mettu, R. (2024, December). <strong>GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction</strong>. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE.<br>[<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/10821831"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a href="/papers/BIBM2024GPUCOREX/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>,<a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/gpuCOREX"><i class="fa-solid fa-code-branch"></i> Code</a>]</li>
-</ol>
-</blockquote>
-<h3 id="Conference-Orals"><a href="#Conference-Orals" class="headerlink" title="Conference Orals"></a>Conference Orals</h3><blockquote>
-<ol>
-<li>📰 <strong>Li, J.</strong>, Yin, Z., Ding, Z., Landry, S. J., &amp; Mettu, R. R. (2025). <strong>Rational Multi-Modal Transformers for TCR-pMHC Prediction</strong>. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.</li>
-<li>📰 <strong>Li, J.</strong>, Landry, S., &amp; Mettu, R. (2024, October). <strong>GPU Acceleration for Markov Chain Monte Carlo sampling</strong>.  In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.</li>
-<li>📰 <strong>Li, J.</strong>, Landry, S., &amp; Mettu, R. (2024, June). <strong>GPU Acceleration of Conformational Stability Computation for CD4+ T Cell Epitope Prediction</strong>. In Next Gen. Conversations: Albany at Tech 2024: The 21st Conversation. Albany.</li>
-</ol>
-</blockquote>
-<h2 id="💠Services"><a href="#💠Services" class="headerlink" title="💠Services"></a>💠Services</h2><h3 id="Conferences"><a href="#Conferences" class="headerlink" title="Conferences"></a>Conferences</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Year</th>
-<th style="text-align:left">Conference</th>
-<th style="text-align:left">Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2026</td>
-<td style="text-align:left"><strong>📒MLSCB@ISMB 2026</strong></td>
-<td style="text-align:left">Reviewer</td>
-</tr>
-<tr>
-<td style="text-align:center">2026</td>
-<td style="text-align:left"><strong>📒ICML 2026</strong></td>
-<td style="text-align:left">Reviewer</td>
-</tr>
-<tr>
-<td style="text-align:center">2026</td>
-<td style="text-align:left"><strong>📒LMRL@ICLR 2026</strong></td>
-<td style="text-align:left">Reviewer</td>
-</tr>
-<tr>
-<td style="text-align:center">2026</td>
-<td style="text-align:left"><strong>📒CVPR 2026</strong></td>
-<td style="text-align:left">Reviewer</td>
-</tr>
-<tr>
-<td style="text-align:center">2025</td>
-<td style="text-align:left"><strong>📒ICLR 2026</strong></td>
-<td style="text-align:left">Reviewer</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="Journals"><a href="#Journals" class="headerlink" title="Journals"></a>Journals</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Journal</th>
-<th style="text-align:left">Role</th>
-<th style="text-align:left">Review Date(s)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>📒PLoS Computational Biology</strong></td>
-<td style="text-align:left">Reviewer</td>
-<td style="text-align:left"><code>2026/05</code></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="💠Grant-amp-Funding"><a href="#💠Grant-amp-Funding" class="headerlink" title="💠Grant &amp; Funding"></a>💠Grant &amp; Funding</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Year</th>
-<th style="text-align:left">Grant</th>
-<th style="text-align:left">Authority</th>
-<th style="text-align:left">Amount</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2025</td>
-<td style="text-align:left"><strong>🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence</strong> (Explainable Machine Learning for Immunotherapy)</td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">-</td>
-</tr>
-<tr>
-<td style="text-align:center">2025</td>
-<td style="text-align:left"><strong>🏅Google Cloud Research Credits Program</strong></td>
-<td style="text-align:left">Google GCP</td>
-<td style="text-align:left">$1,000.00</td>
-</tr>
-<tr>
-<td style="text-align:center">2024</td>
-<td style="text-align:left"><strong>🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence</strong> (Computational Epitope Prediction)</td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">-</td>
-</tr>
-<tr>
-<td style="text-align:center">2024</td>
-<td style="text-align:left"><strong>🏅AWS Public Sector Cloud Credit for Research</strong></td>
-<td style="text-align:left">Amazon AWS</td>
-<td style="text-align:left">$4,984.00</td>
-</tr>
-<tr>
-<td style="text-align:center">2023</td>
-<td style="text-align:left"><strong>🏅Tulane Ph.D. Funding</strong></td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="💠Awards"><a href="#💠Awards" class="headerlink" title="💠Awards"></a>💠Awards</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">Year</th>
-<th style="text-align:left">Award</th>
-<th style="text-align:left">Authority</th>
-<th style="text-align:left">Location</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">2026</td>
-<td style="text-align:left"><strong>🏆CS TA Award</strong></td>
-<td style="text-align:left">Department of Computer Science, Tulane University</td>
-<td style="text-align:left">LA, US</td>
-</tr>
-<tr>
-<td style="text-align:center">2026</td>
-<td style="text-align:left"><strong>🏆Best Research Poster</strong></td>
-<td style="text-align:left">Department of Computer Science, Tulane University</td>
-<td style="text-align:left">LA, US</td>
-</tr>
-<tr>
-<td style="text-align:center">2023</td>
-<td style="text-align:left"><strong>🏆Zhejiang Excellent Graduates</strong></td>
-<td style="text-align:left">Zhejiang Provincial Government</td>
-<td style="text-align:left">Zhejiang, China</td>
-</tr>
-<tr>
-<td style="text-align:center">2022</td>
-<td style="text-align:left"><strong>🏆Best Performer</strong></td>
-<td style="text-align:left">University of Nottingham Ningbo China</td>
-<td style="text-align:left">Zhejiang, China</td>
-</tr>
-<tr>
-<td style="text-align:center">2022</td>
-<td style="text-align:left"><strong>🏆President’s Scholarship</strong></td>
-<td style="text-align:left">University of Nottingham Ningbo China</td>
-<td style="text-align:left">Zhejiang, China</td>
-</tr>
-<tr>
-<td style="text-align:center">2022</td>
-<td style="text-align:left"><strong>🏆Zhejiang Provincial Scholarship</strong></td>
-<td style="text-align:left">Zhejiang Provincial Government</td>
-<td style="text-align:left">Zhejiang, China</td>
-</tr>
-<tr>
-<td style="text-align:center">2021</td>
-<td style="text-align:left"><strong>🏆Provost’s Scholarship</strong></td>
-<td style="text-align:left">University of Nottingham Ningbo China</td>
-<td style="text-align:left">Zhejiang, China</td>
-</tr>
-<tr>
-<td style="text-align:center">2021</td>
-<td style="text-align:left"><strong>🏆Government Scholarship for Mobility Out</strong></td>
-<td style="text-align:left">Ningbo Municipal Government</td>
-<td style="text-align:left">Zhejiang, China</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="💠Experiences"><a href="#💠Experiences" class="headerlink" title="💠Experiences"></a>💠Experiences</h2><h3 id="Work-Experiences"><a href="#Work-Experiences" class="headerlink" title="Work Experiences"></a>Work Experiences</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Position</th>
-<th style="text-align:left">Institution</th>
-<th style="text-align:left">Location</th>
-<th style="text-align:left">Date</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">🗃️Teaching Assistant</td>
-<td style="text-align:left">Department of Computer Science, <br>Tulane University</td>
-<td style="text-align:left">LA, US</td>
-<td style="text-align:left">Aug 2024 - <em>Present</em></td>
-</tr>
-<tr>
-<td style="text-align:left">🗃️Research Assistant</td>
-<td style="text-align:left">Department of Computer Science, <br>Tulane University</td>
-<td style="text-align:left">LA, US</td>
-<td style="text-align:left">Aug 2023 - Aug 2024</td>
-</tr>
-<tr>
-<td style="text-align:left">🗃️Research Internship</td>
-<td style="text-align:left">Shanghai Institution of Materia Medica, <br>China Academy of Science</td>
-<td style="text-align:left">Shanghai, China</td>
-<td style="text-align:left"><em>June 2023 ‑ July 2023</em></td>
-</tr>
-</tbody>
-</table>
-</div>
-<h3 id="Teaching-Experiences"><a href="#Teaching-Experiences" class="headerlink" title="Teaching Experiences"></a>Teaching Experiences</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">Semester</th>
-<th style="text-align:left">Course</th>
-<th style="text-align:left">Institution</th>
-<th style="text-align:left">Role</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">2026 Spring</td>
-<td style="text-align:left">CMPS 2200 Introduction to Algorithm</td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">Teaching Assistant</td>
-</tr>
-<tr>
-<td style="text-align:left">2025 Fall</td>
-<td style="text-align:left">CMPS 2200 Introduction to Algorithm</td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">Teaching Assistant</td>
-</tr>
-<tr>
-<td style="text-align:left">2025 Spring</td>
-<td style="text-align:left">CMPS 2200 Introduction to Algorithm</td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">Teaching Assistant</td>
-</tr>
-<tr>
-<td style="text-align:left">2024 Fall</td>
-<td style="text-align:left">CMPS 2200 Introduction to Algorithm</td>
-<td style="text-align:left">Tulane University</td>
-<td style="text-align:left">Teaching Assistant</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="💠Skills"><a href="#💠Skills" class="headerlink" title="💠Skills"></a>💠Skills</h2><h3 id="Techniques"><a href="#Techniques" class="headerlink" title="Techniques"></a>Techniques</h3><ul>
-<li>🗜️ <strong>Vibe Coding</strong>: Cline, Codex</li>
-<li>🗜️ <strong>Programming</strong>: C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net, CUDA</li>
-<li>🗜️ <strong>Database</strong>: MySQL, SQLite, PostgreSQL, MongoDB, Redis</li>
-<li>🗜️ <strong>Web</strong>: <blockquote>
-<ul>
-<li><strong>Front-end</strong>: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery</li>
-<li><strong>Back-end</strong>: Django, Flask, IIS, Apache HTTP, Docker, Nginx</li>
-</ul>
-</blockquote>
-</li>
-<li>🗜️ <strong>Algorithm</strong>:<blockquote>
-<ul>
-<li><strong>Machine Learning</strong>: PyTorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba</li>
-<li><strong>Big Data</strong>:  Hadoop, Spark</li>
-<li><strong>Visualization</strong>: Matplotlib, Plotly, Streamlit, 3DMol.js</li>
-</ul>
-</blockquote>
-</li>
-<li>🗜️ <strong>Documentation</strong>: LaTeX, Markdown, Swagger, Overleaf</li>
-<li>🗜️ <strong>Hardward</strong>: Arduino, Raspberry Pi, STM32</li>
-<li>🗜️ <strong>Environment</strong>: Git, Anaconda</li>
-<li>🗜️ <strong>Cheminformatics &amp; Bioinformatics</strong>: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB, Biotite</li>
-<li>🎵 <strong>Musical Instrument</strong>: Guqin <em>(Traditional Chinese String Instrument)</em></li>
-</ul>
-<h3 id="Languages"><a href="#Languages" class="headerlink" title="Languages"></a>Languages</h3><ul>
-<li>📓 <strong>Chinese</strong> Native proficiency<ul>
-<li>📓 <strong>Mandarin</strong></li>
-<li>📓 <strong>Chongqing Dialect</strong> I am a Chongqing citizen definetely.</li>
-</ul>
-</li>
-<li>📓 <strong>English</strong> Professional proficiency</li>
-</ul>
+        
+        <h2>💠Education</h2>
+        <table style="border:0; padding:10px;">
+            
+            <tr>
+                <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Doctorate</td>
+            </tr>
+            
+            <tr>
+                <td><img src="/resume/images/tu.ico"></td>
+                <td>
+                    <b>Tulane University</b><br>
+                    Ph.D Student in Computer Science<br>
+                    <i>Research Field: Immunoinformatics &amp; XAI</i><br><i>Advised by: <a target="_blank" rel="noopener" href="https://ramgopalmettu.org/">Prof. Mettu</a></i>
+                </td>
+                <td style="font-size:16px;">
+                    Louisiana, US<br>
+                    Sept. 2023 - Present
+                </td>
+            </tr>
+            
+            
+            <tr>
+                <td colspan="3"><i class="fa-solid fa-graduation-cap"></i> Bachelor</td>
+            </tr>
+            
+            <tr>
+                <td><img src="/resume/images/unnc.ico"></td>
+                <td>
+                    <b>University of Nottingham Ningbo China</b><br>
+                    BSc Hons Computer Science with Artificial Intelligence<br>
+                    <i>(First Class with Honors)</i>
+                </td>
+                <td style="font-size:16px;">
+                    Zhejiang, China<br>
+                    Sept. 2019 - Jun. 2023
+                </td>
+            </tr>
+            
+            <tr>
+                <td><img src="/resume/images/UoB.ico"></td>
+                <td>
+                    <b>University of Birmingham</b><br>
+                    UG Aff Computer Science with Software Engineering<br>
+                    <i>(Exchange Program)</i>
+                </td>
+                <td style="font-size:16px;">
+                    Birmingham, UK<br>
+                    Sept. 2020 - Jun. 2021
+                </td>
+            </tr>
+            
+            
+        </table>
+        
 
-    </div>
-
-    <div class="container post-prev-next">
-        <a class="next"></a>
-        <a class="prev"></a>
-    </div>
-
-    
+        
+        <h2>💠Publications</h2>
+        
+        <p><a href="/papers/"><i class="fa-solid fa-paper-plane"></i> Check my full publication list.</a></p>
         
         
-    
+        <h3>Latest Work</h3>
+        <blockquote>
+            <ol>
+                
+                <li>
+                    <b>Li, J.</b>, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). <b>Why Does It Look There? Structured Explanations for Image Classification</b>. preprint. [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2603.10234"><i class="fa-solid fa-paperclip"></i> Paper</a>]
+                </li>
+                
+            </ol>
+        </blockquote>
+        
+        <h3>Selected Papers</h3>
+        <blockquote>
+            <ol>
+                
+                <li>
+                    <b>Li, J.</b>, Yin, Z., Smith, H., Ding, Z., Landry, S. J., & Mettu, R. R. (2026). <b>Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding</b>. In Proceedings of The Fourteenth International Conference on Learning Representations. [<a target="_blank" rel="noopener" href="https://openreview.net/forum?id=S3kSOFhs5m"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a href="https://jiarui-li.com/papers/ICLR2026QCAI/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>,<a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/QCAI"><i class="fa-solid fa-code-branch"></i> Code</a>]
+                </li>
+                
+                <li>
+                    Yin, Z., <b>Li, J.</b>, & Ding, Z. (2025). <b>iMIND: Insightful Multi-subject Invariant Neural Decoding</b>. Advances in Neural Information Processing Systems. [<a target="_blank" rel="noopener" href="https://neurips.cc/virtual/2025/poster/119508"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a target="_blank" rel="noopener" href="https://zachyin.com/imind/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>]
+                </li>
+                
+                <li>
+                    <b>Li, J.</b>, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). <b>Rational Multi-Modal Transformers for TCR-pMHC Prediction</b>. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics. [<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2509.17305v1"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a href="/papers/BCB2025EGM/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>,<a target="_blank" rel="noopener" href="https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational"><i class="fa-solid fa-code-branch"></i> Code</a>]
+                </li>
+                
+                <li>
+                    <b>Li, J.</b>, Landry, S., & Mettu, R. (2024, December). <b>GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction</b>. In 2024 IEEE International Conference on Bioinformatics and Biomedicine (BIBM). IEEE. [<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/10821831"><i class="fa-solid fa-paperclip"></i> Paper</a>,<a href="/papers/BIBM2024GPUCOREX/"><i class="fa-solid fa-circle-nodes"></i> Web Page</a>,<a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/gpuCOREX"><i class="fa-solid fa-code-branch"></i> Code</a>]
+                </li>
+                
+            </ol>
+        </blockquote>
+        
+        <h3>Conference Orals</h3>
+        <blockquote>
+            <ol>
+                
+                <li>
+                    📰 <b>Li, J.</b>, Yin, Z., Ding, Z., Landry, S. J., & Mettu, R. R. (2025). <b>Rational Multi-Modal Transformers for TCR-pMHC Prediction</b>. In Proceedings of the 16th ACM International Conference on Bioinformatics, Computational Biology and Health Informatics.
+                </li>
+                
+                <li>
+                    📰 <b>Li, J.</b>, Landry, S., & Mettu, R. (2024, October). <b>GPU Acceleration for Markov Chain Monte Carlo sampling</b>. In Proceedings of the Fourth International Conference on AI-ML Systems. ACM.
+                </li>
+                
+                <li>
+                    📰 <b>Li, J.</b>, Landry, S., & Mettu, R. (2024, June). <b>GPU Acceleration of Conformational Stability Computation for CD4+ T Cell Epitope Prediction</b>. In Next Gen. Conversations: Albany at Tech 2024: The 21st Conversation. Albany.
+                </li>
+                
+            </ol>
+        </blockquote>
+        
+        
+
+        
+        <h2>💠Services</h2>
+        
+        <h3>Conferences</h3>
+        <table>
+<thead>
+<tr><th style="text-align:center">Year</th><th style="text-align:left">Conference</th><th style="text-align:left">Role</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">2026</td><td style="text-align:left"><b>📒MLSCB@ISMB 2026</b></td><td style="text-align:left">Reviewer</td></tr>
+<tr><td style="text-align:center">2026</td><td style="text-align:left"><b>📒ICML 2026</b></td><td style="text-align:left">Reviewer</td></tr>
+<tr><td style="text-align:center">2026</td><td style="text-align:left"><b>📒LMRL@ICLR 2026</b></td><td style="text-align:left">Reviewer</td></tr>
+<tr><td style="text-align:center">2026</td><td style="text-align:left"><b>📒CVPR 2026</b></td><td style="text-align:left">Reviewer</td></tr>
+<tr><td style="text-align:center">2025</td><td style="text-align:left"><b>📒ICLR 2026</b></td><td style="text-align:left">Reviewer</td></tr>
+</tbody>
+</table>
+        
+        <h3>Journals</h3>
+        <table>
+<thead>
+<tr><th style="text-align:left">Journal</th><th style="text-align:left">Role</th><th style="text-align:left">Review Date(s)</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left"><b>📒PLoS Computational Biology</b></td><td style="text-align:left">Reviewer</td><td style="text-align:left"><code>2026/05</code></td></tr>
+</tbody>
+</table>
+        
+        
+
+        
+        <h2>💠Grant &amp; Funding</h2>
+        <table>
+<thead>
+<tr><th style="text-align:center">Year</th><th style="text-align:left">Grant</th><th style="text-align:left">Authority</th><th style="text-align:left">Amount</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">2025</td><td style="text-align:left"><b>🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence</b> (Explainable Machine Learning for Immunotherapy)</td><td style="text-align:left">Tulane University</td><td style="text-align:left">-</td></tr>
+<tr><td style="text-align:center">2025</td><td style="text-align:left"><b>🏅Google Cloud Research Credits Program</b></td><td style="text-align:left">Google GCP</td><td style="text-align:left">$1,000.00</td></tr>
+<tr><td style="text-align:center">2024</td><td style="text-align:left"><b>🏅Harold L. and Heather E. Jurist Center of Excellence for Artificial Intelligence</b> (Computational Epitope Prediction)</td><td style="text-align:left">Tulane University</td><td style="text-align:left">-</td></tr>
+<tr><td style="text-align:center">2024</td><td style="text-align:left"><b>🏅AWS Public Sector Cloud Credit for Research</b></td><td style="text-align:left">Amazon AWS</td><td style="text-align:left">$4,984.00</td></tr>
+<tr><td style="text-align:center">2023</td><td style="text-align:left"><b>🏅Tulane Ph.D. Funding</b></td><td style="text-align:left">Tulane University</td><td style="text-align:left">-</td></tr>
+</tbody>
+</table>
+        
+
+        
+        <h2>💠Awards</h2>
+        <table>
+<thead>
+<tr><th style="text-align:center">Year</th><th style="text-align:left">Award</th><th style="text-align:left">Authority</th><th style="text-align:left">Location</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:center">2026</td><td style="text-align:left"><b>🏆CS TA Award</b></td><td style="text-align:left">Department of Computer Science, Tulane University</td><td style="text-align:left">LA, US</td></tr>
+<tr><td style="text-align:center">2026</td><td style="text-align:left"><b>🏆Best Research Poster</b></td><td style="text-align:left">Department of Computer Science, Tulane University</td><td style="text-align:left">LA, US</td></tr>
+<tr><td style="text-align:center">2023</td><td style="text-align:left"><b>🏆Zhejiang Excellent Graduates</b></td><td style="text-align:left">Zhejiang Provincial Government</td><td style="text-align:left">Zhejiang, China</td></tr>
+<tr><td style="text-align:center">2022</td><td style="text-align:left"><b>🏆Best Performer</b></td><td style="text-align:left">University of Nottingham Ningbo China</td><td style="text-align:left">Zhejiang, China</td></tr>
+<tr><td style="text-align:center">2022</td><td style="text-align:left"><b>🏆President’s Scholarship</b></td><td style="text-align:left">University of Nottingham Ningbo China</td><td style="text-align:left">Zhejiang, China</td></tr>
+<tr><td style="text-align:center">2022</td><td style="text-align:left"><b>🏆Zhejiang Provincial Scholarship</b></td><td style="text-align:left">Zhejiang Provincial Government</td><td style="text-align:left">Zhejiang, China</td></tr>
+<tr><td style="text-align:center">2021</td><td style="text-align:left"><b>🏆Provost’s Scholarship</b></td><td style="text-align:left">University of Nottingham Ningbo China</td><td style="text-align:left">Zhejiang, China</td></tr>
+<tr><td style="text-align:center">2021</td><td style="text-align:left"><b>🏆Government Scholarship for Mobility Out</b></td><td style="text-align:left">Ningbo Municipal Government</td><td style="text-align:left">Zhejiang, China</td></tr>
+</tbody>
+</table>
+        
+
+        
+        <h2>💠Experiences</h2>
+        
+        <h3>Work Experiences</h3>
+        <table>
+<thead>
+<tr><th style="text-align:left">Position</th><th style="text-align:left">Institution</th><th style="text-align:left">Location</th><th style="text-align:left">Date</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">🗃️Teaching Assistant</td><td style="text-align:left">Department of Computer Science, <br>Tulane University</td><td style="text-align:left">LA, US</td><td style="text-align:left">Aug 2024 - <i>Present</i></td></tr>
+<tr><td style="text-align:left">🗃️Research Assistant</td><td style="text-align:left">Department of Computer Science, <br>Tulane University</td><td style="text-align:left">LA, US</td><td style="text-align:left">Aug 2023 - Aug 2024</td></tr>
+<tr><td style="text-align:left">🗃️Research Internship</td><td style="text-align:left">Shanghai Institution of Materia Medica, <br>China Academy of Science</td><td style="text-align:left">Shanghai, China</td><td style="text-align:left"><i>June 2023 ‑ July 2023</i></td></tr>
+</tbody>
+</table>
+        
+        <h3>Teaching Experiences</h3>
+        <table>
+<thead>
+<tr><th style="text-align:left">Semester</th><th style="text-align:left">Course</th><th style="text-align:left">Institution</th><th style="text-align:left">Role</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">2026 Spring</td><td style="text-align:left">CMPS 2200 Introduction to Algorithm</td><td style="text-align:left">Tulane University</td><td style="text-align:left">Teaching Assistant</td></tr>
+<tr><td style="text-align:left">2025 Fall</td><td style="text-align:left">CMPS 2200 Introduction to Algorithm</td><td style="text-align:left">Tulane University</td><td style="text-align:left">Teaching Assistant</td></tr>
+<tr><td style="text-align:left">2025 Spring</td><td style="text-align:left">CMPS 2200 Introduction to Algorithm</td><td style="text-align:left">Tulane University</td><td style="text-align:left">Teaching Assistant</td></tr>
+<tr><td style="text-align:left">2024 Fall</td><td style="text-align:left">CMPS 2200 Introduction to Algorithm</td><td style="text-align:left">Tulane University</td><td style="text-align:left">Teaching Assistant</td></tr>
+</tbody>
+</table>
+        
+        
+
+        
+        <h2>💠Skills</h2>
+        
+        <h3>Techniques</h3>
+        <ul>
+            
+            <li>🗜️ <b>Vibe Coding</b>: Cline, Codex
+                
+            </li>
+            
+            <li>🗜️ <b>Programming</b>: C/C++, Java, C#, Python, PHP, JavaScript, Assembly(MIPS), Haskell, VB.net, CUDA
+                
+            </li>
+            
+            <li>🗜️ <b>Database</b>: MySQL, SQLite, PostgreSQL, MongoDB, Redis
+                
+            </li>
+            
+            <li>🗜️ <b>Web</b>
+                
+                <ul>
+                    
+                    <li><b>Front-end</b>: HTML, CSS, Bulma, Tailwind, JavaScript, JQuery</li>
+                    
+                    <li><b>Back-end</b>: Django, Flask, IIS, Apache HTTP, Docker, Nginx</li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li>🗜️ <b>Algorithm</b>
+                
+                <ul>
+                    
+                    <li><b>Machine Learning</b>: PyTorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba</li>
+                    
+                    <li><b>Big Data</b>: Hadoop, Spark</li>
+                    
+                    <li><b>Visualization</b>: Matplotlib, Plotly, Streamlit, 3DMol.js</li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li>🗜️ <b>Documentation</b>: LaTeX, Markdown, Swagger, Overleaf
+                
+            </li>
+            
+            <li>🗜️ <b>Hardward</b>: Arduino, Raspberry Pi, STM32
+                
+            </li>
+            
+            <li>🗜️ <b>Environment</b>: Git, Anaconda
+                
+            </li>
+            
+            <li>🗜️ <b>Cheminformatics &amp; Bioinformatics</b>: RDKit, Vina Docking, ChemDraw, DeepChem, BioPDB, Biotite
+                
+            </li>
+            
+            <li>🎵 <b>Musical Instrument</b>: Guqin <i>(Traditional Chinese String Instrument)</i>
+                
+            </li>
+            
+        </ul>
+        
+        <h3>Languages</h3>
+        <ul>
+            
+            <li>📓 <b>Chinese</b>: Native proficiency
+                
+                <ul>
+                    
+                    <li>📓 <b>Mandarin</b></li>
+                    
+                    <li>📓 <b>Chongqing Dialect</b>: I am a Chongqing citizen definetely.</li>
+                    
+                </ul>
+                
+            </li>
+            
+            <li>📓 <b>English</b>: Professional proficiency
+                
+            </li>
+            
+        </ul>
+        
+        
+    </div>
 </article>
 
         <footer>
@@ -569,6 +638,22 @@
             })
         </script>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 
