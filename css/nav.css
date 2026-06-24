@@ -33,6 +33,15 @@ nav .title {
     font-weight: normal;
     line-height: 48px;
     color: var(--black-2)!important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav .title .nav-favicon {
+    height: 28px;
+    width: auto;
+    vertical-align: middle;
 }
 
 nav .nav-arrow {
