@@ -1,6 +1,9 @@
 ---
 title: CMPS6790 Milestone2
 date: 2024-10-24 13:14:07
+pageicon: "fa-solid fa-graduation-cap"
+desc: "Milestone 2: T Cell Receptor modeling project."
+tags: ["CMPS6790", "Data Science", "TCR-pMHC", "Course"]
 ---
 [**📓 Read Jupyter Notebook for This Project**](./milestone02.html)
 

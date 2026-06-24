@@ -2,6 +2,9 @@
 layout: paper
 has_breadcrumb: true
 has_is_mono: true
+pageicon: "fa-solid fa-file-lines"
+desc: "International Conference on Bioinformatics and Biomedicine"
+tags: ["Immunology", "Antigen Processing", "Algorithm Acceleration", "Computational Biology"]
 paper:
   title: "GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction"
   publication: "International Conference on Bioinformatics and Biomedicine"

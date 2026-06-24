@@ -1,6 +1,9 @@
 ---
 title: CMPS6790
 date: 2024-10-23 13:50:00
+pageicon: "fa-solid fa-graduation-cap"
+desc: "CMPS 6790 Data Science course project."
+tags: ["CMPS6790", "Data Science", "Course"]
 ---
 # CMPS6790 Data Science
  

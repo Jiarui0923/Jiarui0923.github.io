@@ -1,6 +1,9 @@
 ---
 layout: catalog
 title: "Publications"
+pageicon: "fa-solid fa-book"
+desc: "Full list of my publications and preprints."
+tags: ["Publications", "Research"]
 nav:
   Home: "/"
   Papers: null

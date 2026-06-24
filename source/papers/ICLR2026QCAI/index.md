@@ -2,6 +2,9 @@
 layout: paper
 has_breadcrumb: true
 has_is_mono: true
+tags: ["XAI", "Immunology", "TCR-pMHC", "Post-hoc", "Computational Biology", "Machine Learning"]
+pageicon: "fa-solid fa-file-lines"
+desc: "The Fourteenth International Conference on Learning Representations"
 paper:
   title: "Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding"
   publication: "The Fourteenth International Conference on Learning Representations"

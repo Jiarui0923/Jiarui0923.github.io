@@ -1,6 +1,9 @@
 ---
 title: CMPS6790 Milestone1
 date: 2024-09-30 12:59:35
+pageicon: "fa-solid fa-graduation-cap"
+desc: "Milestone 1: T Cell Receptor modeling based on VDJdb."
+tags: ["CMPS6790", "Data Science", "TCR-pMHC", "Course"]
 ---
 [**📓 Read Jupyter Notebook for This Project**](./milestone01.html)
 

@@ -2,6 +2,9 @@
 layout: paper
 has_breadcrumb: true
 has_is_mono: true
+pageicon: "fa-solid fa-file-lines"
+desc: "The ACM Conference on Bioinformatics, Computational Biology, and Health Informatics"
+tags: ["XAI", "Immunology", "TCR-pMHC", "Post-hoc", "Computational Biology", "Machine Learning"]
 paper:
   title: "Rational Multi-Modal Transformers for TCR-pMHC Prediction"
   publication: "The ACM Conference on Bioinformatics, Computational Biology, and Health Informatics"

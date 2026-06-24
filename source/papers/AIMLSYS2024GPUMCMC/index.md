@@ -1,6 +1,9 @@
 ---
 layout: paper
 has_breadcrumb: true
+pageicon: "fa-solid fa-file-lines"
+desc: "Proceedings of the 4th International Conference on AI-ML Systems"
+tags: ["Immunology", "Antigen Processing", "Algorithm Acceleration", "Computational Biology"]
 paper:
   title: "GPU Acceleration for Markov Chain Monte Carlo Sampling"
   publication: "Proceedings of the 4th International Conference on AI-ML Systems"

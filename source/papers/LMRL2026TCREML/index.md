@@ -2,6 +2,9 @@
 layout: paper
 has_breadcrumb: true
 has_is_mono: true
+pageicon: "fa-solid fa-file-lines"
+desc: "Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026"
+tags: ["XAI", "Immunology", "TCR-pMHC", "Prototype Learning", "Ante-hoc", "Computational Biology", "Machine Learning"]
 paper:
   title: "TCR-EML: Explainable Model Layers for TCR-pMHC Prediction"
   publication: "Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026"
