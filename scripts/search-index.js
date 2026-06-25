@@ -102,9 +102,14 @@ hexo.extend.generator.register('search-json', function (locals) {
     }
     push(parts, authorsText(p.authors));
 
-    // Catalog page (papers/index.md)
-    if (Array.isArray(p.papers)) {
-      p.papers.forEach(function (item) {
+    // Catalog page (papers/index.md) — paper data now lives in _data/papers.yml
+    var catalogPapers = p.papers;
+    if (!Array.isArray(catalogPapers) && p.type === 'catalog') {
+      var dataAll = hexo.locals.get('data');
+      if (dataAll && Array.isArray(dataAll.papers)) catalogPapers = dataAll.papers;
+    }
+    if (Array.isArray(catalogPapers)) {
+      catalogPapers.forEach(function (item) {
         if (item.paper) {
           push(parts, item.paper.title);
           push(parts, item.paper.publication);
@@ -112,6 +117,15 @@ hexo.extend.generator.register('search-json', function (locals) {
         }
         if (Array.isArray(item.tags)) push(parts, item.tags.join(' '));
         push(parts, authorsText(item.authors));
+      });
+    }
+
+    // Projects index (projects/index.md)
+    if (Array.isArray(p.projects)) {
+      p.projects.forEach(function (proj) {
+        push(parts, proj.title || proj.name);
+        push(parts, proj.desc);
+        if (Array.isArray(proj.tags)) push(parts, proj.tags.join(' '));
       });
     }
 
