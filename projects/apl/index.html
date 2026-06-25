@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Antigen Processing Prediction Acceleration - Jiarui Li</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Antigen Processing Prediction Acceleration - Jiarui Li" />
+  
+  <meta property="og:type" content="website" />
+  
+  <meta property="og:url" content="https://jiarui-li.com/projects/apl/index.html" />
+  
+  <meta property="og:image" content="/images/favicon.png" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+  
+  
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  
+  
+<link rel="stylesheet" href="/css/paper-card.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/"><img class="nav-favicon" src="/images/favicon.png" alt="">Jiarui Li</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/papers">Publications</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">Resume</a>
+            
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search/" aria-label="Search">&nbsp;</a>
+            
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+
+        
+        <div class="date" id="date">
+            <span>December</span>
+            <span>1,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h2 class="title">Antigen Processing Prediction Acceleration</h2>
+        <p class="project-post-desc">GPU-accelerated modeling of antigen processing to predict CD4+ T-cell epitopes.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p>Before a T cell can recognize an antigen, that antigen must be processed and presented as a<br>peptide on an MHC molecule. Modeling this antigen processing pathway lets us predict which<br>peptides become <strong>CD4+ T-cell epitopes</strong>, yet the underlying biophysical computations are<br>expensive. This project makes epitope prediction practical by accelerating the core<br>calculations on the GPU and packaging them into an easy-to-use suite.</p>
+<h2 id="Faster-conformational-stability"><a href="#Faster-conformational-stability" class="headerlink" title="Faster conformational stability"></a>Faster conformational stability</h2><p>CD4+ epitope prediction depends on conformational stability calculations that dominate the<br>runtime. We re-engineered this computation for the GPU and achieved large speedups:</p>
+<div class="paper-card"><span class="paper-card-icon"><i class="fa-solid fa-file-lines"></i></span><div class="paper-card-body"><div class="paper-card-title"><a href="/papers/BIBM2024GPUCOREX/">GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction</a></div><div class="paper-card-venue">(BIBM 2024) International Conference on Bioinformatics and Biomedicine</div><div class="paper-card-authors">Jiarui Li, Samuel J. Landry, Ramgopal R. Mettu</div><div class="paper-card-links"><a class="paper-card-link" href="https://ieeexplore.ieee.org/abstract/document/10821831" target="_blank"><i class="ai ai-ieee"></i> Paper</a><a class="paper-card-link" href="https://github.com/Jiarui0923/gpuCOREX" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a></div></div></div>
+
+
+
+<h2 id="Accelerated-sampling"><a href="#Accelerated-sampling" class="headerlink" title="Accelerated sampling"></a>Accelerated sampling</h2><p>The same pipeline relies on Markov Chain Monte Carlo sampling. We built a GPU<br>implementation that delivers substantial gains over the CPU baseline:</p>
+<div class="paper-card"><span class="paper-card-icon"><i class="fa-solid fa-file-lines"></i></span><div class="paper-card-body"><div class="paper-card-title"><a href="/papers/AIMLSYS2024GPUMCMC/">GPU Acceleration for Markov Chain Monte Carlo Sampling</a></div><div class="paper-card-venue">(AIMLSys 2024) Proceedings of the 4th International Conference on AI-ML Systems</div><div class="paper-card-authors">Jiarui Li, Samuel J. Landry, Ramgopal R. Mettu</div><div class="paper-card-links"><a class="paper-card-link" href="https://dl.acm.org/doi/abs/10.1145/3703412.3703428" target="_blank"><i class="ai ai-acm"></i> Paper</a></div></div></div>
+
+
+
+<h2 id="An-integrated-suite"><a href="#An-integrated-suite" class="headerlink" title="An integrated suite"></a>An integrated suite</h2><p>Finally, we packaged antigen processing likelihood and epitope prediction into a single<br>application so others can run the full workflow end to end:</p>
+<div class="paper-card"><span class="paper-card-icon"><i class="fa-solid fa-file-lines"></i></span><div class="paper-card-body"><div class="paper-card-title"><a target="_blank" rel="noopener" href="https://tulane-mettu-landry-lab.github.io/blogs/APLSuite/">APLSuite: An Integrated Suite for CD4+ T Cell Epitope Prediction via Antigen Processing Likelihood</a></div><div class="paper-card-venue">(Tech. Rep. 2026) Technical Report (Application)</div><div class="paper-card-authors">Jiarui Li, Marco K Carbullido, Jai Bansal, Samuel J. Landry, Ramgopal R. Mettu</div><div class="paper-card-links"><a class="paper-card-link" href="https://tulane-mettu-landry-lab.github.io/blogs/APLSuite/" target="_blank"><i class="fa-solid fa-circle-nodes"></i> Paper</a><a class="paper-card-link" href="https://github.com/Jiarui0923/APL" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a><a class="paper-card-link" href="https://arxiv.org/abs/2606.02462" target="_blank"><i class="ai ai-arxiv"></i> arXiv</a></div></div></div>
+
+
+
+<p>All related publications are listed below.</p>
+
+
+        
+        <h2>Related Publications</h2>
+        <div class="paper-card-list">
+            
+                
+<div class="paper-card">
+    <span class="paper-card-icon"><i class="fa-solid fa-file-lines"></i></span>
+    <div class="paper-card-body">
+        <div class="paper-card-title"><a href="/papers/BIBM2024GPUCOREX/">GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction</a></div>
+        <div class="paper-card-venue">(BIBM 2024) International Conference on Bioinformatics and Biomedicine</div>
+        <div class="paper-card-authors">Jiarui Li, Samuel J. Landry, Ramgopal R. Mettu</div>
+        
+        <div class="paper-card-links">
+            <a class="paper-card-link" href="https://ieeexplore.ieee.org/abstract/document/10821831" target="_blank"><i class="ai ai-ieee"></i> Paper</a><a class="paper-card-link" href="https://github.com/Jiarui0923/gpuCOREX" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        </div>
+        
+    </div>
+</div>
+
+            
+                
+<div class="paper-card">
+    <span class="paper-card-icon"><i class="fa-solid fa-file-lines"></i></span>
+    <div class="paper-card-body">
+        <div class="paper-card-title"><a href="/papers/AIMLSYS2024GPUMCMC/">GPU Acceleration for Markov Chain Monte Carlo Sampling</a></div>
+        <div class="paper-card-venue">(AIMLSys 2024) Proceedings of the 4th International Conference on AI-ML Systems</div>
+        <div class="paper-card-authors">Jiarui Li, Samuel J. Landry, Ramgopal R. Mettu</div>
+        
+        <div class="paper-card-links">
+            <a class="paper-card-link" href="https://dl.acm.org/doi/abs/10.1145/3703412.3703428" target="_blank"><i class="ai ai-acm"></i> Paper</a>
+        </div>
+        
+    </div>
+</div>
+
+            
+                
+<div class="paper-card">
+    <span class="paper-card-icon"><i class="fa-solid fa-file-lines"></i></span>
+    <div class="paper-card-body">
+        <div class="paper-card-title"><a target="_blank" rel="noopener" href="https://tulane-mettu-landry-lab.github.io/blogs/APLSuite/">APLSuite: An Integrated Suite for CD4+ T Cell Epitope Prediction via Antigen Processing Likelihood</a></div>
+        <div class="paper-card-venue">(Tech. Rep. 2026) Technical Report (Application)</div>
+        <div class="paper-card-authors">Jiarui Li, Marco K Carbullido, Jai Bansal, Samuel J. Landry, Ramgopal R. Mettu</div>
+        
+        <div class="paper-card-links">
+            <a class="paper-card-link" href="https://tulane-mettu-landry-lab.github.io/blogs/APLSuite/" target="_blank"><i class="fa-solid fa-circle-nodes"></i> Paper</a><a class="paper-card-link" href="https://github.com/Jiarui0923/APL" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a><a class="paper-card-link" href="https://arxiv.org/abs/2606.02462" target="_blank"><i class="ai ai-arxiv"></i> arXiv</a>
+        </div>
+        
+    </div>
+</div>
+
+            
+        </div>
+        
+    </div>
+
+    
+    <div class="about">
+        <div class="details">
+            <p>This post is written by Jiarui Li, licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc/4.0">CC BY-NC 4.0</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/search/?q=%23Immunology" class="tag">#Immunology</a> <a href="/search/?q=%23Antigen%20Processing" class="tag">#Antigen Processing</a> <a href="/search/?q=%23Algorithm%20Acceleration" class="tag">#Algorithm Acceleration</a> <a href="/search/?q=%23Computational%20Biology" class="tag">#Computational Biology</a> 
+        </p>
+        
+    </div>
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Jerry</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/Jiarui0923" class="item">GitHub</a>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/papers" class="item">Publications</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2026 Jiarui Li<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> | Migrated from Cupertino theme </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
+

@@ -29,6 +29,7 @@ nav a, nav a:hover, nav a:focus, nav a:active, nav a:link, nav a:visited {
 
 nav .title {
     margin: 0;
+    padding-left: 0;
     font-size: 20px;
     font-weight: normal;
     line-height: 48px;
@@ -41,6 +42,7 @@ nav .title {
 nav .title .nav-favicon {
     height: 28px;
     width: auto;
+    padding-left: 2px;
     vertical-align: middle;
 }
 
@@ -70,13 +72,19 @@ nav .nav-item:hover, nav .nav-item:focus {
 
 @media screen and (max-width: 600px) {
     nav .nav-item {
-        padding: 0 8px;
+        padding: 0 4px;
+    }
+    nav .title {
+        padding-left: 8px;
     }
 }
 
 @media screen and (max-width: 400px) {
     nav .nav-item {
         padding: 0 4px;
+    }
+    nav .title {
+        padding-left: 4px;
     }
 }
 

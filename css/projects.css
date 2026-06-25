@@ -1,0 +1,85 @@
+/* Projects index — stacked showcase panels (product-website style). */
+.projects-scroll {
+    margin-top: 1rem;
+}
+
+/* Block (not flex) so the inner .container always spans the full 980px column,
+   making every panel the same width whether or not it has an image. */
+.project-section {
+    padding: 0.6rem 0;
+}
+
+.project-panel {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2rem 2.5rem;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+}
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .project-panel { background: rgba(255, 255, 255, 0.06); }
+}
+body[data-color-scheme="dark"] .project-panel { background: rgba(255, 255, 255, 0.06); }
+
+/* Title row — full width, never shares a row with the image. */
+.project-head { margin-bottom: 1.3rem; }
+.project-section .project-date { font-size: 0.9rem; color: var(--card-time); margin: 0 0 0.4rem; }
+.project-section .project-title { font-size: 1.8rem; font-weight: 700; color: var(--card-title); margin: 0; line-height: 1.1; }
+
+/* Body row — info on the left, optional image on the right. */
+.project-body {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+.project-body .project-info { flex: 1 1 auto; min-width: 0; }
+.project-body .project-image { flex: 0 0 38%; max-width: 38%; }
+.project-body .project-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Fade all four edges into the panel for a soft, borderless look.
+       Two gradients (horizontal + vertical) intersected = soft on every side. */
+    -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+        linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-composite: intersect;
+}
+
+.project-section .project-desc { font-size: 1.1rem; color: var(--black-2); line-height: 1.5; margin: 0 0 1.2rem; }
+.project-section .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+.project-section .project-tag {
+    font-size: 0.78rem; padding: 0.18rem 0.65rem; border-radius: 1rem;
+    background: var(--white-2); color: var(--black-4);
+}
+.project-section .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.6rem 1.4rem; border-radius: 2rem;
+    background: var(--link); color: #fff; text-decoration: none;
+    font-size: 0.95rem; transition: opacity 0.2s ease;
+}
+.project-section .project-link:hover { opacity: 0.85; color: #fff; }
+
+@media screen and (max-width: 800px) {
+    .project-panel { padding: 1.75rem; }
+    /* Tablet: keep the image on the right (not at the bottom); just shrink it
+       and top-align it with the text. */
+    .project-body { gap: 1.25rem; align-items: flex-start; }
+    .project-body .project-image { flex: 0 0 34%; max-width: 34%; }
+    .project-section .project-title { font-size: 1.7rem; }
+    .project-section .project-desc { font-size: 1rem; }
+}
+
+@media screen and (max-width: 600px) {
+    /* Phone: a 34%-wide image is too cramped — stack it full width above the text. */
+    .project-body { flex-direction: column; align-items: stretch; gap: 1rem; }
+    .project-body .project-image { order: -1; flex: 0 0 auto; max-width: 100%; width: 100%; }
+}

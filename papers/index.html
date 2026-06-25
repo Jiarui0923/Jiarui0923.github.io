@@ -74,8 +74,11 @@
 
   
   
+  
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  
+  
   
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -104,6 +107,10 @@
             
             
             
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
             <a class="nav-item" href="/resume">Resume</a>
             
             
@@ -116,43 +123,136 @@
         </div>
     </div>
 </nav>
-        <div class="papers-index-container" style="max-width:900px;margin:6rem auto 2rem auto;padding:0 1rem;">
+        
+    <div class="container papers-index-container">
     <style>
-        .papers-index-container .pi-title { font-size: 2rem; margin: 0 0 0.25rem 0; font-weight: 700; }
-        .papers-index-container .pi-subtitle { font-size: 1.05rem; color: var(--black-4); margin: 0 0 1rem 0; }
+        /* Catalog reuses the theme's .container + .meta .title from the parent
+           templates (like search.ejs); only the catalog-specific bits are styled here. */
+        .papers-index-container .pi-subtitle { font-size: 19px; color: var(--black-4); margin: 0 0 1rem 0; }
         .papers-index-container .pi-breadcrumb { display: flex; gap: 0.3rem; font-size: 0.85rem; color: var(--black-4); margin-bottom: 1.5rem; }
         .papers-index-container .pi-breadcrumb a { color: var(--black-2); text-decoration: none; }
         .papers-index-container .pi-breadcrumb a:hover { color: var(--link); }
         .papers-index-container .pi-breadcrumb span { color: var(--black); font-weight: 600; }
-        .papers-index-container .pi-search { width: 100%; padding: 0.75rem 1rem; font-size: 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; box-sizing: border-box; background: var(--card-bg); color: var(--black); }
-        .papers-index-container .pi-search::placeholder { color: var(--black-4); }
-        .papers-index-container .pi-tag-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .papers-index-container .pi-tag-btn { padding: 0.4rem 0.9rem; border: 1px solid var(--border-color); border-radius: 2rem; cursor: pointer; font-size: 0.85rem; background: var(--card-bg); color: var(--black-2); transition: all 0.2s; }
-        .papers-index-container .pi-tag-btn:hover { background: var(--link); color: #fff; border-color: var(--link); }
+        .papers-index-container .pi-intro { margin-bottom: 1rem; font-size: 19px; line-height: 1.4211; }
+
+        /* Search box — mirrors #searchbox */
+        .papers-index-container .pi-search {
+            display: block;
+            outline: none;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: var(--white);
+            color: var(--black-2);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            font-size: 20px;
+            border-radius: 12px;
+        }
+        .papers-index-container .pi-search:hover,
+        .papers-index-container .pi-search:focus-visible { background-color: var(--white-1); color: var(--black); }
+        .papers-index-container .pi-search::placeholder { color: var(--grey); }
+
+        /* Tag filters — pill buttons mirroring .sort-btn */
+        .papers-index-container .pi-tag-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0 0; }
+        .papers-index-container .pi-tag-btn {
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            background: var(--card-bg);
+            color: var(--black-2);
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .papers-index-container .pi-tag-btn:hover { border-color: var(--link); color: var(--link); }
         .papers-index-container .pi-tag-btn.active { background: var(--link); color: #fff; border-color: var(--link); }
-        .papers-index-container .pi-list { list-style: none; padding: 0; }
-        .papers-index-container .pi-item { background: var(--card-bg); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); transition: box-shadow 0.2s; }
-        .papers-index-container .pi-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-        .papers-index-container .pi-item-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.3rem 0; }
+
+        /* Count toolbar — mirrors .search-toolbar / .search-count */
+        .papers-index-container .pi-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 2px 1.1rem; }
+        .papers-index-container .pi-result-count { font-size: 0.9rem; color: var(--black-4); }
+
+        .papers-index-container .pi-list { list-style: none; padding: 0; margin: 0 0 2rem; }
+
+        /* Glass cards — mirror .sr-card */
+        .papers-index-container .pi-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.1rem 1.3rem;
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+        .papers-index-container .pi-item:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); }
+        @media (prefers-color-scheme: dark) {
+            body[data-color-scheme="auto"] .papers-index-container .pi-item { background: rgba(255, 255, 255, 0.06); }
+        }
+        body[data-color-scheme="dark"] .papers-index-container .pi-item { background: rgba(255, 255, 255, 0.06); }
+
+        .papers-index-container .pi-icon {
+            flex: 0 0 2.6rem;
+            width: 2.6rem;
+            height: 2.6rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.8rem;
+            background: var(--white-2);
+            color: var(--link);
+            font-size: 1.1rem;
+        }
+        .papers-index-container .pi-body { flex: 1 1 auto; min-width: 0; }
+        .papers-index-container .pi-head { display: flex; align-items: baseline; gap: 1rem; }
+        .papers-index-container .pi-item-title { flex: 1 1 auto; min-width: 0; font-size: 1.1rem; font-weight: 600; color: var(--card-title); overflow-wrap: break-word; }
         .papers-index-container .pi-item-title a { color: var(--card-title); text-decoration: none; }
         .papers-index-container .pi-item-title a:hover { color: var(--link); }
-        .papers-index-container .pi-item-venue { font-size: 0.9rem; color: var(--black-4); margin-bottom: 0.3rem; }
-        .papers-index-container .pi-item-date { font-size: 0.85rem; color: var(--card-time); margin-bottom: 0.5rem; }
-        .papers-index-container .pi-item-authors { font-size: 0.9rem; color: var(--black-2); margin-bottom: 0.5rem; }
-        .papers-index-container .pi-item-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .papers-index-container .pi-item-link { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.7rem; border-radius: 1rem; font-size: 0.8rem; text-decoration: none; background: var(--white-2); color: var(--black-2); transition: all 0.2s; }
+        .papers-index-container .pi-item-date { flex: 0 0 auto; margin-left: auto; font-size: 0.82rem; color: var(--card-time); white-space: nowrap; }
+        .papers-index-container .pi-item-venue { margin-top: 0.35rem; font-size: 0.92rem; color: var(--black-4); overflow-wrap: break-word; }
+        .papers-index-container .pi-item-authors { margin-top: 0.25rem; font-size: 0.9rem; color: var(--black-2); overflow-wrap: break-word; }
+        .papers-index-container .pi-item-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+        .papers-index-container .pi-item-link {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 0.3rem 0.7rem; border-radius: 1rem; font-size: 0.8rem;
+            text-decoration: none; background: var(--white-2); color: var(--black-2);
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
         .papers-index-container .pi-item-link:hover { background: var(--link); color: #fff; }
         .papers-index-container .pi-item-link i { font-size: 0.85rem; }
-        .papers-index-container .pi-pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 2rem; }
-        .papers-index-container .pi-page-btn { padding: 0.5rem 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem; cursor: pointer; background: var(--card-bg); color: var(--black-2); font-size: 0.9rem; transition: all 0.2s; }
+        .papers-index-container .pi-item-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+        .papers-index-container .pi-tag {
+            font-size: 0.78rem; padding: 0.15rem 0.6rem; border-radius: 1rem;
+            background: var(--white-2); color: var(--black-4); cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        .papers-index-container .pi-tag:hover { background: var(--link); color: #fff; }
+
+        .papers-index-container .pi-no-results { text-align: center; padding: 3rem 0; color: var(--grey); }
+
+        /* Pagination — mirror .search-pagination / .sr-page-btn */
+        .papers-index-container .pi-pagination { display: flex; justify-content: center; align-items: center; gap: 0.6rem; margin: 1.5rem 0 6rem; }
+        .papers-index-container .pi-page-btn {
+            padding: 0.5rem 1rem; border: 1px solid var(--border-color); border-radius: 0.6rem;
+            background: var(--card-bg); color: var(--black-2); font-size: 0.9rem; cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
         .papers-index-container .pi-page-btn:hover:not(:disabled) { background: var(--link); color: #fff; border-color: var(--link); }
         .papers-index-container .pi-page-btn:disabled { opacity: 0.4; cursor: default; }
         .papers-index-container .pi-page-info { font-size: 0.9rem; color: var(--black-4); }
-        .papers-index-container .pi-no-results { text-align: center; padding: 3rem; color: var(--black-4); }
-        .papers-index-container .pi-result-count { font-size: 0.85rem; color: var(--black-4); margin-bottom: 0.5rem; }
+
+        @media screen and (max-width: 600px) {
+            .papers-index-container .pi-head { flex-wrap: wrap; gap: 0.2rem; }
+            .papers-index-container .pi-item-date { margin-left: 0; }
+        }
     </style>
-    
-    <h1 class="pi-title">Publications</h1>
+
+    <div class="meta">
+        <h2 class="title">Publications</h2>
+    </div>
     
     
     <div class="pi-breadcrumb">
@@ -167,7 +267,7 @@
         
     </div>
     
-    <div class="content" style="margin-left:-4rem;">
+    <div class="pi-intro">
         <p>
 <a href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
 &nbsp;&nbsp;
@@ -182,7 +282,9 @@
     </div>
     <input type="text" class="pi-search" id="pi-searchbox" placeholder="Search papers by title, author, venue, or keyword...">
     <div class="pi-tag-filters" id="pi-tag-filters"></div>
-    <div class="pi-result-count" id="pi-result-count"></div>
+    <div class="pi-toolbar">
+        <div class="pi-result-count" id="pi-result-count"></div>
+    </div>
     <ul class="pi-list" id="pi-paper-list"></ul>
     <div class="pi-no-results" id="pi-no-results" style="display:none;">No papers match your search.</div>
     <div class="pi-pagination" id="pi-pagination"></div>
@@ -190,10 +292,15 @@
 
 <script>
 (function() {
-    var papers = [{"tags":["XAI","Computer Vision","Explainability","Machine Learning"],"paper":{"title":"Why Does It Look There? Structured Explanations for Image Classification","publication":"arXiv Preprint","date":{"month":"March","year":2026},"abbr":"arXiv"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Samuel J. Landry"},{"name":"Zhengming Ding"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"arXiv","link":"https://arxiv.org/abs/2603.10234","icon":"ai ai-arxiv"}]},{"slug":"ICLR2026QCAI","tags":["XAI","Immunology","TCR-pMHC","Post-hoc","Computational Biology","Machine Learning"],"paper":{"title":"Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding","publication":"The Fourteenth International Conference on Learning Representations","date":{"month":"April","year":2026},"abbr":"ICLR"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Haley Smith"},{"name":"Zhengming Ding"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://openreview.net/forum?id=S3kSOFhs5m","icon":"fa-regular fa-file"},{"name":"arXiv","link":"https://arxiv.org/abs/2507.03197","icon":"ai ai-arxiv"},{"name":"GitHub","link":"https://github.com/Jiarui0923/QCAI","icon":"fa-brands fa-github"}]},{"slug":"LMRL2026TCREML","tags":["XAI","Immunology","TCR-pMHC","Prototype Learning","Ante-hoc","Computational Biology","Machine Learning"],"paper":{"title":"TCR-EML: Explainable Model Layers for TCR-pMHC Prediction","publication":"Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026","date":{"month":"April","year":2026},"abbr":"LMRL"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Zhengming Ding"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://openreview.net/forum?id=lBS6Kg648t","icon":"fa-regular fa-file"},{"name":"arXiv","link":"https://arxiv.org/abs/2510.04377","icon":"ai ai-arxiv"},{"name":"GitHub","link":"https://github.com/Tulane-Mettu-Landry-Lab/tcr-eml","icon":"fa-brands fa-github"},{"name":"HuggingFace","link":"https://huggingface.co/jli78/TCR-EML/","icon":"fa-brands fa-hugging-face"}]},{"slug":"BCB2025EGM","tags":["XAI","Immunology","TCR-pMHC","Post-hoc","Computational Biology","Machine Learning"],"paper":{"title":"Rational Multi-Modal Transformers for TCR-pMHC Prediction","publication":"The ACM Conference on Bioinformatics, Computational Biology, and Health Informatics","date":{"month":"December","year":2025},"abbr":"ACM BCB"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Zhengming Ding"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://dl.acm.org/doi/10.1145/3765612.3767194","icon":"ai ai-acm"},{"name":"PubMed","link":"https://pmc.ncbi.nlm.nih.gov/articles/PMC12486057/","icon":"ai ai-pubmed"},{"name":"GitHub","link":"https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational","icon":"fa-brands fa-github"},{"name":"HuggingFace","link":"https://huggingface.co/jli78/EGM/","icon":"fa-brands fa-hugging-face"},{"name":"arXiv","link":"https://arxiv.org/abs/2509.17305","icon":"ai ai-arxiv"}]},{"tags":["Immunology","Antigen Processing","Computational Biology"],"paper":{"title":"APLSuite: An Integrated Suite for CD4+ T Cell Epitope Prediction via Antigen Processing Likelihood","publication":"Technical Report (Application)","date":{"month":"June","year":2026},"abbr":"Tech. Rep."},"authors":[{"name":"Jiarui Li"},{"name":"Marco K Carbullido"},{"name":"Jai Bansal"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://tulane-mettu-landry-lab.github.io/blogs/APLSuite/","icon":"fa-solid fa-circle-nodes"},{"name":"GitHub","link":"https://github.com/Jiarui0923/APL","icon":"fa-brands fa-github"},{"name":"arXiv","link":"https://arxiv.org/abs/2606.02462","icon":"ai ai-arxiv"}]},{"paper":{"title":"iMIND: Insightful Multi-subject Invariant Neural Decoding","publication":"The Thirty-Ninth Annual Conference on Neural Information Processing Systems","date":{"month":"November","year":2025},"abbr":"NeurIPS"},"tags":["NeuroScience","Machine Learning","Computational Biology"],"authors":[{"name":"Zixiang Yin"},{"name":"Jiarui Li"},{"name":"Zhengming Ding"}],"links":[{"name":"Project","link":"https://zachyin.com/imind/","icon":"fa-solid fa-circle-nodes"},{"name":"Paper","link":"https://proceedings.neurips.cc/paper_files/paper/2025/hash/daa098aa8e1fc718943ff1ab7b5b30c9-Abstract-Conference.html","icon":"fa-regular fa-file"},{"name":"arXiv","link":"https://arxiv.org/abs/2509.17313","icon":"ai ai-arxiv"},{"name":"GitHub","link":"https://github.com/gbZachYin/imind","icon":"fa-brands fa-github"}]},{"slug":"AIMLSYS2024GPUMCMC","tags":["Immunology","Antigen Processing","Algorithm Acceleration","Computational Biology"],"paper":{"title":"GPU Acceleration for Markov Chain Monte Carlo Sampling","publication":"Proceedings of the 4th International Conference on AI-ML Systems","date":{"month":"October","year":2024},"abbr":"AIMLSys"},"authors":[{"name":"Jiarui Li"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://dl.acm.org/doi/abs/10.1145/3703412.3703428","icon":"ai ai-acm"}]},{"slug":"BIBM2024GPUCOREX","tags":["Immunology","Antigen Processing","Algorithm Acceleration","Computational Biology"],"paper":{"title":"GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction","publication":"International Conference on Bioinformatics and Biomedicine","date":{"month":"December","year":2024},"abbr":"BIBM"},"authors":[{"name":"Jiarui Li"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://ieeexplore.ieee.org/abstract/document/10821831","icon":"ai ai-ieee"},{"name":"GitHub","link":"https://github.com/Jiarui0923/gpuCOREX","icon":"fa-brands fa-github"}]},{"paper":{"title":"311 Predicting risk for kidney transplant outcomes by modeling antigen processing and presentation by HLA to T-cells","publication":"Journal of Clinical and Translational Science","date":{"month":"April","year":2026},"abbr":"J. Clin. Transl. Sci."},"tags":["Computational Biology","Immunology"],"authors":[{"name":"Alyssa Paynter"},{"name":"Jiarui Li"},{"name":"Ramgopal Mettu"},{"name":"Samuel Landry"},{"name":"Loren Gragert"}],"links":[{"name":"Paper","link":"https://www.cambridge.org/core/journals/journal-of-clinical-and-translational-science/article/311-predicting-risk-for-kidney-transplant-outcomes-by-modeling-antigen-processing-and-presentation-by-hla-to-tcells/9AE12DEB4DC055408ED4127E07525206","icon":"fa-solid fa-paperclip"}]},{"paper":{"title":"370 Improving risk stratification in kidney transplant outcomes by modeling antigen processing to inform prediction of T-cell epitopes derived from mismatched HLA proteins","publication":"Journal of Clinical and Translational Science","date":{"month":"April","year":2025},"abbr":"J. Clin. Transl. Sci."},"tags":["Computational Biology","Immunology"],"authors":[{"name":"Alyssa Paynter"},{"name":"Jiarui Li"},{"name":"Marco Carbullido"},{"name":"Ramgopal Mettu"},{"name":"Samuel Landry"},{"name":"Loren Gragert"}],"links":[{"name":"Paper","link":"https://www.cambridge.org/core/journals/journal-of-clinical-and-translational-science/article/370-improving-risk-stratification-in-kidney-transplant-outcomes-by-modeling-antigen-processing-to-inform-prediction-of-tcell-epitopes-derived-from-mismatched-hla-proteins/5AD1FFEEDB98F5AA21F625A5F6273430","icon":"fa-solid fa-paperclip"}]},{"paper":{"title":"Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics","publication":"IEEE Symposium Series on Computational Intelligence","date":{"month":"December","year":2023},"abbr":"SSCI"},"tags":["Machine Learning"],"authors":[{"name":"Jiarui Li"},{"name":"Ran Ji"},{"name":"Cheng'ao Li"},{"name":"Xiaoying Yang"},{"name":"Jiayi Li"},{"name":"Yiran Li"},{"name":"Xihan Xiong"},{"name":"Yutong Fang"},{"name":"Shusheng Ding"},{"name":"Tianxiang Cui"}],"links":[{"name":"Paper","link":"https://ieeexplore.ieee.org/abstract/document/10371912/","icon":"ai ai-ieee"}]},{"paper":{"title":"Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification","publication":"IEEE International Conference on Acoustics, Speech and Signal Processing","date":{"month":"June","year":2023},"abbr":"ICASSP"},"tags":["Machine Learning"],"authors":[{"name":"Ran Ji"},{"name":"Jiarui Li"},{"name":"Wentao He"},{"name":"Jianfeng Ren"},{"name":"Xudong Jiang"}],"links":[{"name":"Paper","link":"https://ieeexplore.ieee.org/abstract/document/10095141/","icon":"ai ai-ieee"}]}];
+    var papers = [{"ref":"WhyLookThere","tags":["XAI","Computer Vision","Explainability","Machine Learning"],"paper":{"title":"Why Does It Look There? Structured Explanations for Image Classification","publication":"arXiv Preprint","date":{"month":"March","year":2026},"abbr":"arXiv"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Samuel J. Landry"},{"name":"Zhengming Ding"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"arXiv","link":"https://arxiv.org/abs/2603.10234","icon":"ai ai-arxiv"}]},{"slug":"ICLR2026QCAI","tags":["XAI","Immunology","TCR-pMHC","Post-hoc","Computational Biology","Machine Learning"],"paper":{"title":"Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding","publication":"The Fourteenth International Conference on Learning Representations","date":{"month":"April","year":2026},"abbr":"ICLR"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Haley Smith"},{"name":"Zhengming Ding"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://openreview.net/forum?id=S3kSOFhs5m","icon":"fa-regular fa-file"},{"name":"arXiv","link":"https://arxiv.org/abs/2507.03197","icon":"ai ai-arxiv"},{"name":"GitHub","link":"https://github.com/Jiarui0923/QCAI","icon":"fa-brands fa-github"}]},{"slug":"LMRL2026TCREML","tags":["XAI","Immunology","TCR-pMHC","Prototype Learning","Ante-hoc","Computational Biology","Machine Learning"],"paper":{"title":"TCR-EML: Explainable Model Layers for TCR-pMHC Prediction","publication":"Learning Meaningful Representations of Life (LMRL) Workshop at ICLR 2026","date":{"month":"April","year":2026},"abbr":"LMRL"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Zhengming Ding"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://openreview.net/forum?id=lBS6Kg648t","icon":"fa-regular fa-file"},{"name":"arXiv","link":"https://arxiv.org/abs/2510.04377","icon":"ai ai-arxiv"},{"name":"GitHub","link":"https://github.com/Tulane-Mettu-Landry-Lab/tcr-eml","icon":"fa-brands fa-github"},{"name":"HuggingFace","link":"https://huggingface.co/jli78/TCR-EML/","icon":"fa-brands fa-hugging-face"}]},{"slug":"BCB2025EGM","tags":["XAI","Immunology","TCR-pMHC","Post-hoc","Computational Biology","Machine Learning"],"paper":{"title":"Rational Multi-Modal Transformers for TCR-pMHC Prediction","publication":"The ACM Conference on Bioinformatics, Computational Biology, and Health Informatics","date":{"month":"December","year":2025},"abbr":"ACM BCB"},"authors":[{"name":"Jiarui Li"},{"name":"Zixiang Yin"},{"name":"Zhengming Ding"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://dl.acm.org/doi/10.1145/3765612.3767194","icon":"ai ai-acm"},{"name":"PubMed","link":"https://pmc.ncbi.nlm.nih.gov/articles/PMC12486057/","icon":"ai ai-pubmed"},{"name":"GitHub","link":"https://github.com/Tulane-Mettu-Landry-Lab/tcr-rational","icon":"fa-brands fa-github"},{"name":"HuggingFace","link":"https://huggingface.co/jli78/EGM/","icon":"fa-brands fa-hugging-face"},{"name":"arXiv","link":"https://arxiv.org/abs/2509.17305","icon":"ai ai-arxiv"}]},{"ref":"APLSuite","tags":["Immunology","Antigen Processing","Computational Biology"],"paper":{"title":"APLSuite: An Integrated Suite for CD4+ T Cell Epitope Prediction via Antigen Processing Likelihood","publication":"Technical Report (Application)","date":{"month":"June","year":2026},"abbr":"Tech. Rep."},"authors":[{"name":"Jiarui Li"},{"name":"Marco K Carbullido"},{"name":"Jai Bansal"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://tulane-mettu-landry-lab.github.io/blogs/APLSuite/","icon":"fa-solid fa-circle-nodes"},{"name":"GitHub","link":"https://github.com/Jiarui0923/APL","icon":"fa-brands fa-github"},{"name":"arXiv","link":"https://arxiv.org/abs/2606.02462","icon":"ai ai-arxiv"}]},{"paper":{"title":"iMIND: Insightful Multi-subject Invariant Neural Decoding","publication":"The Thirty-Ninth Annual Conference on Neural Information Processing Systems","date":{"month":"November","year":2025},"abbr":"NeurIPS"},"tags":["NeuroScience","Machine Learning","Computational Biology"],"authors":[{"name":"Zixiang Yin"},{"name":"Jiarui Li"},{"name":"Zhengming Ding"}],"links":[{"name":"Project","link":"https://zachyin.com/imind/","icon":"fa-solid fa-circle-nodes"},{"name":"Paper","link":"https://proceedings.neurips.cc/paper_files/paper/2025/hash/daa098aa8e1fc718943ff1ab7b5b30c9-Abstract-Conference.html","icon":"fa-regular fa-file"},{"name":"arXiv","link":"https://arxiv.org/abs/2509.17313","icon":"ai ai-arxiv"},{"name":"GitHub","link":"https://github.com/gbZachYin/imind","icon":"fa-brands fa-github"}]},{"slug":"AIMLSYS2024GPUMCMC","tags":["Immunology","Antigen Processing","Algorithm Acceleration","Computational Biology"],"paper":{"title":"GPU Acceleration for Markov Chain Monte Carlo Sampling","publication":"Proceedings of the 4th International Conference on AI-ML Systems","date":{"month":"October","year":2024},"abbr":"AIMLSys"},"authors":[{"name":"Jiarui Li"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://dl.acm.org/doi/abs/10.1145/3703412.3703428","icon":"ai ai-acm"}]},{"slug":"BIBM2024GPUCOREX","tags":["Immunology","Antigen Processing","Algorithm Acceleration","Computational Biology"],"paper":{"title":"GPU Acceleration of Conformational Stability Computation for CD4+ T-cell Epitope Prediction","publication":"International Conference on Bioinformatics and Biomedicine","date":{"month":"December","year":2024},"abbr":"BIBM"},"authors":[{"name":"Jiarui Li"},{"name":"Samuel J. Landry"},{"name":"Ramgopal R. Mettu"}],"links":[{"name":"Paper","link":"https://ieeexplore.ieee.org/abstract/document/10821831","icon":"ai ai-ieee"},{"name":"GitHub","link":"https://github.com/Jiarui0923/gpuCOREX","icon":"fa-brands fa-github"}]},{"paper":{"title":"311 Predicting risk for kidney transplant outcomes by modeling antigen processing and presentation by HLA to T-cells","publication":"Journal of Clinical and Translational Science","date":{"month":"April","year":2026},"abbr":"J. Clin. Transl. Sci."},"tags":["Computational Biology","Immunology"],"authors":[{"name":"Alyssa Paynter"},{"name":"Jiarui Li"},{"name":"Ramgopal Mettu"},{"name":"Samuel Landry"},{"name":"Loren Gragert"}],"links":[{"name":"Paper","link":"https://www.cambridge.org/core/journals/journal-of-clinical-and-translational-science/article/311-predicting-risk-for-kidney-transplant-outcomes-by-modeling-antigen-processing-and-presentation-by-hla-to-tcells/9AE12DEB4DC055408ED4127E07525206","icon":"fa-solid fa-paperclip"}]},{"paper":{"title":"370 Improving risk stratification in kidney transplant outcomes by modeling antigen processing to inform prediction of T-cell epitopes derived from mismatched HLA proteins","publication":"Journal of Clinical and Translational Science","date":{"month":"April","year":2025},"abbr":"J. Clin. Transl. Sci."},"tags":["Computational Biology","Immunology"],"authors":[{"name":"Alyssa Paynter"},{"name":"Jiarui Li"},{"name":"Marco Carbullido"},{"name":"Ramgopal Mettu"},{"name":"Samuel Landry"},{"name":"Loren Gragert"}],"links":[{"name":"Paper","link":"https://www.cambridge.org/core/journals/journal-of-clinical-and-translational-science/article/370-improving-risk-stratification-in-kidney-transplant-outcomes-by-modeling-antigen-processing-to-inform-prediction-of-tcell-epitopes-derived-from-mismatched-hla-proteins/5AD1FFEEDB98F5AA21F625A5F6273430","icon":"fa-solid fa-paperclip"}]},{"paper":{"title":"Prediction of Flight Arrival Delay Time Using US Bureau of Transportation Statistics","publication":"IEEE Symposium Series on Computational Intelligence","date":{"month":"December","year":2023},"abbr":"SSCI"},"tags":["Machine Learning"],"authors":[{"name":"Jiarui Li"},{"name":"Ran Ji"},{"name":"Cheng'ao Li"},{"name":"Xiaoying Yang"},{"name":"Jiayi Li"},{"name":"Yiran Li"},{"name":"Xihan Xiong"},{"name":"Yutong Fang"},{"name":"Shusheng Ding"},{"name":"Tianxiang Cui"}],"links":[{"name":"Paper","link":"https://ieeexplore.ieee.org/abstract/document/10371912/","icon":"ai ai-ieee"}]},{"paper":{"title":"Dual-Stream Siamese Vision Transformer With Mutual Attention For Radar Gait Verification","publication":"IEEE International Conference on Acoustics, Speech and Signal Processing","date":{"month":"June","year":2023},"abbr":"ICASSP"},"tags":["Machine Learning"],"authors":[{"name":"Ran Ji"},{"name":"Jiarui Li"},{"name":"Wentao He"},{"name":"Jianfeng Ren"},{"name":"Xudong Jiang"}],"links":[{"name":"Paper","link":"https://ieeexplore.ieee.org/abstract/document/10095141/","icon":"ai ai-ieee"}]}];
     var perPage = 10;
     var currentTag = 'all';
     var currentPage = 1;
+
+    function escapeHtml(s) {
+        return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
 
     function getTags() {
         var tags = new Set();
@@ -208,6 +315,7 @@
             if (query) {
                 var txt = (p.paper.title + ' ' + p.paper.publication + ' ' + p.paper.abbr + ' ' +
                     p.authors.map(function(a){ return a.name; }).join(' ') + ' ' +
+                    (p.tags ? p.tags.join(' ') : '') + ' ' +
                     (p.links ? p.links.map(function(l){ return l.name; }).join(' ') : '')).toLowerCase();
                 return txt.indexOf(query) !== -1;
             }
@@ -215,19 +323,24 @@
         });
     }
 
+    function setTag(tag) {
+        currentTag = tag;
+        currentPage = 1;
+        document.querySelectorAll('#pi-tag-filters .pi-tag-btn').forEach(function(b) {
+            b.classList.toggle('active', b.dataset.tag === tag);
+        });
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function renderTags() {
         var tags = getTags();
         var container = document.getElementById('pi-tag-filters');
         var html = '<button class="pi-tag-btn active" data-tag="all">All</button>';
-        tags.forEach(function(t) { html += '<button class="pi-tag-btn" data-tag="' + t + '">' + t + '</button>'; });
+        tags.forEach(function(t) { html += '<button class="pi-tag-btn" data-tag="' + escapeHtml(t) + '">' + escapeHtml(t) + '</button>'; });
         container.innerHTML = html;
         container.addEventListener('click', function(e) {
-            if (e.target.classList.contains('pi-tag-btn')) {
-                currentTag = e.target.dataset.tag; currentPage = 1;
-                container.querySelectorAll('.pi-tag-btn').forEach(function(b) { b.classList.remove('active'); });
-                e.target.classList.add('active');
-                render();
-            }
+            if (e.target.classList.contains('pi-tag-btn')) setTag(e.target.dataset.tag);
         });
     }
 
@@ -245,22 +358,36 @@
             listEl.innerHTML = ''; noRes.style.display = 'block';
         } else {
             noRes.style.display = 'none';
-            listEl.innerHTML = pageItems.map(function(p, idx) {
+            listEl.innerHTML = pageItems.map(function(p) {
                 var pp = p.paper;
-                var authors = (p.authors || []).map(function(a) { return a.name; }).join(', ');
+                var authors = (p.authors || []).map(function(a) { return escapeHtml(a.name); }).join(', ');
                 var linksHtml = '';
                 if (p.links && p.links.length > 0) {
                     linksHtml = '<div class="pi-item-links">' + p.links.map(function(l) {
-                        return '<a class="pi-item-link" href="' + l.link + '"><i class="' + l.icon + '"></i>' + l.name + '</a>';
+                        return '<a class="pi-item-link" href="' + escapeHtml(l.link) + '"><i class="' + escapeHtml(l.icon) + '"></i>' + escapeHtml(l.name) + '</a>';
+                    }).join('') + '</div>';
+                }
+                var tagsHtml = '';
+                if (p.tags && p.tags.length > 0) {
+                    tagsHtml = '<div class="pi-item-tags">' + p.tags.map(function(t) {
+                        return '<span class="pi-tag" data-tag="' + escapeHtml(t) + '">#' + escapeHtml(t) + '</span>';
                     }).join('') + '</div>';
                 }
                 var paperUrl = p.slug ? ('./' + p.slug + '/') : '';
-                var titleHtml = paperUrl ? '<a href="' + paperUrl + '">' + pp.title + '</a>' : '<span>' + pp.title + '</span>';
+                var titleInner = escapeHtml(pp.title);
+                var titleHtml = paperUrl ? '<a href="' + escapeHtml(paperUrl) + '">' + titleInner + '</a>' : titleInner;
                 return '<li class="pi-item">' +
-                    '<p class="pi-item-title">' + titleHtml + '</p>' +
-                    '<p class="pi-item-venue"><strong style="color:#555;">(' + pp.abbr + ' ' + pp.date.year + ')</strong> ' + pp.publication + '</p>' +
-                    '<p class="pi-item-date">' + pp.date.month + ' ' + pp.date.year + '</p>' +
-                    '<p class="pi-item-authors">' + authors + '</p>' + linksHtml + '</li>';
+                    '<div class="pi-icon"><i class="fa-solid fa-file-lines"></i></div>' +
+                    '<div class="pi-body">' +
+                        '<div class="pi-head">' +
+                            '<div class="pi-item-title">' + titleHtml + '</div>' +
+                            '<div class="pi-item-date">' + escapeHtml(pp.date.month + ' ' + pp.date.year) + '</div>' +
+                        '</div>' +
+                        '<div class="pi-item-venue"><strong>(' + escapeHtml(pp.abbr + ' ' + pp.date.year) + ')</strong> ' + escapeHtml(pp.publication) + '</div>' +
+                        '<div class="pi-item-authors">' + authors + '</div>' +
+                        linksHtml + tagsHtml +
+                    '</div>' +
+                '</li>';
             }).join('');
         }
         var pagEl = document.getElementById('pi-pagination');
@@ -270,15 +397,22 @@
         pag += '<button class="pi-page-btn" ' + (currentPage === totalPages ? 'disabled' : '') + ' data-page="' + (currentPage + 1) + '">Next &raquo;</button>';
         pagEl.innerHTML = pag;
         pagEl.querySelectorAll('.pi-page-btn').forEach(function(btn) {
-            btn.addEventListener('click', function() { if (!this.disabled) { currentPage = parseInt(this.dataset.page); render(); window.scrollTo(0, 0); } });
+            btn.addEventListener('click', function() { if (!this.disabled) { currentPage = parseInt(this.dataset.page); render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } });
         });
     }
+
+    // Clicking a tag pill on a card filters by that tag.
+    document.getElementById('pi-paper-list').addEventListener('click', function(e) {
+        if (e.target.classList.contains('pi-tag')) setTag(e.target.dataset.tag);
+    });
 
     document.getElementById('pi-searchbox').addEventListener('input', function() { currentPage = 1; render(); });
     renderTags();
     render();
 })();
 </script>
+
+
         <footer>
     <div class="inner">
         <div class="links">
