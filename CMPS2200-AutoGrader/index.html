@@ -139,7 +139,120 @@
     <div class="divider"></div>
 
     <div class="content">
-        <p>AutoGrader for CMPS2200 Introduction to Algorithm.<br>Link: <a href="/CMPS2200-AutoGrader/grader.html">/CMPS2200-AutoGrader/grader.html</a></p>
+        <p>This is an <strong>autograder for <code>CMPS2200: Introduction to Algorithms</code></strong>.</p>
+<p>It is a <strong>single-file, server-free autograder</strong> designed for CMPS2200 lab repositories.<br>The autograder is <strong>configuration-free</strong> but can be customized for special requirements. It uses <a target="_blank" rel="noopener" href="https://pyscript.net/"><code>PyScript</code></a>, which allows Python code to run <strong>directly in the browser</strong> using <code>Pyodide</code> (Python compiled to WebAssembly).<br>This makes it possible to deploy the autograder as a <strong>single HTML page</strong>, running the repository code entirely within the user’s browser, <strong>no backend or server required</strong>.</p>
+<p>The autograder is also available online and can be accessed directly at:<br>👉 <a target="_blank" rel="noopener" href="https://www.jiarui-li.com/CMPS2200-AutoGrader/grader.html">CMPS2200 Autograder</a></p>
+<p><img src="images/screenshot.png"></p>
+<h2 id="Usage-Guidelines-for-Students"><a href="#Usage-Guidelines-for-Students" class="headerlink" title="Usage Guidelines for Students"></a>Usage Guidelines for Students</h2><p>This section introduces the <strong>main functions</strong>, <strong>issue reporting</strong>, and <strong>extended functions</strong> of the autograder.<br>Completing the first section is enough to start using the autograder.  </p>
+<p>If you encounter an error, please check the <a href="#common-issues">Common Issues</a> section first.<br>If the issue is not resolved, follow the <strong>Issue Reporting</strong> instructions.</p>
+<h3 id="How-to-Test-Your-Code"><a href="#How-to-Test-Your-Code" class="headerlink" title="How to Test Your Code"></a>How to Test Your Code</h3><ol>
+<li>Go to your repository page and copy the repository link or clone link.  <ul>
+<li>Repository link format:<br><code>https://github.com/&#123;account_name&#125;/&#123;repository_name&#125;/(tree/main/)</code>  </li>
+<li>Git clone link format:<br><code>https://github.com/&#123;account_name&#125;/&#123;repository_name&#125;.git</code>  </li>
+<li><strong>Make sure your repository is public.</strong></li>
+</ul>
+</li>
+<li>Paste the link in the autograder, then click <strong>Submit</strong> or press <strong>Enter</strong>.</li>
+<li>Wait a few seconds — the <strong>Test Points</strong> panel will display:<ul>
+<li>Passed tests  </li>
+<li>Failed tests  </li>
+<li>Execution time  </li>
+</ul>
+</li>
+</ol>
+<p>⚠️ <strong>Important:</strong> The autograder runs <strong>entirely in your own browser</strong>.<br>Your tests and submissions are <strong>not visible</strong> to your professor or TA.</p>
+<h3 id="How-to-Identify-and-Report-an-Issue"><a href="#How-to-Identify-and-Report-an-Issue" class="headerlink" title="How to Identify and Report an Issue"></a>How to Identify and Report an Issue</h3><p>If an error occurs:</p>
+<ol>
+<li>Open the <strong>Terminal</strong> tab and check the error message.  </li>
+<li>Look for possible solutions in the <a href="#common-issues">Common Issues</a> section.  </li>
+<li>If the issue persists, report it by following these steps:  <ul>
+<li>Go to the <strong>Config</strong> tab and copy all configuration information into your email.  </li>
+<li>Go to the <strong>Terminal</strong> tab and copy the <strong>error message only</strong> into your email.  </li>
+<li>Include a <strong>short description</strong> of the issue along with the copied information.</li>
+</ul>
+</li>
+</ol>
+<h3 id="Extended-Functions"><a href="#Extended-Functions" class="headerlink" title="Extended Functions"></a>Extended Functions</h3><h4 id="History"><a href="#History" class="headerlink" title="History"></a>History</h4><ul>
+<li>The <strong>History</strong> panel shows all your past evaluation records.  </li>
+<li>Records are stored <strong>locally</strong> in your browser.  </li>
+<li>Records will be lost if you switch browsers, change computers, or clear browser data.  </li>
+<li>You can manually remove all records by clicking <strong>Clear</strong>.</li>
+</ul>
+<h4 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h4><ul>
+<li>The autograder supports both <strong>light</strong> and <strong>dark</strong> themes.  </li>
+<li>By default, the theme is set to <strong>Auto</strong>, following your system preference.  </li>
+<li>You can manually switch themes using the <strong>theme toggle button</strong> in the navigation bar, next to <em>Introduction to Algorithms</em>.</li>
+</ul>
+<h2 id="Common-Issues"><a href="#Common-Issues" class="headerlink" title="Common Issues"></a>Common Issues</h2><h3 id="File-Not-Found"><a href="#File-Not-Found" class="headerlink" title="File Not Found"></a>File Not Found</h3><p>This error may occur for the following reasons:</p>
+<ol>
+<li>Your repository is <strong>private</strong> — please make it <strong>public</strong>.  </li>
+<li>The repository link is <strong>incorrect</strong> — double-check the URL.  </li>
+<li>Required files are missing — your repository must contain at least:  <ul>
+<li><code>main.py</code>  </li>
+<li><code>test_main.py</code>  </li>
+</ul>
+</li>
+<li>Files are inside an extra folder — make sure they are located in the <strong>root directory</strong> of your repository. </li>
+</ol>
+<h3 id="Package-Missing"><a href="#Package-Missing" class="headerlink" title="Package Missing"></a>Package Missing</h3><p>If you see errors related to missing packages:</p>
+<ul>
+<li>Ensure that a <code>requirements.txt</code> file is included in your forked or copied repository.</li>
+</ul>
+<h2 id="Customize-Configuration"><a href="#Customize-Configuration" class="headerlink" title="Customize Configuration"></a>Customize Configuration</h2><p>This section is intended for <strong>course tutors</strong> who want to customize the autograder.  </p>
+<p>By default, the autograder works as a standalone HTML file (<code>grader.html</code>).<br>For customization, a <code>config.js</code> file can be provided in the same path.<br>If <code>config.js</code> is not found, the autograder falls back to its default configuration.  </p>
+<h3 id="Configure-Autograder"><a href="#Configure-Autograder" class="headerlink" title="Configure Autograder"></a>Configure Autograder</h3><p>The config file consists of three parts:</p>
+<ul>
+<li><strong><code>test_file</code></strong> — the test file for PyTest  </li>
+<li><strong><code>files</code></strong> — the list of files imported by the test file  </li>
+<li><strong><code>python_packages</code></strong> — the required Python packages  </li>
+</ul>
+<h4 id="Test-File"><a href="#Test-File" class="headerlink" title="Test File"></a>Test File</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> test_file = <span class="string">&quot;test_main.py&quot;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>This is the main entry point for PyTest.</li>
+<li>By default, it is <code>test_main.py</code>.</li>
+<li>You can change it if your test file has a different name.</li>
+</ul>
+<p>The autograder will automatically scan all functions in this file and execute them, equivalent to:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pytest &#123;test_file&#125;::&#123;<span class="keyword">function</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Files"><a href="#Files" class="headerlink" title="Files"></a>Files</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> files = [</span><br><span class="line">    <span class="string">&quot;main.py&quot;</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>This is the list of files imported by <code>test_main.py</code>.</li>
+<li>By default, it includes only <code>main.py</code>.</li>
+<li>Make sure to list all files explicitly — including submodules.<ul>
+<li>✅ Example: include <code>utils/file.py</code></li>
+<li>❌ Do not just include <code>utils/</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> python_packages = [</span><br><span class="line">    <span class="string">&quot;pytest&quot;</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>If the repository contains a <code>requirements.txt</code>, this parameter is ignored.</li>
+<li>The autograder will automatically install dependencies from <code>requirements.txt</code>.</li>
+<li>If <code>requirements.txt</code> is missing, configure the required packages here.<br>  You can specify packages by name, version, or repository path:  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> python_packages = [</span><br><span class="line">    <span class="string">&quot;pytest&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&#123;package&#125;==&#123;version&#125;&quot;</span>, <span class="comment">// with version</span></span><br><span class="line">    <span class="string">&quot;&#123;package&#125;@&#123;repository path&#125;&quot;</span>, <span class="comment">// with repository link</span></span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+⚠️ Do not remove <code>pytest</code> from this list — it is required.</li>
+</ul>
+<h3 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h3><p>There are multiple ways to run the autograder:</p>
+<ol>
+<li>Local File<br>Open <code>grader.html</code> directly in your web browser.</li>
+<li>Deploy as a static page<br>Serve <code>grader.html</code> with a static web server (e.g., NGINX, Apache).</li>
+<li>Deploy to GitHub page  <ul>
+<li>Host <code>grader.html</code> as a GitHub Page or subpage.</li>
+<li>Ensure that your GitHub framework does not re-render it.<br>For example, with Hexo, add the following header at the beginning of grader.html to prevent rendering:<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">layout: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Cite-amp-Support"><a href="#Cite-amp-Support" class="headerlink" title="Cite &amp; Support"></a>Cite &amp; Support</h2><p>If you need further support, customization, or find any bugs, please either:  </p>
+<ul>
+<li>Open an issue in this repository, or  </li>
+<li>Contact <strong>Jiarui Li</strong> at <em>jli78@tulane.edu</em>  </li>
+</ul>
+<p>If you would like to reference this repository, please cite it as:<br><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@misc&#123;CMPS2200_AutoGrader,</span><br><span class="line">  title        = &#123;CMPS2200-AutoGrader: An autograder for CMPS2200 Introduction to Algorithms&#125;,</span><br><span class="line">  howpublished = &#123;\url&#123;https://github.com/Jiarui0923/CMPS2200-AutoGrader&#125;&#125;,</span><br><span class="line">  year         = &#123;2025&#125;,</span><br><span class="line">  note         = &#123;GPL-3.0 License&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Acknowledgement"><a href="#Acknowledgement" class="headerlink" title="Acknowledgement"></a>Acknowledgement</h2><p>This autograder imported packages via public CDNs:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://pyscript.net/">PyScript</a>: In-browser Python script interpreting.<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://pyscript.net/releases/2025.7.3/core.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://pyscript.net/releases/2025.7.3/core.css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://bulma.io/">Bulma</a>: CSS framework.<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><a target="_blank" rel="noopener" href="https://fontawesome.com/">Font Awsome</a>: CSS icons.<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 
     </div>
 
