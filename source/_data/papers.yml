@@ -1,6 +1,27 @@
 # Canonical paper registry — single source of truth.
 # Used by papers/index.md (catalog), the <<slug>> card filter (scripts/paper-cards.js),
 # and project related-paper lists (_partial/paper-card.ejs).
+- ref: TCRSRIM
+  tags: ["XAI", "Immunology", "TCR-pMHC", "Ante-hoc", "Structure Prediction", "Computational Biology", "Machine Learning"]
+  paper:
+    title: "Structure-Regularized Interpretable TCR-Epitope Prediction"
+    publication: "arXiv Preprint"
+    date:
+      month: July
+      year: 2026
+    abbr: "arXiv"
+  authors:
+    - name: "Jiarui Li"
+    - name: "Zixiang Yin"
+    - name: "Yunbei Zhang"
+    - name: "Janet Wang"
+    - name: "Samuel J. Landry"
+    - name: "Zhengming Ding"
+    - name: "Ramgopal R. Mettu"
+  links:
+    - name: "arXiv"
+      link: "https://arxiv.org/abs/2606.30902"
+      icon: "ai ai-arxiv"
 - ref: WhyLookThere
   tags: ["XAI", "Computer Vision", "Explainability", "Machine Learning"]
   paper:

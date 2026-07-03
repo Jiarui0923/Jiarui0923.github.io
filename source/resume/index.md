@@ -82,8 +82,21 @@ publications:
       - authors:
           - { name: "Li, J.", me: true }
           - { name: "Yin, Z." }
-          - { name: "Ding, Z." }
+          - { name: "Zhang, Y." }
+          - { name: "Wang, J." }
           - { name: "Landry, S. J." }
+          - { name: "Ding, Z." }
+          - { name: "Mettu, R. R." }
+        year: 2026
+        title: "Structure-Regularized Interpretable TCR-Epitope Prediction"
+        venue: "preprint."
+        links:
+          - { name: "Paper", link: "https://arxiv.org/abs/2606.30902", icon: "fa-solid fa-paperclip" }
+      - authors:
+          - { name: "Li, J.", me: true }
+          - { name: "Yin, Z." }
+          - { name: "Landry, S. J." }
+          - { name: "Ding, Z." }
           - { name: "Mettu, R. R." }
         year: 2026
         title: "Why Does It Look There? Structured Explanations for Image Classification"
