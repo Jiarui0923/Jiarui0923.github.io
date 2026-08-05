@@ -68,6 +68,7 @@
       link: "https://github.com/Jiarui0923/QCAI"
       icon: "fa-brands fa-github"
 - slug: LMRL2026TCREML
+  awards: ["Spotlight"]
   tags: ["XAI", "Immunology", "TCR-pMHC", "Prototype Learning", "Ante-hoc", "Computational Biology", "Machine Learning"]
   paper:
     title: "TCR-EML: Explainable Model Layers for TCR-pMHC Prediction"
@@ -96,6 +97,7 @@
       link: "https://huggingface.co/jli78/TCR-EML/"
       icon: "fa-brands fa-hugging-face"
 - slug: BCB2025EGM
+  awards: ["Oral"]
   tags: ["XAI", "Immunology", "TCR-pMHC", "Post-hoc", "Computational Biology", "Machine Learning"]
   paper:
     title: "Rational Multi-Modal Transformers for TCR-pMHC Prediction"
@@ -178,6 +180,7 @@
       icon: "fa-brands fa-github"
 - slug: AIMLSYS2024GPUMCMC
   tags: ["Immunology", "Antigen Processing", "Algorithm Acceleration", "Computational Biology"]
+  awards: ["Oral"]
   paper:
     title: "GPU Acceleration for Markov Chain Monte Carlo Sampling"
     publication: "Proceedings of the 4th International Conference on AI-ML Systems"
