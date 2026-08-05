@@ -1,29 +1,66 @@
-/* Projects index — stacked showcase panels (product-website style). */
+/* Projects index — plain stacked entries divided by rules (no cards). */
 .projects-scroll {
     margin-top: 1rem;
 }
 
 /* Block (not flex) so the inner .container always spans the full 980px column,
-   making every panel the same width whether or not it has an image. */
+   making every entry the same width whether or not it has an image. */
 .project-section {
-    padding: 0.6rem 0;
+    padding: 0;
 }
 
 .project-panel {
+    position: relative;
     width: 100%;
     box-sizing: border-box;
-    padding: 2rem 2.5rem;
-    border-radius: 1.5rem;
-    background: rgba(255, 255, 255, 0.18);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+    padding: 2rem 0;
+    transition: padding 0.25s ease;
 }
-@media (prefers-color-scheme: dark) {
-    body[data-color-scheme="auto"] .project-panel { background: rgba(255, 255, 255, 0.06); }
+/* Hovering grows the block vertically; the rules above and below it light up.
+   z-index lifts the hovered panel so its coloured rules paint over the plain
+   ones its neighbours draw at the same position. */
+.project-panel:hover {
+    padding: 4.25rem 0;
+    z-index: 2;
 }
-body[data-color-scheme="dark"] .project-panel { background: rgba(255, 255, 255, 0.06); }
+
+/* Separator rules drawn as pseudo-elements (not borders) so each panel owns
+   both the rule above it and the rule below it and can colour the pair. */
+.project-panel::before,
+.project-panel::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+    transition: height 0.2s ease, top 0.2s ease, bottom 0.2s ease,
+                background-color 0.2s ease, transform 0.3s ease;
+}
+.project-panel::before { top: 0; }
+.project-panel::after { bottom: 0; }
+
+/* The list's outer edges carry no rule at rest — the first panel's top rule and
+   the last panel's bottom rule are collapsed to zero width, so on hover they
+   sweep open from the centre instead of blinking into place. Both selectors
+   outrank the plain :hover rules below, hence the explicit hover pair. */
+.project-section:first-child .project-panel::before,
+.project-section:last-child .project-panel::after { transform: scaleX(0); }
+.project-section:first-child .project-panel:hover::before,
+.project-section:last-child .project-panel:hover::after { transform: scaleX(1); }
+
+/* The 1px overhang straddles the boundary so the thick rule fully covers the
+   neighbouring panel's plain rule instead of stacking on top of it. */
+.project-panel:hover::before {
+    top: -1px;
+    height: 2px;
+    background: var(--link);
+}
+.project-panel:hover::after {
+    bottom: -1px;
+    height: 2px;
+    background: var(--link);
+}
 
 /* Title row — full width, never shares a row with the image. */
 .project-head { margin-bottom: 1.3rem; }
@@ -69,7 +106,8 @@ body[data-color-scheme="dark"] .project-panel { background: rgba(255, 255, 255, 
 .project-section .project-link:hover { opacity: 0.85; color: #fff; }
 
 @media screen and (max-width: 800px) {
-    .project-panel { padding: 1.75rem; }
+    .project-panel { padding: 1.75rem 0; }
+    .project-panel:hover { padding: 3.5rem 0; }
     /* Tablet: keep the image on the right (not at the bottom); just shrink it
        and top-align it with the text. */
     .project-body { gap: 1.25rem; align-items: flex-start; }

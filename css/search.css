@@ -25,10 +25,7 @@
   margin: 0.9rem 2px 0;
   font-size: 0.9rem;
   color: var(--black-4);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  padding: 0.4rem 0.9rem;
-  background: var(--card-bg);
+  padding: 0.4rem 0;
 }
 .search-tips summary {
   cursor: pointer;
@@ -99,45 +96,73 @@
   padding: 3rem 0;
 }
 
-/* --- Glass result cards --- */
+/* --- Plain result rows, divided by rules (mirrors the projects index) --- */
 .sr-card {
+  position: relative;
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1.1rem 1.3rem;
-  margin-bottom: 1rem;
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  padding: 1.1rem 0;
   text-decoration: none;
   color: var(--black-2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: padding 0.25s ease;
 }
+/* Hovering grows the row a little; the rules above and below it light up.
+   z-index lifts the hovered row so its coloured rules paint over the plain
+   ones its neighbours draw at the same position. */
 .sr-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  padding: 1.8rem 0;
+  z-index: 2;
   text-decoration: none;
   color: var(--black-2);
 }
-@media (prefers-color-scheme: dark) {
-  body[data-color-scheme="auto"] .sr-card { background: rgba(255, 255, 255, 0.06); }
+
+/* Separator rules drawn as pseudo-elements (not borders) so each row owns both
+   the rule above it and the rule below it and can colour the pair. */
+.sr-card::before,
+.sr-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-color);
+  transition: height 0.2s ease, top 0.2s ease, bottom 0.2s ease,
+              background-color 0.2s ease, transform 0.3s ease;
 }
-body[data-color-scheme="dark"] .sr-card { background: rgba(255, 255, 255, 0.06); }
+.sr-card::before { top: 0; }
+.sr-card::after { bottom: 0; }
+
+/* The list's outer edges carry no rule at rest — collapsed to zero width so on
+   hover they sweep open from the centre instead of blinking into place. Both
+   selectors outrank the plain :hover rules below, hence the explicit pair. */
+.sr-card:first-child::before,
+.sr-card:last-child::after { transform: scaleX(0); }
+.sr-card:first-child:hover::before,
+.sr-card:last-child:hover::after { transform: scaleX(1); }
+
+/* The 1px overhang straddles the boundary so the thick rule fully covers the
+   neighbouring row's plain rule instead of stacking on top of it. */
+.sr-card:hover::before {
+  top: -1px;
+  height: 2px;
+  background: var(--link);
+}
+.sr-card:hover::after {
+  bottom: -1px;
+  height: 2px;
+  background: var(--link);
+}
 
 .sr-icon {
-  flex: 0 0 2.6rem;
-  width: 2.6rem;
-  height: 2.6rem;
+  flex: 0 0 1.6rem;
+  width: 1.6rem;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 0.8rem;
-  background: var(--white-2);
+  justify-content: flex-start;
   color: var(--link);
-  font-size: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .sr-body {

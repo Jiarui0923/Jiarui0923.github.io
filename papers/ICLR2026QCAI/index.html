@@ -66,6 +66,37 @@
         .section-nav-link.is-active { transform: scale(1.05); max-width: 30vw; }
         #citation-content { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; }
         .hero-bordered { border-top: 2px solid #ccc; border-bottom: 2px solid #ccc; }
+        /* Award badges — mirrors themes/cupertino/source/css/awards.css, inlined
+           because paper pages are standalone and don't load the theme's CSS. */
+        .award-badges { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-left: 0.5rem; vertical-align: middle; white-space: nowrap; }
+        /* Own line under the title rather than trailing another element. */
+        .award-badges-block { display: flex; margin: -0.5rem 0 1.25rem; }
+        .award-badge {
+            display: inline-flex; flex: 0 0 auto; align-items: center; gap: 0.4em;
+            padding: 0.25em 0.75em; border-radius: 2em;
+            font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; line-height: 1.4;
+            white-space: nowrap; color: var(--award-c);
+            background: color-mix(in srgb, var(--award-c) 14%, transparent);
+            border: 1px solid color-mix(in srgb, var(--award-c) 32%, transparent);
+        }
+        .award-badge i { font-size: 0.85em; }
+        .award-amber { --award-c: #b45309; } .award-violet { --award-c: #6d28d9; }
+        .award-rose { --award-c: #be123c; } .award-emerald { --award-c: #047857; }
+        .award-sky { --award-c: #0369a1; } .award-fuchsia { --award-c: #a21caf; }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) .award-amber { --award-c: #fbbf24; }
+            html:not([data-theme="light"]) .award-violet { --award-c: #a78bfa; }
+            html:not([data-theme="light"]) .award-rose { --award-c: #fb7185; }
+            html:not([data-theme="light"]) .award-emerald { --award-c: #34d399; }
+            html:not([data-theme="light"]) .award-sky { --award-c: #38bdf8; }
+            html:not([data-theme="light"]) .award-fuchsia { --award-c: #e879f9; }
+        }
+        html[data-theme="dark"] .award-amber { --award-c: #fbbf24; }
+        html[data-theme="dark"] .award-violet { --award-c: #a78bfa; }
+        html[data-theme="dark"] .award-rose { --award-c: #fb7185; }
+        html[data-theme="dark"] .award-emerald { --award-c: #34d399; }
+        html[data-theme="dark"] .award-sky { --award-c: #38bdf8; }
+        html[data-theme="dark"] .award-fuchsia { --award-c: #e879f9; }
         .CodeMirror { font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace; height: auto !important; }
         .CodeMirror-scroll { overflow: hidden !important; min-height: auto; }
     </style>
@@ -149,6 +180,7 @@
                 <div class="content">
                     <h4 class="subtitle" style="font-weight: 400; color: #555;">2026 April</h4>
                     <h1 class="title mt-0">Quantifying Cross-Attention Interaction in Transformers for Interpreting TCR-pMHC Binding</h1>
+                    
                     <p class="is-dmserif mb-0">
 
                         <a target="_blank" rel="noopener" href="https://www.jiarui-li.com/"><strong>Jiarui Li</strong></a><span class="sup" data-number="1"></span> &middot; 

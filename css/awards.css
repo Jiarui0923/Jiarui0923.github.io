@@ -1,0 +1,59 @@
+/* Award badges ("Oral", "Spotlight", …) — see scripts/awards.js for the markup
+   and the name → icon/palette registry. Each palette sets a single accent
+   colour; the fill and border are derived from it, so switching a palette for
+   dark mode is a one-line override. */
+.award-badges {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: 0.4rem;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* Sized in `em` so the pill tracks whatever text it sits in — the resume runs
+   at 19px, the catalog venue line at ~15px. */
+.award-badge {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.4em;
+    /* `em` throughout so the pill keeps its proportions at any text size.
+       This is the compact default used by the catalog and paper pages; the
+       resume overrides it locally (its body text is much larger). */
+    padding: 0.25em 0.75em;
+    margin: 0 0.15em;
+    border-radius: 2em;
+    font-size: 0.75em;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: nowrap;
+    color: var(--award-c);
+    background: color-mix(in srgb, var(--award-c) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--award-c) 32%, transparent);
+}
+.award-badge i { font-size: 0.85em; }
+
+.award-amber { --award-c: #b45309; }
+.award-violet { --award-c: #6d28d9; }
+.award-rose { --award-c: #be123c; }
+.award-emerald { --award-c: #047857; }
+.award-sky { --award-c: #0369a1; }
+.award-fuchsia { --award-c: #a21caf; }
+
+/* Dark mode — lighter accents so the text clears the dark fill. */
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .award-amber { --award-c: #fbbf24; }
+    body[data-color-scheme="auto"] .award-violet { --award-c: #a78bfa; }
+    body[data-color-scheme="auto"] .award-rose { --award-c: #fb7185; }
+    body[data-color-scheme="auto"] .award-emerald { --award-c: #34d399; }
+    body[data-color-scheme="auto"] .award-sky { --award-c: #38bdf8; }
+    body[data-color-scheme="auto"] .award-fuchsia { --award-c: #e879f9; }
+}
+body[data-color-scheme="dark"] .award-amber { --award-c: #fbbf24; }
+body[data-color-scheme="dark"] .award-violet { --award-c: #a78bfa; }
+body[data-color-scheme="dark"] .award-rose { --award-c: #fb7185; }
+body[data-color-scheme="dark"] .award-emerald { --award-c: #34d399; }
+body[data-color-scheme="dark"] .award-sky { --award-c: #38bdf8; }
+body[data-color-scheme="dark"] .award-fuchsia { --award-c: #e879f9; }
