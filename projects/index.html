@@ -75,6 +75,7 @@
   
   
   
+  
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     
@@ -238,7 +239,7 @@
                 </div>
                 <div class="project-body">
                     <div class="project-info">
-                        <p class="project-desc">Understanding the neural mechanisms underlying visual recognition and information decoding. (Collaborative project with Zach and Prof. Ding.)</p>
+                        <p class="project-desc">Understanding the neural mechanisms underlying visual recognition and information decoding. (Collaborative project with Zixiang Yin and Prof. Ding.)</p>
                         
                         <div class="project-tags">
                             <span class="project-tag">#NeuroScience</span><span class="project-tag">#Computer Science</span><span class="project-tag">#fMRI</span>
@@ -316,6 +317,22 @@
             })
         </script>
         
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="//cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
 </html>
 

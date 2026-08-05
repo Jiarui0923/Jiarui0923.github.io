@@ -157,3 +157,25 @@ body[data-color-scheme="dark"] .hero .group {
         font-size: 1.9rem;
     }
 }
+/* Optional homepage section rendered from source/_data/index.md. Built from the
+   same pieces as <footer>: full-width band on the same surface, with the shared
+   .inner wrapper (980px column, 32px 16px padding) holding the text. post.css
+   is not loaded on the homepage, so the body type is set explicitly here. */
+.index-extra {
+    width: 100%;
+    background-color: var(--white);
+    border-top: 1px solid var(--border-color);
+}
+.index-extra .inner {
+    font-size: 19px;
+    line-height: 1.4211;
+    letter-spacing: 0.012em;
+    /* More room before the footer than .inner's default 32px. */
+    padding-bottom: 72px;
+}
+.index-extra .inner > :first-child {
+    margin-top: 0;
+}
+.index-extra .inner > :last-child {
+    margin-bottom: 0;
+}
