@@ -50,7 +50,7 @@ education:
         detail: "Ph.D Student in Computer Science"
         notes:
           - "<i>Research Field: Immunoinformatics &amp; XAI</i>"
-          - "<i>Advised by: <a href=\"https://ramgopalmettu.org/\">Prof. Mettu</a></i>"
+          - "<i>Advised by: <a href=\"https://ramgopalmettu.org/\">Prof. Ramgopal Mettu</a></i>"
         location: "Louisiana, US"
         date: "Sept. 2023 - Present"
   - degree: "Bachelor"

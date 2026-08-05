@@ -24,7 +24,7 @@ projects:
     date: "2024 to Present"
     image: "/projects/apl/images/background.png"
   - title: "Brain-Vision Decoding"
-    desc: "Understanding the neural mechanisms underlying visual recognition and information decoding. (Collaborative project with Zach and Prof. Ding.)"
+    desc: "Understanding the neural mechanisms underlying visual recognition and information decoding. (Collaborative project with Zixiang Yin and Prof. Ding.)"
     tags: ["NeuroScience", "Computer Science", "fMRI"]
     image: "/images/brainvision_back.png"
     date: "2024 to Present"
