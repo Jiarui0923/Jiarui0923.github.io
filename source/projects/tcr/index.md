@@ -7,7 +7,7 @@ tags: ["Immunology", "TCR-pMHC", "XAI", "Machine Learning", "Computational Biolo
 pageicon: "fa-solid fa-diagram-project"
 image: "/projects/tcr/images/background.png"
 related_papers:
-  - TCRSRIM
+  - MLCB2026TCRSRIM
   - ICLR2026QCAI
   - LMRL2026TCREML
   - BCB2025EGM
@@ -33,7 +33,7 @@ A post-hoc method explains a model after it is trained, so the explanation is al
 
 We carried this explain-by-design idea further with **TCR-SRIM**, which pairs protein language embeddings with interpretable contact prototypes and adds structural regularization. Being interpretable by design let us use the model as a probe, and it turned up a genuinely mechanistic result. When the structures a model learns from come from predictors like AlphaFold3, TCRModel2, and tFold-TCR rather than from experiment, prediction scores stay competitive, yet the interaction patterns become less accurate and the binding sites less diverse than those learned from experimentally resolved structures. Put plainly, a model can look right while learning the wrong contacts, and only an interpretable model makes that slip visible.
 
-<<TCRSRIM>>
+<<MLCB2026TCRSRIM>>
 
 ## From explanation back to better models
 

@@ -2,6 +2,7 @@
 # Used by papers/index.md (catalog), the <<slug>> card filter (scripts/paper-cards.js),
 # and project related-paper lists (_partial/paper-card.ejs).
 - ref: TCRSRIM
+  slug: MLCB2026TCRSRIM
   tags: ["XAI", "Immunology", "TCR-pMHC", "Ante-hoc", "Structure Prediction", "Computational Biology", "Machine Learning"]
   awards: ["Oral"]
   paper:
@@ -23,6 +24,9 @@
     - name: "arXiv"
       link: "https://arxiv.org/abs/2606.30902"
       icon: "ai ai-arxiv"
+    - name: "GitHub"
+      link: "https://github.com/Tulane-Mettu-Landry-Lab/tcr-sr"
+      icon: "fa-brands fa-github"
 - ref: WhyLookThere
   tags: ["XAI", "Computer Vision", "Explainability", "Machine Learning"]
   paper:
