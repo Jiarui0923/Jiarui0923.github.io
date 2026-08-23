@@ -1,0 +1,464 @@
+
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>[MLCB] Structure-Regularized Interpretable TCR-Epitope Prediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔬</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/material-darker.min.css">
+    <style>
+        :root {
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-dserif: 'DM Serif Text', serif;
+            --hero-bg-color: #f5f5f5;
+            --hero-text-color: #222;
+        }
+        h1, h2, h3, h4 { font-family: var(--font-dserif); }
+        body { font-family: var(--font-sans); }
+        .is-dmserif { font-family: var(--font-dserif); }
+        .is-mono { font-family: var(--font-mono); }
+        .hover-expand .text {
+            opacity: 0; max-width: 0; overflow: hidden; white-space: nowrap;
+            transition: opacity 0.3s ease, max-width 0.3s ease; display: inline-block; vertical-align: middle;
+        }
+        .hover-expand:hover .text { opacity: 1; max-width: 200px; }
+        .sup { font-size: 0.7em; vertical-align: super; }
+        .sup[data-symbol="plus"]::after { content: "⁺"; }
+        .sup[data-symbol="minus"]::after { content: "⁻"; }
+        .sup[data-symbol="star"]::after { content: "*"; }
+        .sup[data-number="1"]::after { content: "¹"; } .sup[data-number="2"]::after { content: "²"; }
+        .sup[data-number="3"]::after { content: "³"; } .sup[data-number="4"]::after { content: "⁴"; }
+        .sup[data-number="5"]::after { content: "⁵"; } .sup[data-number="6"]::after { content: "⁶"; }
+        .sup[data-number="7"]::after { content: "⁷"; } .sup[data-number="8"]::after { content: "⁸"; }
+        .sup[data-number="9"]::after { content: "⁹"; } .sup[data-number="0"]::after { content: "⁰"; }
+        .navbar-container {
+            position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px; z-index: 1000; border-radius: 2rem;
+            border-color: lightgrey; border-width: 0.5pt; border-style: solid;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); overflow: hidden;
+        }
+        .custom-frosted-navbar {
+            background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px); border-radius: 1rem;
+            padding-left: 1rem; padding-right: 1rem; height: 100%;
+        }
+        .custom-frosted-navbar .navbar-item { background-color: transparent !important; }
+        .frosted-button {
+            background-color: transparent !important; backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+        }
+        .frosted-button:hover { background-color: rgba(50, 152, 220, 0.1) !important; }
+        .navbar-center { flex-grow: 1; display: flex; justify-content: center; align-items: center; overflow: hidden; white-space: nowrap; text-align: center; min-width: 0; }
+        #section-indicator-container { display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden; }
+        .section-nav-link { display: inline-block; cursor: pointer; text-decoration: none; transition: all 0.3s ease-in-out; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 15vw; }
+        .section-nav-link.is-active { transform: scale(1.05); max-width: 30vw; }
+        #citation-content { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; }
+        .hero-bordered { border-top: 2px solid #ccc; border-bottom: 2px solid #ccc; }
+        /* Award badges — mirrors themes/cupertino/source/css/awards.css, inlined
+           because paper pages are standalone and don't load the theme's CSS. */
+        .award-badges { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin-left: 0.5rem; vertical-align: middle; white-space: nowrap; }
+        /* Own line under the title rather than trailing another element. */
+        .award-badges-block { display: flex; margin: -0.5rem 0 1.25rem; }
+        .award-badge {
+            display: inline-flex; flex: 0 0 auto; align-items: center; gap: 0.4em;
+            padding: 0.25em 0.75em; border-radius: 2em;
+            font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600; line-height: 1.4;
+            white-space: nowrap; color: var(--award-c);
+            background: color-mix(in srgb, var(--award-c) 14%, transparent);
+            border: 1px solid color-mix(in srgb, var(--award-c) 32%, transparent);
+        }
+        .award-badge i { font-size: 0.85em; }
+        .award-amber { --award-c: #b45309; } .award-violet { --award-c: #6d28d9; }
+        .award-rose { --award-c: #be123c; } .award-emerald { --award-c: #047857; }
+        .award-sky { --award-c: #0369a1; } .award-fuchsia { --award-c: #a21caf; }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) .award-amber { --award-c: #fbbf24; }
+            html:not([data-theme="light"]) .award-violet { --award-c: #a78bfa; }
+            html:not([data-theme="light"]) .award-rose { --award-c: #fb7185; }
+            html:not([data-theme="light"]) .award-emerald { --award-c: #34d399; }
+            html:not([data-theme="light"]) .award-sky { --award-c: #38bdf8; }
+            html:not([data-theme="light"]) .award-fuchsia { --award-c: #e879f9; }
+        }
+        html[data-theme="dark"] .award-amber { --award-c: #fbbf24; }
+        html[data-theme="dark"] .award-violet { --award-c: #a78bfa; }
+        html[data-theme="dark"] .award-rose { --award-c: #fb7185; }
+        html[data-theme="dark"] .award-emerald { --award-c: #34d399; }
+        html[data-theme="dark"] .award-sky { --award-c: #38bdf8; }
+        html[data-theme="dark"] .award-fuchsia { --award-c: #e879f9; }
+        .CodeMirror { font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace; height: auto !important; }
+        .CodeMirror-scroll { overflow: hidden !important; min-height: auto; }
+    </style>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+    <div class="navbar-container">
+        <nav class="navbar custom-frosted-navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <div class="navbar-item">
+                    <h1 class="is-size-5 has-text-weight-bold">MLCB 2026</h1>
+                </div>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" href="#cite">
+                  <i class="fa-solid fa-quote-right"></i>
+                </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-center is-flex-mobile">
+                    <div class="navbar-item is-flex-mobile">
+                      <div class="buttons has-addons is-centered" id="section-indicator-container"></div>
+                    </div>
+                </div>
+                <div class="navbar-end">
+
+                    <a class="navbar-item hover-expand is-small is-dmserif" href="MLCB_2026_TCR_SRIM.pdf">
+                        <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-file-pdf"></i></span>
+                        <span class="text">&nbsp;&nbsp;PDF</span>
+                    </a>
+
+                    <a class="navbar-item hover-expand is-small is-dmserif" target="_blank" rel="noopener" href="https://arxiv.org/abs/2606.30902">
+                        <span class="icon" style="margin-right: -5pt;"><i class="ai ai-arxiv"></i></span>
+                        <span class="text">&nbsp;&nbsp;arXiv</span>
+                    </a>
+
+                    <a class="navbar-item button is-ghost hover-expand is-link is-outlined is-dmserif" href="#cite">
+                        <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>
+                        <span class="text">&nbsp;&nbsp;Cite</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="hero is-small">
+        <nav class="hero-body">
+            <article class="media">
+                
+                <div class="media-content is-hidden-mobile">
+                    <h1 class="subtitle">Machine Learning in Computational Biology</h1>
+                </div>
+                <div class="media-content is-hidden-tablet">
+                    <h1 class="subtitle">MLCB</h1>
+                </div>
+            </article>
+        </nav>
+    </div>
+
+    <section class="hero is-bold is-halfheight mt-0">
+        <div class="hero-body">
+            <div class="container has-text-left">
+                <div class="content">
+                    <h4 class="subtitle" style="font-weight: 400; color: #555;">2026 November</h4>
+                    <h1 class="title mt-0">Structure-Regularized Interpretable TCR-Epitope Prediction</h1>
+                    <span class="award-badges award-badges-block"><span class="award-badge award-amber"><i class="fa-solid fa-award"></i>Oral</span></span>
+                    <p class="is-dmserif mb-0">
+
+                        <a target="_blank" rel="noopener" href="https://www.jiarui-li.com/"><strong>Jiarui Li</strong></a><span class="sup" data-number="1"></span> &middot; 
+
+                        <a target="_blank" rel="noopener" href="https://zachyin.com/"><strong>Zixiang Yin</strong></a><span class="sup" data-number="1"></span> &middot; 
+
+                        <a target="_blank" rel="noopener" href="https://yunbeizhang.github.io/"><strong>Yunbei Zhang</strong></a><span class="sup" data-number="1"></span> &middot; 
+
+                        <strong>Janet Wang</strong><span class="sup" data-number="1"></span> &middot; 
+
+                        <a target="_blank" rel="noopener" href="https://medicine.tulane.edu/departments/biochemistry-molecular-biology-tulane-cancer-center-debakey/faculty/samuel-j-landry-phd"><strong>Samuel J. Landry</strong></a><span class="sup" data-number="2"></span> &middot; 
+
+                        <a target="_blank" rel="noopener" href="https://www.cs.tulane.edu/~zding1/"><strong>Zhengming Ding</strong></a><span class="sup" data-number="1"></span> &middot; 
+
+                        <a target="_blank" rel="noopener" href="https://ramgopalmettu.org/"><strong>Ramgopal R. Mettu</strong></a><span class="sup" data-number="1"></span><span class="sup" data-symbol="star"></span>
+
+                    </p>
+                    <p class="is-dmserif">
+
+                        <span class="sup" data-number="1"></span>Department of Computer Science, Tulane University<br>
+
+                        <span class="sup" data-number="2"></span>Department of Biochemistry and Molecular Biology, Tulane University School of Medicine<br>
+
+
+<span class="sup" data-symbol="star"></span>Corresponding Author(s)<br>
+                    </p>
+                    <p>
+                        <div class="buttons has-addons is-dmserif">
+
+                            <a class="button is-small is-rounded frosted-button " href="MLCB_2026_TCR_SRIM.pdf">
+                                <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-file-pdf"></i></span>
+                                <span class="text">&nbsp;&nbsp;PDF</span>
+                            </a>
+
+                            <a class="button is-small is-rounded frosted-button hover-expand" target="_blank" rel="noopener" href="https://arxiv.org/abs/2606.30902">
+                                <span class="icon" style="margin-right: -5pt;"><i class="ai ai-arxiv"></i></span>
+                                <span class="text">&nbsp;&nbsp;arXiv</span>
+                            </a>
+
+                            <a class="button is-small is-rounded frosted-button hover-expand is-link is-outlined" href="#cite">
+                                <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>
+                                <span class="text">&nbsp;&nbsp;Cite</span>
+                            </a>
+                        </div>
+                    </p>
+                </div>
+                
+                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                    <ul>
+
+                        
+                        <li><a href="/">Home</a></li>
+                        
+
+                        
+                        <li><a href="/papers/">Papers</a></li>
+                        
+
+                        
+                        <li class="is-active"><a aria-current="page">MLCB 2026</a></li>
+                        
+
+                    </ul>
+                </nav>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="content" id="markdown-output-container">
+                <p>T cell receptor (TCR)-epitope binding prediction is essential for understanding adaptive immunity and developing immunotherapies. Existing sequence- and structure-based models often generalize poorly to unseen epitopes and provide limited interpretability. Furthermore, the impact of generated structures on model learning remains unclear. We present TCR-SRIM, a structure-regularized interpretable-by-design model that combines protein language model embeddings with interpretable contact prototypes to capture residue-level TCR-epitope interactions. TCR-SRIM achieves state-of-the-art predictive performance and improved interpretation quality on the TCR-XAI benchmark. Using its inherent interpretability, we further evaluate the effect of generated structures on model learning. While structures predicted by AlphaFold3, TCRModel2, and tFold-TCR yield competitive performance, they lead to less accurate interaction patterns and reduced binding-site diversity than experimentally-resolved structures. Our results highlight limitations of current structure prediction models for TCR-epitope learning and demonstrate the value of interpretable-by-design models for studying generated biological structures.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-4" id="cite">Cite This Work</h2>
+            <div class="grid has-3-cols">
+                <div class="cell is-col-span-2">
+                    <div class="tabs mb-0" id="citation-tabs">
+                        <ul>
+
+                            <li class="is-active"><a href="#">Bibtex</a></li>
+
+                            <li><a href="#">APA</a></li>
+
+                        </ul>
+                    </div>
+                    <div id="citation-content-wrapper" style="min-height:100px;"></div>
+                </div>
+                <div class="cell has-text-centered is-flex is-justify-content-center is-align-items-center">
+                    <div id="share-col"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>CC BY 4.0</p>
+            <p>Build <a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/paperpage">PaperPage</a> for your paper.</p>
+            <a id="theme-toggle" class="button">
+                <span class="icon"><i class="fa-solid fa-circle-half-stroke"></i></span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/shell/shell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/stex/stex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/yaml/yaml.min.js"></script>
+    <script>
+    (function(){
+        // Theme toggle — must run first so data-theme is correct before CM init
+        var toggleBtn = document.getElementById('theme-toggle');
+        var htmlEl = document.documentElement;
+        var theme = localStorage.getItem('theme') || 'auto';
+        function updateBtn() {
+            var icon = toggleBtn.querySelector('.icon i');
+            icon.classList.remove('fa-sun','fa-moon','fa-circle-half-stroke');
+            icon.classList.add(theme === 'light' ? 'fa-sun' : theme === 'dark' ? 'fa-moon' : 'fa-circle-half-stroke');
+        }
+        function applyTheme() {
+            if (theme === 'light') htmlEl.setAttribute('data-theme','light');
+            else if (theme === 'dark') htmlEl.setAttribute('data-theme','dark');
+            else htmlEl.removeAttribute('data-theme');
+            updateBtn();
+            localStorage.setItem('theme', theme);
+        }
+        applyTheme();
+        toggleBtn.addEventListener('click', function() {
+            theme = theme === 'auto' ? 'light' : theme === 'light' ? 'dark' : 'auto';
+            applyTheme();
+        });
+
+        // CodeMirror theme depends on restored page theme
+        var cmTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
+        var cmInstances = [];
+        var citCM = null;
+
+        // Citation tabs with CodeMirror (no line numbers, bibtex syntax highlight)
+        var tabsUl = document.querySelector('#citation-tabs ul');
+        var citWrapper = document.getElementById('citation-content-wrapper');
+        var citData = {"Bibtex":"@inproceedings{li2026tcrsrim,\n  title={Structure-Regularized Interpretable TCR-Epitope Prediction},\n  author={Li, Jiarui and Yin, Zixiang and Zhang, Yunbei and Wang, Janet and Landry, Samuel J and Ding, Zhengming and Mettu, Ramgopal R},\n  booktitle={Machine Learning in Computational Biology (MLCB)},\n  pages={1--10},\n  year={2026}\n}\n","APA":"Li, J., Yin, Z., Zhang, Y., Wang, J., Landry, S. J., Ding, Z., & Mettu, R. R. (2026). Structure-Regularized Interpretable TCR-Epitope Prediction. Machine Learning in Computational Biology (MLCB) (pp. 1-10)."};
+        function initCitCM(initialTab) {
+            if (typeof CodeMirror === 'undefined') { setTimeout(function(){ initCitCM(initialTab); }, 100); return; }
+            var val = initialTab ? citData[initialTab] || '' : '';
+            citCM = CodeMirror(citWrapper, {
+                value: val,
+                mode: initialTab === 'Bibtex' ? 'stex' : '',
+                theme: cmTheme,
+                readOnly: true,
+                lineNumbers: false,
+                lineWrapping: true,
+                viewportMargin: Infinity
+            });
+            setTimeout(function(){ if (citCM) citCM.refresh(); }, 50);
+        }
+        var firstKey = Object.keys(citData)[0];
+        initCitCM(firstKey);
+        tabsUl.addEventListener('click', function(e) {
+            e.preventDefault();
+            var a = e.target.closest('a');
+            if (!a) return;
+            tabsUl.querySelectorAll('li').forEach(function(l){ l.classList.remove('is-active'); });
+            a.parentElement.classList.add('is-active');
+            var tabName = a.textContent;
+            var newVal = citData[tabName] || '';
+            if (citCM) {
+                citCM.setValue(newVal);
+                citCM.setOption('mode', tabName === 'Bibtex' ? 'stex' : '');
+                setTimeout(function(){ citCM.refresh(); }, 10);
+            }
+        });
+
+        // Section indicator (scroll nav)
+        var sectionData = [];
+        var scrollTO;
+        function slugify(t){ return t.toLowerCase().trim().replace(/[\s\W-]+/g,'-').replace(/^-+|-+$/g,''); }
+        function extractSections() {
+            sectionData = [];
+            var cnt = document.getElementById('markdown-output-container');
+            if (!cnt) return;
+            var used = new Set();
+            cnt.querySelectorAll('h1,h2,h3').forEach(function(h) {
+                var t = h.textContent.trim();
+                if (!t) return;
+                var id = h.id;
+                if (!id || used.has(id)) { id = slugify(t); var u = id, c = 1; while(used.has(u)) u = id+'-'+(c++); id = u; h.id = id; }
+                used.add(id);
+                var r = h.getBoundingClientRect();
+                sectionData.push({ id: id, title: t, offset: r.top + window.scrollY - 150 });
+            });
+            sectionData.sort(function(a,b){ return a.offset - b.offset; });
+            updateIndicator();
+        }
+        function updateIndicator() {
+            var ic = document.getElementById('section-indicator-container');
+            if (!sectionData.length || !ic) return;
+            clearTimeout(scrollTO);
+            scrollTO = setTimeout(function() {
+                var sy = window.scrollY, ai = 0;
+                for (var i = sectionData.length-1; i >= 0; i--) { if (sy >= sectionData[i].offset) { ai = i; break; } }
+                var cs = sectionData[ai], ps = sectionData[ai-1], ns = sectionData[ai+1];
+                if (ic.dataset.aid === cs.id) return;
+                ic.dataset.aid = cs.id;
+                var h = '';
+                if (ps) h += '<a class="button is-ghost section-nav-link is-prev" href="#'+ps.id+'"><i class="fa-solid fa-arrow-left"></i></a>';
+                h += '<a class="button is-ghost section-nav-link is-active" href="#'+cs.id+'">'+cs.title.toUpperCase()+'</a>';
+                if (ns) h += '<a class="button is-ghost section-nav-link is-next" href="#'+ns.id+'"><i class="fa-solid fa-arrow-right"></i></a>';
+                ic.innerHTML = h;
+            }, 50);
+        }
+        extractSections();
+        window.addEventListener('scroll', updateIndicator);
+        window.addEventListener('resize', extractSections);
+
+        // Smooth scroll
+        document.addEventListener('click', function(e) {
+            var a = e.target.closest('a[href^="#"]');
+            if (a) { e.preventDefault(); var el = document.getElementById(a.getAttribute('href').substring(1)); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+        });
+
+        // QR code — colors follow page theme
+        var isDark = htmlEl.getAttribute('data-theme') === 'dark';
+        var qrDark = isDark ? '#000' : '#fff';
+        var qrLight = isDark ? '#1a1a1a' : '#fff';
+        var qrEl = document.getElementById('share-col');
+        var qr = new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: qrDark, colorLight: qrLight, correctLevel: QRCode.CorrectLevel.H });
+        // Update QR on theme change
+        var origApply = applyTheme;
+        applyTheme = function() {
+            origApply();
+            var d = htmlEl.getAttribute('data-theme') === 'dark';
+            qrEl.innerHTML = '';
+            qr = new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: d ? '#fff' : '#000', colorLight: d ? '#1a1a1a' : '#fff', correctLevel: QRCode.CorrectLevel.H });
+        };
+
+        // CodeMirror for code blocks with auto-height
+        (function initCM() {
+            if (typeof CodeMirror === 'undefined') { setTimeout(initCM, 100); return; }
+            var mm = { python:'python', py:'python', javascript:'javascript', js:'javascript', bash:'shell', sh:'shell', shell:'shell', yaml:'yaml', yml:'yaml' };
+            var cnt = document.getElementById('markdown-output-container');
+            if (!cnt) return;
+            var blocks = cnt.querySelectorAll('figure.highlight');
+            if (!blocks.length) blocks = cnt.querySelectorAll('pre');
+            Array.from(blocks).forEach(function(el) {
+                // Extract code only (skip Hexo gutter line numbers)
+                var codeEl = el.querySelector('.code pre') || el.querySelector('pre code') || el.querySelector('code');
+                var code = codeEl ? codeEl.textContent : el.textContent;
+                // Trim trailing newline to fix extra line number
+                code = code.replace(/\n$/, '');
+                // Detect language: figure.highlight.{lang} or code.language-{lang}
+                var lang = '';
+                var figMatch = el.className.match(/highlight\s+([a-zA-Z0-9_+-]+)/);
+                if (figMatch) lang = figMatch[1].toLowerCase();
+                if (!lang && el.querySelector('code')) {
+                    var codeMatch = el.querySelector('code').className.match(/language-([a-zA-Z0-9_+-]+)/);
+                    if (codeMatch) lang = codeMatch[1].toLowerCase();
+                }
+                var mode = mm[lang] || lang || '';
+                var div = document.createElement('div');
+                el.parentNode.insertBefore(div, el);
+                el.parentNode.removeChild(el);
+                var cm = CodeMirror(div, {
+                    value: code,
+                    mode: mode,
+                    theme: cmTheme,
+                    readOnly: true,
+                    lineNumbers: true,
+                    viewportMargin: Infinity
+                });
+                cmInstances.push(cm);
+            });
+            // Auto-height: refresh after render
+            setTimeout(function() {
+                cmInstances.forEach(function(cm) { cm.refresh(); });
+            }, 50);
+        })();
+
+        // Theme change: switch CodeMirror themes (including citation)
+        var observer = new MutationObserver(function() {
+            var newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
+            if (newTheme !== cmTheme) {
+                cmTheme = newTheme;
+                cmInstances.forEach(function(cm) { cm.setOption('theme', cmTheme); });
+                if (citCM) citCM.setOption('theme', cmTheme);
+            }
+        });
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
+    </script>
+</body>
+</html>
+
