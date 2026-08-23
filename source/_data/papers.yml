@@ -3,13 +3,14 @@
 # and project related-paper lists (_partial/paper-card.ejs).
 - ref: TCRSRIM
   tags: ["XAI", "Immunology", "TCR-pMHC", "Ante-hoc", "Structure Prediction", "Computational Biology", "Machine Learning"]
+  awards: ["Oral"]
   paper:
     title: "Structure-Regularized Interpretable TCR-Epitope Prediction"
-    publication: "arXiv Preprint"
+    publication: "Machine Learning in Computational Biology"
     date:
-      month: July
+      month: November
       year: 2026
-    abbr: "arXiv"
+    abbr: "MLCB"
   authors:
     - name: "Jiarui Li"
     - name: "Zixiang Yin"
