@@ -197,6 +197,7 @@ services:
     columns: ["Year", "Conference", "Role"]
     align: ["center", "left", "left"]
     rows:
+      - ["2026", "<b><i class=\"fa-solid fa-clipboard-check ri ri-indigo\"></i>IEEE BHI 2026</b>", "Reviewer"]
       - ["2026", "<b><i class=\"fa-solid fa-clipboard-check ri ri-indigo\"></i>MLCB 2026</b>", "Reviewer"]
       - ["2026", "<b><i class=\"fa-solid fa-clipboard-check ri ri-indigo\"></i>MLSCB@ISMB 2026</b>", "Reviewer"]
       - ["2026", "<b><i class=\"fa-solid fa-clipboard-check ri ri-indigo\"></i>ICML 2026</b>", "Reviewer"]
@@ -244,6 +245,7 @@ experiences:
     columns: ["Semester", "Course", "Institution", "Role"]
     align: ["left", "left", "left", "left"]
     rows:
+      - ["2026 Fall", "<i class=\"fa-solid fa-chalkboard ri ri-teal\"></i>CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
       - ["2026 Spring", "<i class=\"fa-solid fa-chalkboard ri ri-teal\"></i>CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
       - ["2025 Fall", "<i class=\"fa-solid fa-chalkboard ri ri-teal\"></i>CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
       - ["2025 Spring", "<i class=\"fa-solid fa-chalkboard ri ri-teal\"></i>CMPS 2200 Introduction to Algorithm", "Tulane University", "Teaching Assistant"]
@@ -263,7 +265,7 @@ skills:
       - label: "<b>Web</b>"
         children:
           - { label: "<b>Front-end</b>", value: "HTML, CSS, Bulma, Tailwind, JavaScript, JQuery" }
-          - { label: "<b>Back-end</b>", value: "Django, Flask, IIS, Apache HTTP, Docker, Nginx" }
+          - { label: "<b>Back-end</b>", value: "Django, FastAPI, Flask, IIS, Apache HTTP, Docker, Nginx" }
       - label: "<b>Algorithm</b>"
         children:
           - { label: "<b>Machine Learning</b>", value: "PyTorch, PyG, TensorFlow, Pandas, Numpy, scikit‑learn, scipy, Numba" }
