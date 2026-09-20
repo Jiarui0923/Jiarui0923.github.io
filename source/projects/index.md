@@ -26,7 +26,9 @@ projects:
   - title: "Brain-Vision Decoding"
     desc: "Understanding the neural mechanisms underlying visual recognition and information decoding. (Collaborative project with Zixiang Yin and Prof. Ding.)"
     tags: ["NeuroScience", "Computer Science", "fMRI"]
-    image: "/images/brainvision_back.png"
+    image_light: "/images/brainvision_back_light.png"
+    image_dark: "/images/brainvision_back_dark.png"
+    image_background: true
     date: "2024 to Present"
     url: "https://zachyin.com/#Brain-Vision"
 ---
