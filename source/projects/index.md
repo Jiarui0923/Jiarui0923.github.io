@@ -10,13 +10,17 @@ projects:
     desc: "Explaining the model training procedure that transforms interpretation into explanation."
     tags: ["XAI", "Interpretability", "Explainability", "Machine Learning"]
     date: "2025 to Present"
-    image: "/projects/i2x/images/background.png"
+    image_light: "/projects/i2x/images/background_i2x_white.png"
+    image_dark: "/projects/i2x/images/background_i2x_black.png"
+    image_background: true
   - slug: tcr
     title: "Interpretable TCR-Epitope Prediction"
     desc: "Interpretable models for predicting and interpreting how T-cell receptors recognize peptide-MHC complexes."
     tags: ["Immunology", "TCR-pMHC", "XAI", "Machine Learning"]
     date: "2024 to Present"
-    image: "/projects/tcr/images/background.png"
+    image_light: "/projects/tcr/images/background_tcr_white.png"
+    image_dark: "/projects/tcr/images/background_tcr_black.png"
+    image_background: true
   - slug: apl
     title: "Antigen Processing Prediction Acceleration"
     desc: "GPU-accelerated modeling of antigen processing to predict CD4+ T-cell epitopes."
