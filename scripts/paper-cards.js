@@ -52,8 +52,12 @@ function renderPaperCard(entry) {
   const titleHtml = titleUrl ? '<a href="' + esc(titleUrl) + '">' + esc(pp.title) + '</a>' : esc(pp.title);
   let linksHtml = '';
   if (links.length) {
-    linksHtml = '<div class="paper-card-links">' + links.map(function (l) {
-      return '<a class="paper-card-link" href="' + esc(l.link) + '" target="_blank"><i class="' + esc(l.icon) + '"></i> ' + esc(l.name) + '</a>';
+    // Jelly chips (themes/cupertino/source/css/jelly-chips.css) - keep in step
+    // with the same markup in _partial/paper-card.ejs.
+    linksHtml = '<div class="paper-card-links jelly-row">' + links.map(function (l) {
+      return '<a class="jelly-chip" href="' + esc(l.link) + '" target="_blank">' +
+        '<span class="jelly-chip__skin"><span class="jelly-chip__icon"><i class="' + esc(l.icon) + '"></i></span>' +
+        '<span class="jelly-chip__label">' + esc(l.name) + '</span></span></a>';
     }).join('') + '</div>';
   }
   return '<div class="paper-card">' +
