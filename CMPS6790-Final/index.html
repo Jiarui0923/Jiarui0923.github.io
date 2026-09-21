@@ -78,6 +78,11 @@
   
   
   
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" rel="stylesheet">
+  
+  
+  
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
     <body
@@ -1920,18 +1925,21 @@
         
         
             <br>
-            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
-                <label>
-                    <input type="radio" value="light">
-                    <span>Light</span>
+            
+            <div class="color-scheme-toggle rubber-segment" role="radiogroup" id="theme-color-scheme-toggle"
+                 data-radius="20" data-glide="55" data-speed="1.4" data-squash="3.5">
+                <span class="rubber-thumb" aria-hidden="true"></span>
+                <label class="rubber-option">
+                    <input type="radio" name="color-scheme" value="light">
+                    <span><i class="fa-solid fa-sun" aria-hidden="true"></i>Light</span>
                 </label>
-                <label>
-                    <input type="radio" value="dark">
-                    <span>Dark</span>
+                <label class="rubber-option">
+                    <input type="radio" name="color-scheme" value="dark">
+                    <span><i class="fa-solid fa-moon" aria-hidden="true"></i>Dark</span>
                 </label>
-                <label>
-                    <input type="radio" value="auto">
-                    <span>Auto</span>
+                <label class="rubber-option">
+                    <input type="radio" name="color-scheme" value="auto">
+                    <span><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>Auto</span>
                 </label>
             </div>
         
@@ -1942,6 +1950,12 @@
         
 <script src="/js/main.js"></script>
 
+        
+        
+<script src="/js/rubber-segment.js"></script>
+
+        
+        
         
         
         

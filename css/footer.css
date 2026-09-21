@@ -52,19 +52,42 @@ footer .footer-extra-description {
     margin-bottom: -12px;
 }
 
-footer .color-scheme-toggle {
-    display: inline-block;
-    border-radius: 16px;
-    border: 1px solid var(--blue);
-    padding-bottom: 1px;
+/* --- Rubber segmented control (colour scheme switch) ----------------------
+   A sliding thumb replaces the per-option background: it stretches along the
+   travel, squashes as it lands, and can be dragged and flicked. The motion is
+   driven by js/rubber-segment.js, which writes the transform every frame; the
+   rules here only describe the resting shape. Without JS the :checked rule at
+   the bottom still paints the active segment, so the switch stays usable. */
+footer .rubber-segment {
+    /* Deliberately monochrome rather than the theme blue: black on dark grey in
+       light mode, white on light grey in dark mode. */
+    --seg-thumb: #1d1d1f;
+    --seg-idle: #535358;
+    --seg-border: #8a8a8f;
+    --seg-on-thumb: #ffffff;
+    position: relative;
+    display: inline-flex;
+    align-items: stretch;
     margin-top: 16px;
+    padding: 3px;
+    /* data-radius on the element is the source of truth; this matches it. */
+    border-radius: 20px;
+    border: 1px solid var(--seg-border);
+    /* The control owns horizontal drags, so the browser must not steal them
+       for scrolling, and a drag must not turn into a text selection. */
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-footer .color-scheme-toggle label {
-    margin: 1px;
+footer .rubber-option {
+    position: relative;
+    z-index: 1;
+    margin: 0;
 }
 
-footer .color-scheme-toggle label input {
+footer .rubber-option input {
     position: absolute;
     appearance: none;
     width: 0px;
@@ -74,18 +97,68 @@ footer .color-scheme-toggle label input {
     clip-path: inset(0 0 99.9% 99.9%);
 }
 
-footer .color-scheme-toggle label span {
+footer .rubber-option span {
+    /* Flex centring (not line-height) so the icon and the word share one
+       optical baseline and both sit dead centre in the pill. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    width: 62px;
+    height: 20px;
+    padding: 3px 8px;
     font-size: 14px;
-    line-height: 14px;
-    padding: 2px 4px;
-    border-radius: 12px;
-    color: var(--link);
-    width: 40px;
-    display: inline-block;
-    text-align: center;
+    line-height: 1;
+    border-radius: 17px;
+    color: var(--seg-idle);
+    cursor: pointer;
+    transition: color 0.18s ease;
 }
 
-footer .color-scheme-toggle label input:checked+span {
-    color: var(--white-txt-on-blue-bg);
-    background-color: var(--blue);
+footer .rubber-option span i {
+    font-size: 0.85em;
+    line-height: 1;
+}
+
+footer .rubber-option input:checked + span { color: var(--seg-on-thumb); }
+footer .rubber-option input:focus-visible + span { outline: 2px solid var(--seg-thumb); outline-offset: 2px; }
+
+footer .rubber-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 0;
+    height: calc(100% - 6px);
+    border-radius: 17px;
+    background: var(--seg-thumb);
+    pointer-events: none;
+    will-change: transform;
+}
+
+/* Dark: the pair flips to white on light grey. */
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] footer .rubber-segment {
+        --seg-thumb: #f5f5f7;
+        --seg-idle: #b0b0b6;
+        --seg-border: #6e6e75;
+        --seg-on-thumb: #1d1d1f;
+    }
+}
+body[data-color-scheme="dark"] footer .rubber-segment {
+    --seg-thumb: #f5f5f7;
+    --seg-idle: #b0b0b6;
+    --seg-border: #6e6e75;
+    --seg-on-thumb: #1d1d1f;
+}
+
+/* JS sizes and drives the thumb; until it does (or if it never runs) the thumb
+   stays hidden and the checked segment paints its own pill instead. */
+footer .rubber-segment:not(.rubber-ready) .rubber-thumb { display: none; }
+footer .rubber-segment:not(.rubber-ready) .rubber-option input:checked + span {
+    background-color: var(--seg-thumb);
+}
+/* While dragging, the pointer owns the gesture — no text cursor, no hover. */
+footer .rubber-segment.rubber-dragging .rubber-option span { cursor: grabbing; }
+@media (prefers-reduced-motion: reduce) {
+    footer .rubber-thumb { transition: none; }
 }

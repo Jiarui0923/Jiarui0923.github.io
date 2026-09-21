@@ -1,0 +1,152 @@
+/* Specular button ---------------------------------------------------------
+ * A CSS port of the React Bits "Specular Button"
+ * (reactbits.dev/components/specular-button): a glass pill with a rim light
+ * that tracks the cursor. The original drives the rim with a shader; here it
+ * is a conic gradient clipped to the border by a two-layer mask, with its
+ * start angle following the pointer.
+ *
+ * The values below are the preset the design was picked at — thickness 0.6,
+ * radius 36, blur 12, shineSize 13 — and js/specular-button.js overrides them
+ * from the matching data-* attributes if they differ.
+ */
+
+/* The rim angle has to be a registered property: an unregistered custom
+   property is a token, and a token cannot be interpolated, so the rim would
+   jump to the cursor instead of swinging to it. inherits must stay true — the
+   gradient lives on a pseudo-element. */
+@property --spec-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: true;
+}
+
+.specular-button {
+    --spec-thickness: 1.5px;   /* React prop: thickness 0.6 */
+    --spec-radius: 36px;       /* radius 36 */
+    --spec-blur: 12px;         /* blur 12 */
+    --spec-shine: 13%;         /* shineSize 13, as a share of the sweep */
+    --spec-angle: 0deg;
+
+    /* Light: brushed metal — a steel ring carrying a white glint, so the rim
+       still reads against the pale hero artwork. */
+    --spec-hot: #ffffff;
+    --spec-mid: #c9ced6;
+    --spec-dim: #8b919b;
+    --spec-glass: rgba(255, 255, 255, 0.22);
+    --spec-inner: rgba(255, 255, 255, 0.5);
+    --spec-text: #000000;
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.45em 1.25em;
+    border-radius: var(--spec-radius);
+    /* Same family as the hero's big title (inherited from body), but light
+       rather than its heading weight. */
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--spec-text);
+    background: var(--spec-glass);
+    -webkit-backdrop-filter: blur(var(--spec-blur)) saturate(150%);
+    backdrop-filter: blur(var(--spec-blur)) saturate(150%);
+    box-shadow: inset 0 1px 0 var(--spec-inner), 0 10px 30px rgba(0, 0, 0, 0.12);
+    isolation: isolate;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, font-size 0.5s,
+                --spec-angle 0.25s ease;
+}
+
+/* Never underlined — it is a button, and the theme underlines links on hover. */
+.specular-button,
+.specular-button:link,
+.specular-button:visited,
+.specular-button:hover,
+.specular-button:focus,
+.specular-button:active {
+    color: var(--spec-text);
+    text-decoration: none;
+}
+
+/* Shared shape for the rim and its glow: a conic gradient with two glints half
+   a turn apart, clipped to a border-width ring by masking the padding box out
+   of the border box. */
+.specular-button::before,
+.specular-button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: var(--spec-thickness);
+    background: conic-gradient(from var(--spec-angle),
+        var(--spec-dim) 0%,
+        var(--spec-mid) calc(var(--spec-shine) / 4),
+        var(--spec-hot) calc(var(--spec-shine) / 2),
+        var(--spec-mid) calc(var(--spec-shine) * 0.75),
+        var(--spec-dim) var(--spec-shine),
+        var(--spec-dim) 50%,
+        var(--spec-mid) calc(50% + var(--spec-shine) / 4),
+        var(--spec-hot) calc(50% + var(--spec-shine) / 2),
+        var(--spec-mid) calc(50% + var(--spec-shine) * 0.75),
+        var(--spec-dim) calc(50% + var(--spec-shine)),
+        var(--spec-dim) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* The glow is the same ring, blurred and pushed behind the label. */
+.specular-button::after {
+    inset: -1px;
+    z-index: -1;
+    filter: blur(5px);
+    opacity: 0.7;
+    transition: opacity 0.25s ease, filter 0.25s ease;
+}
+
+.specular-button .specular-label {
+    position: relative;
+    z-index: 1;
+}
+
+.specular-button:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 var(--spec-inner), 0 14px 34px rgba(0, 0, 0, 0.18);
+}
+.specular-button:hover::after { opacity: 1; filter: blur(7px); }
+.specular-button:active { transform: translateY(0); }
+
+/* Dark: white glint on light grey, matching the footer switch's palette. */
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .specular-button {
+        --spec-hot: #ffffff;
+        --spec-mid: rgba(255, 255, 255, 0.45);
+        --spec-dim: rgba(255, 255, 255, 0.12);
+        --spec-glass: rgba(255, 255, 255, 0.08);
+        --spec-inner: rgba(255, 255, 255, 0.18);
+        --spec-text: #ffffff;
+    }
+}
+body[data-color-scheme="dark"] .specular-button {
+    --spec-hot: #ffffff;
+    --spec-mid: rgba(255, 255, 255, 0.45);
+    --spec-dim: rgba(255, 255, 255, 0.12);
+    --spec-glass: rgba(255, 255, 255, 0.08);
+    --spec-inner: rgba(255, 255, 255, 0.18);
+    --spec-text: #ffffff;
+}
+
+/* Steps down with the rest of the hero type. */
+@media screen and (max-width: 800px) {
+    .specular-button { font-size: 0.95rem; }
+}
+@media screen and (max-width: 600px) {
+    .specular-button { font-size: 0.9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .specular-button { transition: none; }
+    .specular-button::after { filter: blur(4px); }
+}
