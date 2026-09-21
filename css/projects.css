@@ -130,9 +130,36 @@ body[data-color-scheme="dark"] .project-section img.theme-img-dark { display: bl
 .project-section .project-link.glass-surface--svg {
     backdrop-filter: var(--glass-filter) saturate(var(--glass-saturation));
 }
+/* Where an SVG filter cannot run in backdrop-filter (every browser on iOS),
+   a raking highlight and a bright top rim stand in for the refraction. */
 .project-section .project-link.glass-surface--fallback {
-    backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
-    -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(255, 255, 255, 0.3) 45%,
+            rgba(255, 255, 255, 0.45) 100%);
+    backdrop-filter: blur(16px) saturate(1.9) brightness(1.06);
+    -webkit-backdrop-filter: blur(16px) saturate(1.9) brightness(1.06);
+    box-shadow:
+        inset 0 1px 0 0 rgba(255, 255, 255, 0.85),
+        inset 0 0 12px 0 rgba(255, 255, 255, 0.25),
+        0 6px 20px rgba(17, 17, 26, 0.1);
+}
+body[data-color-scheme="dark"] .project-section .project-link.glass-surface--fallback {
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.06) 45%,
+            rgba(255, 255, 255, 0.15) 100%);
+}
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .project-section .project-link.glass-surface--fallback {
+        background:
+            linear-gradient(135deg,
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(255, 255, 255, 0.06) 45%,
+                rgba(255, 255, 255, 0.15) 100%);
+    }
 }
 .project-section .project-link:hover {
     color: var(--link);
@@ -143,7 +170,14 @@ body[data-color-scheme="dark"] .project-section img.theme-img-dark { display: bl
         0 8px 24px rgba(17, 17, 26, 0.12),
         0 16px 40px rgba(17, 17, 26, 0.08);
 }
-.project-section .project-link:active { transform: translateY(0); }
+/* Touch has no hover, so the press is the whole response. */
+.project-section .project-link:active {
+    transform: scale(0.97);
+    box-shadow:
+        0 0 2px 1px rgba(0, 0, 0, 0.16) inset,
+        0 0 10px 4px rgba(0, 0, 0, 0.1) inset,
+        0 2px 8px rgba(17, 17, 26, 0.1);
+}
 @media (prefers-color-scheme: dark) {
     body[data-color-scheme="auto"] .project-section .project-link {
         background: hsl(0 0% 0% / var(--glass-frost));

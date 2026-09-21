@@ -142,12 +142,41 @@
             else start()
         }
 
+        // Touch never fires pointerenter in a useful way - the finger arrives
+        // and leaves in one gesture - so a press drives the same response, and
+        // the release is held briefly so the spring is actually seen before the
+        // link navigates away.
+        var releaseTO = null
+        function press(chip, i) {
+            window.clearTimeout(releaseTO)
+            chips.forEach((c) => c.classList.remove('is-pressed'))
+            chip.classList.add('is-pressed')
+            apply(i)
+        }
+        function release() {
+            window.clearTimeout(releaseTO)
+            releaseTO = window.setTimeout(() => {
+                chips.forEach((c) => c.classList.remove('is-pressed'))
+                apply(null)
+            }, 260)
+        }
+
         chips.forEach((chip, i) => {
-            chip.addEventListener('pointerenter', () => apply(i))
+            chip.addEventListener('pointerenter', (e) => {
+                if (e.pointerType === 'touch') return  // handled by pointerdown
+                apply(i)
+            })
+            chip.addEventListener('pointerdown', () => press(chip, i))
+            chip.addEventListener('pointerup', release)
+            chip.addEventListener('pointercancel', release)
             chip.addEventListener('focus', () => apply(i))
             chip.addEventListener('blur', () => apply(null))
         })
-        rowEl.addEventListener('pointerleave', () => apply(null))
+        rowEl.addEventListener('pointerleave', (e) => {
+            if (e.pointerType === 'touch') return
+            chips.forEach((c) => c.classList.remove('is-pressed'))
+            apply(null)
+        })
         window.addEventListener('resize', measure)
         if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure)
         row.render()

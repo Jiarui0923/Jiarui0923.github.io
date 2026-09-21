@@ -95,7 +95,11 @@
                         margin-left 280ms var(--jr-ease-out);
         }
         .jelly-chip:hover .jelly-chip__label,
-        .jelly-chip:focus-visible .jelly-chip__label { max-width: 220px; opacity: 1; margin-left: 0.45em; }
+        .jelly-chip:focus-visible .jelly-chip__label,
+        .jelly-chip.is-pressed .jelly-chip__label { max-width: 220px; opacity: 1; margin-left: 0.45em; }
+        /* Touch has no hover, so a press stands in for it. */
+        .jelly-chip { touch-action: manipulation; }
+        .jelly-chip.is-pressed .jelly-chip__skin { background: var(--jr-chip-hover); }
         /* Nav bar chips: transparent, and blurring whatever shows through the
            glass bar behind them. */
         .jelly-row--nav {
@@ -132,9 +136,28 @@
             --jr-chip-hover: rgba(255, 255, 255, 0.16);
             --jr-border: transparent;
         }
-        /* No hover to open them with, so touch shows every label. */
-        @media (hover: none) {
-            .jelly-chip__label { max-width: 220px; opacity: 1; margin-left: 0.45em; }
+        /* Bulma hides .navbar-menu below 1024px, which on this page would hide
+           the entire link row and leave a bar holding nothing but a burger.
+           Show it inline instead, stripped of the dropdown dressing Bulma gives
+           it on mobile, and drop the burger since the Cite chip is right there. */
+        @media screen and (max-width: 1023px) {
+            .custom-frosted-navbar { display: flex; align-items: center; }
+            .custom-frosted-navbar .navbar-brand { flex: 0 0 auto; min-height: 0; }
+            .custom-frosted-navbar .navbar-menu {
+                display: flex; align-items: center; flex: 1 1 auto; min-width: 0;
+                background: transparent; box-shadow: none; padding: 0;
+            }
+            .custom-frosted-navbar .navbar-end {
+                display: flex; align-items: center; margin-left: auto; flex: 0 0 auto;
+            }
+            .custom-frosted-navbar .navbar-burger { display: none; }
+            .custom-frosted-navbar .navbar-brand .navbar-item h1 { font-size: 0.95rem; }
+            .custom-frosted-navbar .navbar-item { padding: 0.25rem 0.5rem; }
+            .jelly-row--nav { --jr-h: 28px; --jr-px: 8px; }
+        }
+        @media screen and (max-width: 600px) {
+            /* Narrow: the section indicator gives up its room to the chips. */
+            .custom-frosted-navbar .navbar-center { display: none; }
         }
         @media (prefers-reduced-motion: reduce) {
             .jelly-chip__label { transition: none; }
@@ -201,16 +224,26 @@
                 0 8px 24px rgba(17, 17, 26, 0.05) inset,
                 0 16px 56px rgba(17, 17, 26, 0.05) inset;
         }
+        /* No SVG filter in backdrop-filter here - that is every browser on
+           iOS, since they all run WebKit - so the refraction is faked: a raking
+           highlight across the surface plus a bright top rim, over a stronger
+           blur. It reads as glass rather than as a flat frosted panel. */
         .navbar-container.glass-surface--fallback {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
-            -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.6) 0%,
+                    rgba(255, 255, 255, 0.28) 38%,
+                    rgba(255, 255, 255, 0.2) 62%,
+                    rgba(255, 255, 255, 0.45) 100%);
+            backdrop-filter: blur(18px) saturate(1.9) brightness(1.06);
+            -webkit-backdrop-filter: blur(18px) saturate(1.9) brightness(1.06);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow:
-                0 8px 32px 0 rgba(31, 38, 135, 0.2),
-                0 2px 16px 0 rgba(31, 38, 135, 0.1),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
-                inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.3),
+                inset 0 0 14px 0 rgba(255, 255, 255, 0.25),
+                0 8px 32px 0 rgba(31, 38, 135, 0.18),
+                0 2px 16px 0 rgba(31, 38, 135, 0.1);
         }
         @media (prefers-color-scheme: dark) {
             html:not([data-theme="light"]) .navbar-container.glass-surface--svg {
@@ -221,13 +254,20 @@
                     0 4px 16px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
             }
             html:not([data-theme="light"]) .navbar-container.glass-surface--fallback {
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
-                -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
-                border: 1px solid rgba(255, 255, 255, 0.2);
+                background:
+                    linear-gradient(135deg,
+                        rgba(255, 255, 255, 0.22) 0%,
+                        rgba(255, 255, 255, 0.07) 38%,
+                        rgba(255, 255, 255, 0.05) 62%,
+                        rgba(255, 255, 255, 0.16) 100%);
+                backdrop-filter: blur(18px) saturate(1.9) brightness(1.15);
+                -webkit-backdrop-filter: blur(18px) saturate(1.9) brightness(1.15);
+                border: 1px solid rgba(255, 255, 255, 0.22);
                 box-shadow:
-                    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-                    inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+                    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+                    inset 0 -1px 0 0 rgba(255, 255, 255, 0.12),
+                    inset 0 0 14px 0 rgba(255, 255, 255, 0.1),
+                    0 8px 32px 0 rgba(0, 0, 0, 0.35);
             }
         }
         html[data-theme="dark"] .navbar-container.glass-surface--svg {
@@ -238,13 +278,20 @@
                 0 4px 16px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
         }
         html[data-theme="dark"] .navbar-container.glass-surface--fallback {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
-            -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background:
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.22) 0%,
+                    rgba(255, 255, 255, 0.07) 38%,
+                    rgba(255, 255, 255, 0.05) 62%,
+                    rgba(255, 255, 255, 0.16) 100%);
+            backdrop-filter: blur(18px) saturate(1.9) brightness(1.15);
+            -webkit-backdrop-filter: blur(18px) saturate(1.9) brightness(1.15);
+            border: 1px solid rgba(255, 255, 255, 0.22);
             box-shadow:
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-                inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.12),
+                inset 0 0 14px 0 rgba(255, 255, 255, 0.1),
+                0 8px 32px 0 rgba(0, 0, 0, 0.35);
         }
         /* The bar itself no longer frosts anything — the surface around it does. */
         .custom-frosted-navbar {

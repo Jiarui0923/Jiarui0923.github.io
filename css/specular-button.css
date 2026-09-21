@@ -116,7 +116,12 @@
     box-shadow: inset 0 1px 0 var(--spec-inner), 0 14px 34px rgba(0, 0, 0, 0.18);
 }
 .specular-button:hover::after { opacity: 1; filter: blur(7px); }
-.specular-button:active { transform: translateY(0); }
+/* Touch has no hover, so the press carries the response on its own. */
+.specular-button:active {
+    transform: scale(0.97);
+    box-shadow: inset 0 1px 0 var(--spec-inner), 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+.specular-button:active::after { opacity: 1; filter: blur(8px); }
 
 /* Dark: white glint on light grey, matching the footer switch's palette. */
 @media (prefers-color-scheme: dark) {

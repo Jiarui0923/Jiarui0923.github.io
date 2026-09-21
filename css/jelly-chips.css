@@ -86,10 +86,18 @@
                 margin-left 0.28s var(--jr-ease-out);
 }
 .jelly-chip:hover .jelly-chip__label,
-.jelly-chip:focus-visible .jelly-chip__label {
+.jelly-chip:focus-visible .jelly-chip__label,
+.jelly-chip.is-pressed .jelly-chip__label {
     max-width: 14rem;
     opacity: 1;
     margin-left: 0.45em;
+}
+/* Touch has no hover, so a press stands in for it: js/jelly-chips.js adds
+   .is-pressed on pointerdown and the chip opens and swells under the finger. */
+.jelly-chip { touch-action: manipulation; }
+.jelly-chip.is-pressed .jelly-chip__skin {
+    background: var(--jr-chip-hover);
+    color: var(--jr-text-hover);
 }
 
 /* Resume socials: a taller pill, and the row wraps because there are many.
@@ -109,12 +117,8 @@
 /* Scoped to the open state: unscoped, this outranks the collapsed
    .jelly-chip__label rule and the chip never closes. */
 .jelly-row--social .jelly-chip:hover .jelly-chip__label,
-.jelly-row--social .jelly-chip:focus-visible .jelly-chip__label { max-width: 16rem; }
-
-/* No hover to open them with, so touch shows every label. */
-@media (hover: none) {
-    .jelly-chip__label { max-width: 14rem; opacity: 1; margin-left: 0.45em; }
-}
+.jelly-row--social .jelly-chip:focus-visible .jelly-chip__label,
+.jelly-row--social .jelly-chip.is-pressed .jelly-chip__label { max-width: 16rem; }
 
 @media screen and (max-width: 600px) {
     .jelly-row--social { --jr-h: 2.1rem; }

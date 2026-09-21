@@ -68,11 +68,15 @@
 
     // Pointer coordinates are viewport-relative, so scrolling moves the button
     // under a stationary cursor and the angle has to be recomputed.
-    document.addEventListener('pointermove', (e) => {
+    function follow(e) {
         pointerX = e.clientX
         pointerY = e.clientY
         schedule()
-    }, { passive: true })
+    }
+    document.addEventListener('pointermove', follow, { passive: true })
+    // Touch reports no position until a finger lands, so a tap anywhere aims
+    // the rim; without this the button sits at its resting angle on a phone.
+    document.addEventListener('pointerdown', follow, { passive: true })
     window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
 })()
