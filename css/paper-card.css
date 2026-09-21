@@ -60,13 +60,7 @@ body[data-color-scheme="dark"] .paper-card { background: rgba(255, 255, 255, 0.0
 .paper-card-title a:hover { color: var(--link); }
 .paper-card-venue { margin-top: 0.3rem; font-size: 0.9rem; color: var(--black-4); overflow-wrap: break-word; }
 .paper-card-authors { margin-top: 0.2rem; font-size: 0.88rem; color: var(--black-2); overflow-wrap: break-word; }
-.paper-card-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
-.paper-card-link {
-    display: inline-flex; align-items: center; gap: 0.3rem;
-    padding: 0.3rem 0.7rem; border-radius: 1rem; font-size: 0.8rem;
-    text-decoration: none; background: var(--white-2); color: var(--black-2);
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-.paper-card-link:hover { background: var(--link); color: #fff; }
-.paper-card-link i { font-size: 0.85rem; }
+/* The link pills are jelly chips (css/jelly-chips.css); the row only needs
+   its place in the card. */
+.paper-card-links { flex-wrap: wrap; margin-top: 0.6rem; }
 .paper-card-missing { color: var(--grey); font-style: italic; }

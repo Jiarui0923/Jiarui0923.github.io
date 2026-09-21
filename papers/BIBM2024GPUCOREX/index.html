@@ -17,6 +17,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/github.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/theme/material-darker.min.css">
+    
+    
+<link rel="stylesheet" href="/css/var.css">
+
+    
+<link rel="stylesheet" href="/css/nav.css">
+
+    
+<link rel="stylesheet" href="/css/footer.css">
+
     <style>
         :root {
             --font-sans: 'Inter', sans-serif;
@@ -29,11 +39,106 @@
         body { font-family: var(--font-sans); }
         .is-dmserif { font-family: var(--font-dserif); }
         .is-mono { font-family: var(--font-mono); }
-        .hover-expand .text {
-            opacity: 0; max-width: 0; overflow: hidden; white-space: nowrap;
-            transition: opacity 0.3s ease, max-width 0.3s ease; display: inline-block; vertical-align: middle;
+        /* Link chips — a port of React Bits' Jelly Radio
+           (reactbits.dev/micro/jelly-radio) at gap 4, barge 0. Upstream is a
+           radio group driven by clicks; here the chips are links, so hover
+           takes the place of selection: the hovered chip swells and opens to
+           show its label while its neighbours barge aside and shrink. The
+           springs live in the script at the bottom of this file; these rules
+           only describe the resting shape. */
+        .jelly-row {
+            --jr-gap: 4px;
+            --jr-radius: 18px;
+            --jr-h: 32px;
+            --jr-font: 13px;
+            --jr-px: 12px;
+            --jr-pad-x: 12px;   /* both recomputed by the script from the */
+            --jr-pad-y: 4px;    /* measured chip size, as upstream does */
+            --jr-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --jr-chip: rgba(0, 0, 0, 0.05);
+            --jr-chip-hover: rgba(0, 0, 0, 0.09);
+            --jr-border: rgba(0, 0, 0, 0.08);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--jr-gap);
+            padding: var(--jr-pad-y) var(--jr-pad-x);
+            user-select: none;
+            -webkit-user-select: none;
         }
-        .hover-expand:hover .text { opacity: 1; max-width: 200px; }
+        .jelly-chip {
+            position: relative; margin: 0; padding: 0; border: 0;
+            background: none; color: inherit; font: inherit; text-decoration: none;
+            transform-origin: 50% 50%; will-change: transform;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .jelly-chip:hover, .jelly-chip:focus { text-decoration: none; color: inherit; }
+        .jelly-chip__skin {
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            height: var(--jr-h); padding: 0 var(--jr-px); border-radius: var(--jr-radius);
+            border: 1px solid var(--jr-border);
+            background: var(--jr-chip); color: inherit;
+            font-size: var(--jr-font); font-weight: 500; line-height: 1; white-space: nowrap;
+            overflow: hidden;
+            transition: background-color 200ms ease, border-color 200ms ease;
+        }
+        .jelly-chip:hover .jelly-chip__skin,
+        .jelly-chip:focus-visible .jelly-chip__skin { background: var(--jr-chip-hover); }
+        .jelly-chip__icon { display: inline-flex; flex: 0 0 auto; }
+        /* Collapsed to nothing until the chip is hovered; max-width animates
+           because the label has no fixed width to transition from. */
+        .jelly-chip__label {
+            /* min-width: 0 because a flex item's automatic minimum size would
+               outrank max-width: 0 and keep the label at full width. */
+            display: inline-block; min-width: 0; max-width: 0; opacity: 0; margin-left: 0;
+            overflow: hidden; white-space: nowrap;
+            transition: max-width 280ms var(--jr-ease-out), opacity 200ms ease,
+                        margin-left 280ms var(--jr-ease-out);
+        }
+        .jelly-chip:hover .jelly-chip__label,
+        .jelly-chip:focus-visible .jelly-chip__label { max-width: 220px; opacity: 1; margin-left: 0.45em; }
+        /* Nav bar chips: transparent, and blurring whatever shows through the
+           glass bar behind them. */
+        .jelly-row--nav {
+            --jr-h: 30px;
+            --jr-font: 12px;
+            --jr-px: 10px;
+            --jr-chip: transparent;
+            --jr-chip-hover: rgba(0, 0, 0, 0.08);
+            --jr-border: transparent;
+        }
+        .jelly-row--nav .jelly-chip__skin {
+            backdrop-filter: blur(8px) saturate(1.3);
+            -webkit-backdrop-filter: blur(8px) saturate(1.3);
+        }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) .jelly-row {
+                --jr-chip: rgba(255, 255, 255, 0.1);
+                --jr-chip-hover: rgba(255, 255, 255, 0.18);
+                --jr-border: rgba(255, 255, 255, 0.14);
+            }
+            html:not([data-theme="light"]) .jelly-row--nav {
+                --jr-chip: transparent;
+                --jr-chip-hover: rgba(255, 255, 255, 0.16);
+                --jr-border: transparent;
+            }
+        }
+        html[data-theme="dark"] .jelly-row {
+            --jr-chip: rgba(255, 255, 255, 0.1);
+            --jr-chip-hover: rgba(255, 255, 255, 0.18);
+            --jr-border: rgba(255, 255, 255, 0.14);
+        }
+        html[data-theme="dark"] .jelly-row--nav {
+            --jr-chip: transparent;
+            --jr-chip-hover: rgba(255, 255, 255, 0.16);
+            --jr-border: transparent;
+        }
+        /* No hover to open them with, so touch shows every label. */
+        @media (hover: none) {
+            .jelly-chip__label { max-width: 220px; opacity: 1; margin-left: 0.45em; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .jelly-chip__label { transition: none; }
+        }
         .sup { font-size: 0.7em; vertical-align: super; }
         .sup[data-symbol="plus"]::after { content: "⁺"; }
         .sup[data-symbol="minus"]::after { content: "⁻"; }
@@ -43,23 +148,110 @@
         .sup[data-number="5"]::after { content: "⁵"; } .sup[data-number="6"]::after { content: "⁶"; }
         .sup[data-number="7"]::after { content: "⁷"; } .sup[data-number="8"]::after { content: "⁸"; }
         .sup[data-number="9"]::after { content: "⁹"; } .sup[data-number="0"]::after { content: "⁰"; }
+        /* Bottom nav as a glass surface — a port of React Bits' GlassSurface
+           (reactbits.dev/components/glass-surface) at backgroundOpacity 0.77,
+           distortionScale -150, blur 30, displace 0.9. The refraction is a real
+           SVG displacement map fed to backdrop-filter, generated at the bar's
+           measured size by the script at the bottom of this file. Browsers
+           without backdrop-filter: url() — Safari and Firefox — get the plain
+           blur of .glass-surface--fallback instead. The component's light-dark()
+           and oklch color-mix() are written out per theme here, since this page
+           switches on html[data-theme]. */
+        /* Tucked out of the way once the footer is on screen, so the bar
+           never floats over it. The base translateX has to be repeated in the
+           tucked state or the bar would jump to the right as it leaves. */
+        .navbar-container.is-tucked {
+            opacity: 0;
+            transform: translateX(-50%) translateY(150%);
+            pointer-events: none;
+        }
         .navbar-container {
+            transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             position: fixed; bottom: 1rem; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 1200px; z-index: 1000; border-radius: 2rem;
-            border-color: lightgrey; border-width: 0.5pt; border-style: solid;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); overflow: hidden;
+            overflow: hidden;
+            --glass-frost: 0.77;
+            --glass-saturation: 1;
+            /* Plain glass as the resting state, so the bar is still legible
+               before the script classifies the browser (or if it never runs).
+               Both surface classes override it. */
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px) saturate(1.8);
+            -webkit-backdrop-filter: blur(12px) saturate(1.8);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) .navbar-container { background: rgba(255, 255, 255, 0.1); }
+        }
+        html[data-theme="dark"] .navbar-container { background: rgba(255, 255, 255, 0.1); }
+        .glass-surface__filter {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            opacity: 0; pointer-events: none; z-index: -1;
+        }
+        .navbar-container.glass-surface--svg {
+            background: hsl(0 0% 100% / var(--glass-frost));
+            backdrop-filter: url(#glass-filter-navbar) saturate(var(--glass-saturation));
+            box-shadow:
+                0 0 2px 1px rgba(0, 0, 0, 0.15) inset,
+                0 0 10px 4px rgba(0, 0, 0, 0.1) inset,
+                0 4px 16px rgba(17, 17, 26, 0.05),
+                0 8px 24px rgba(17, 17, 26, 0.05),
+                0 16px 56px rgba(17, 17, 26, 0.05),
+                0 4px 16px rgba(17, 17, 26, 0.05) inset,
+                0 8px 24px rgba(17, 17, 26, 0.05) inset,
+                0 16px 56px rgba(17, 17, 26, 0.05) inset;
+        }
+        .navbar-container.glass-surface--fallback {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+            -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 8px 32px 0 rgba(31, 38, 135, 0.2),
+                0 2px 16px 0 rgba(31, 38, 135, 0.1),
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+        }
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) .navbar-container.glass-surface--svg {
+                background: hsl(0 0% 0% / var(--glass-frost));
+                box-shadow:
+                    0 0 2px 1px rgba(255, 255, 255, 0.35) inset,
+                    0 0 10px 4px rgba(255, 255, 255, 0.15) inset,
+                    0 4px 16px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+            }
+            html:not([data-theme="light"]) .navbar-container.glass-surface--fallback {
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
+                -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow:
+                    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+                    inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+            }
+        }
+        html[data-theme="dark"] .navbar-container.glass-surface--svg {
+            background: hsl(0 0% 0% / var(--glass-frost));
+            box-shadow:
+                0 0 2px 1px rgba(255, 255, 255, 0.35) inset,
+                0 0 10px 4px rgba(255, 255, 255, 0.15) inset,
+                0 4px 16px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+        html[data-theme="dark"] .navbar-container.glass-surface--fallback {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
+            -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+        }
+        /* The bar itself no longer frosts anything — the surface around it does. */
         .custom-frosted-navbar {
-            background-color: rgba(255, 255, 255, 0.2); backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px); border-radius: 1rem;
+            background-color: transparent; border-radius: 1rem;
             padding-left: 1rem; padding-right: 1rem; height: 100%;
         }
         .custom-frosted-navbar .navbar-item { background-color: transparent !important; }
-        .frosted-button {
-            background-color: transparent !important; backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px); box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
-        }
-        .frosted-button:hover { background-color: rgba(50, 152, 220, 0.1) !important; }
         .navbar-center { flex-grow: 1; display: flex; justify-content: center; align-items: center; overflow: hidden; white-space: nowrap; text-align: center; min-width: 0; }
         #section-indicator-container { display: flex; align-items: center; justify-content: center; height: 100%; overflow: hidden; }
         .section-nav-link { display: inline-block; cursor: pointer; text-decoration: none; transition: all 0.3s ease-in-out; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 15vw; }
@@ -97,13 +289,118 @@
         html[data-theme="dark"] .award-emerald { --award-c: #34d399; }
         html[data-theme="dark"] .award-sky { --award-c: #38bdf8; }
         html[data-theme="dark"] .award-fuchsia { --award-c: #e879f9; }
+        /* The colour-scheme switch rides in the shared footer now, styled by
+           css/footer.css, so its rules are no longer inlined here. Dark rules
+           below still key off html[data-theme]; the script at the end of the
+           page keeps that attribute in step with body[data-color-scheme], which
+           is what the theme's own CSS switches on. */
+        .paper-doc-footer {
+            max-width: 980px; margin: 0 auto; padding: 2.5rem 16px 0.5rem;
+            text-align: center; font-size: 0.9rem; color: var(--black-4);
+        }
+        .paper-doc-footer p { margin: 0.2rem 0; }
+        /* Clears the shared nav, which is fixed to the top of the viewport. */
+        body { margin-top: 56px; }
+        /* Line the shared nav up with the masthead below it rather than the
+           theme's 980px column: the venue row sits directly in .hero-body, so
+           its left edge is that block's 1.5rem padding (is-small hero), with no
+           container centring it. */
+        #theme-nav > .inner {
+            width: auto;
+            max-width: none;
+            padding: 0 1.5rem;
+        }
+        /* Bulma also styles .title, and its .title:not(:last-child) rule
+           outranks the theme's nav/footer rules, so the shared chrome inherits
+           a 1.5rem gap and Bulma's fixed grey. Both are undone here; the
+           selectors are deliberately specific enough to win. */
+        #theme-nav .title,
+        #theme-nav .title:not(:last-child) {
+            margin: 0;
+            font-size: 20px;
+            font-weight: normal;
+            line-height: 48px;
+            word-break: normal;
+        }
+        footer .links .title {
+            margin: 0 0 8px;
+            font-size: 17px;
+            font-weight: 500;
+            line-height: 1.3;
+            color: var(--black-2);
+            word-break: normal;
+        }
+        /* Bulma's bare <a> colour would override the theme's link colour in the
+           footer, where the theme only colours .item. */
+        footer a { color: var(--link); }
+        footer .item { color: var(--footer-link-grey); }
         .CodeMirror { font-family: 'Cascadia Code', 'Cascadia Mono', 'JetBrains Mono', 'Fira Code', monospace; height: auto !important; }
         .CodeMirror-scroll { overflow: hidden !important; min-height: auto; }
     </style>
 <meta name="generator" content="Hexo 6.3.0"></head>
-<body>
+<body data-color-scheme="auto" data-config-root="/">
+    <script>
+    /* Apply the saved colour scheme before first paint. main.js does this too,
+       but only once the footer (and its switch) exists at the end of the page,
+       which would be a visible flash away. */
+    (function(){
+        var match = document.cookie.split('; ').find(function(row) { return row.indexOf('color-scheme=') === 0; });
+        var scheme = match ? match.split('=')[1] : 'auto';
+        document.body.setAttribute('data-color-scheme', scheme);
+        if (scheme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+        else if (scheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+    </script>
+
+    <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/"><img class="nav-favicon" src="/images/favicon.png" alt="">Jiarui Li</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/papers">Publications</a>
+            
+            
+            
+            <a class="nav-item" href="/projects">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/resume">Resume</a>
+            
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search/" aria-label="Search">&nbsp;</a>
+            
+            
+            
+        </div>
+    </div>
+</nav>
+
     <div class="navbar-container">
-        <nav class="navbar custom-frosted-navbar" role="navigation" aria-label="main navigation">
+        <svg class="glass-surface__filter" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <defs>
+                <filter id="glass-filter-navbar" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
+                    <feImage id="glass-map-navbar" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
+                    <!-- One displacement pass per channel, each offset a little, so the
+                         edge refracts with a touch of chromatic aberration. -->
+                    <feDisplacementMap id="glass-red-navbar" in="SourceGraphic" in2="map" xChannelSelector="R" yChannelSelector="G" result="dispRed" />
+                    <feColorMatrix in="dispRed" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="red" />
+                    <feDisplacementMap id="glass-green-navbar" in="SourceGraphic" in2="map" xChannelSelector="R" yChannelSelector="G" result="dispGreen" />
+                    <feColorMatrix in="dispGreen" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="green" />
+                    <feDisplacementMap id="glass-blue-navbar" in="SourceGraphic" in2="map" xChannelSelector="R" yChannelSelector="G" result="dispBlue" />
+                    <feColorMatrix in="dispBlue" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blue" />
+                    <feBlend in="red" in2="green" mode="screen" result="rg" />
+                    <feBlend in="rg" in2="blue" mode="screen" result="output" />
+                    <feGaussianBlur id="glass-blur-navbar" in="output" stdDeviation="0.9" />
+                </filter>
+            </defs>
+        </svg>
+        <div class="navbar custom-frosted-navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <div class="navbar-item">
                     <h1 class="is-size-5 has-text-weight-bold">BIBM 2024</h1>
@@ -119,33 +416,43 @@
                     </div>
                 </div>
                 <div class="navbar-end">
+                    <div class="jelly-row jelly-row--nav is-dmserif">
 
-                    <a class="navbar-item hover-expand is-small is-dmserif" target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/10821831">
-                        <span class="icon" style="margin-right: -5pt;"><i class="ai ai-ieee"></i></span>
-                        <span class="text">&nbsp;&nbsp;Paper</span>
-                    </a>
+                        <a class="jelly-chip" target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/10821831">
+                            <span class="jelly-chip__skin">
+                                <span class="jelly-chip__icon"><i class="ai ai-ieee"></i></span>
+                                <span class="jelly-chip__label">Paper</span>
+                            </span>
+                        </a>
 
-                    <a class="navbar-item hover-expand is-small is-dmserif" href="li2024gpu.pdf">
-                        <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-file-pdf"></i></span>
-                        <span class="text">&nbsp;&nbsp;PDF</span>
-                    </a>
+                        <a class="jelly-chip" href="li2024gpu.pdf">
+                            <span class="jelly-chip__skin">
+                                <span class="jelly-chip__icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                <span class="jelly-chip__label">PDF</span>
+                            </span>
+                        </a>
 
-                    <a class="navbar-item hover-expand is-small is-dmserif" target="_blank" rel="noopener" href="https://github.com/Jiarui0923/gpuCOREX">
-                        <span class="icon" style="margin-right: -5pt;"><i class="fa-brands fa-github"></i></span>
-                        <span class="text">&nbsp;&nbsp;GitHub</span>
-                    </a>
+                        <a class="jelly-chip" target="_blank" rel="noopener" href="https://github.com/Jiarui0923/gpuCOREX">
+                            <span class="jelly-chip__skin">
+                                <span class="jelly-chip__icon"><i class="fa-brands fa-github"></i></span>
+                                <span class="jelly-chip__label">GitHub</span>
+                            </span>
+                        </a>
 
-                    <a class="navbar-item button is-ghost hover-expand is-link is-outlined is-dmserif" href="#cite">
-                        <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>
-                        <span class="text">&nbsp;&nbsp;Cite</span>
-                    </a>
+                        <a class="jelly-chip" href="#cite">
+                            <span class="jelly-chip__skin">
+                                <span class="jelly-chip__icon"><i class="fa-solid fa-quote-right"></i></span>
+                                <span class="jelly-chip__label">Cite</span>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
     </div>
 
     <div class="hero is-small">
-        <nav class="hero-body">
+        <div class="hero-body">
             <article class="media">
                 
                 <figure class="media-left">
@@ -161,7 +468,7 @@
                     <h1 class="subtitle">BIBM</h1>
                 </div>
             </article>
-        </nav>
+        </div>
     </div>
 
     <section class="hero is-bold is-halfheight mt-0">
@@ -190,32 +497,40 @@
 <span class="sup" data-symbol="star"></span>Corresponding Author(s)<br>
                     </p>
                     <p>
-                        <div class="buttons has-addons is-dmserif">
+                        <div class="jelly-row is-dmserif">
 
-                            <a class="button is-small is-rounded frosted-button " target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/10821831">
-                                <span class="icon" style="margin-right: -5pt;"><i class="ai ai-ieee"></i></span>
-                                <span class="text">&nbsp;&nbsp;Paper</span>
+                            <a class="jelly-chip" target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/10821831">
+                                <span class="jelly-chip__skin">
+                                    <span class="jelly-chip__icon"><i class="ai ai-ieee"></i></span>
+                                    <span class="jelly-chip__label">Paper</span>
+                                </span>
                             </a>
 
-                            <a class="button is-small is-rounded frosted-button hover-expand" href="li2024gpu.pdf">
-                                <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-file-pdf"></i></span>
-                                <span class="text">&nbsp;&nbsp;PDF</span>
+                            <a class="jelly-chip" href="li2024gpu.pdf">
+                                <span class="jelly-chip__skin">
+                                    <span class="jelly-chip__icon"><i class="fa-solid fa-file-pdf"></i></span>
+                                    <span class="jelly-chip__label">PDF</span>
+                                </span>
                             </a>
 
-                            <a class="button is-small is-rounded frosted-button hover-expand" target="_blank" rel="noopener" href="https://github.com/Jiarui0923/gpuCOREX">
-                                <span class="icon" style="margin-right: -5pt;"><i class="fa-brands fa-github"></i></span>
-                                <span class="text">&nbsp;&nbsp;GitHub</span>
+                            <a class="jelly-chip" target="_blank" rel="noopener" href="https://github.com/Jiarui0923/gpuCOREX">
+                                <span class="jelly-chip__skin">
+                                    <span class="jelly-chip__icon"><i class="fa-brands fa-github"></i></span>
+                                    <span class="jelly-chip__label">GitHub</span>
+                                </span>
                             </a>
 
-                            <a class="button is-small is-rounded frosted-button hover-expand is-link is-outlined" href="#cite">
-                                <span class="icon" style="margin-right: -5pt;"><i class="fa-solid fa-quote-right"></i></span>
-                                <span class="text">&nbsp;&nbsp;Cite</span>
+                            <a class="jelly-chip" href="#cite">
+                                <span class="jelly-chip__skin">
+                                    <span class="jelly-chip__icon"><i class="fa-solid fa-quote-right"></i></span>
+                                    <span class="jelly-chip__label">Cite</span>
+                                </span>
                             </a>
                         </div>
                     </p>
                 </div>
                 
-                <nav class="breadcrumb is-small" aria-label="breadcrumbs">
+                <div class="breadcrumb is-small" role="navigation" aria-label="breadcrumbs">
                     <ul>
 
                         
@@ -231,7 +546,7 @@
                         
 
                     </ul>
-                </nav>
+                </div>
                 
             </div>
         </div>
@@ -275,15 +590,62 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>CC BY 4.0</p>
-            <p>Build <a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/paperpage">PaperPage</a> for your paper.</p>
-            <a id="theme-toggle" class="button">
-                <span class="icon"><i class="fa-solid fa-circle-half-stroke"></i></span>
-            </a>
+    
+    <div class="paper-doc-footer">
+        <p>CC BY 4.0</p>
+        <p>Build <a target="_blank" rel="noopener" href="https://github.com/Jiarui0923/paperpage">PaperPage</a> for your paper.</p>
+    </div>
+    <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Jerry</h2>
+                
+                <a href="/resume" class="item">Resume</a>
+                
+                <a href="/papers" class="item">Publications</a>
+                
+                <a href="/projects" class="item">Projects</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+            </div>
+            
         </div>
-    </footer>
+        <span>&copy; 2026 Jiarui Li<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> | Migrated from Cupertino theme </span>
+        
+        
+            <br>
+            
+            <div class="color-scheme-toggle rubber-segment" role="radiogroup" id="theme-color-scheme-toggle"
+                 data-radius="20" data-glide="55" data-speed="1.4" data-squash="3.5">
+                <span class="rubber-thumb" aria-hidden="true"></span>
+                <label class="rubber-option">
+                    <input type="radio" name="color-scheme" value="light">
+                    <span><i class="fa-solid fa-sun" aria-hidden="true"></i>Light</span>
+                </label>
+                <label class="rubber-option">
+                    <input type="radio" name="color-scheme" value="dark">
+                    <span><i class="fa-solid fa-moon" aria-hidden="true"></i>Dark</span>
+                </label>
+                <label class="rubber-option">
+                    <input type="radio" name="color-scheme" value="auto">
+                    <span><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+    
+    
+<script src="/js/main.js"></script>
+
+    
+<script src="/js/rubber-segment.js"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js"></script>
@@ -294,27 +656,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/mode/yaml/yaml.min.js"></script>
     <script>
     (function(){
-        // Theme toggle — must run first so data-theme is correct before CM init
-        var toggleBtn = document.getElementById('theme-toggle');
+        // Theme — must run first so data-theme is correct before CM init. The
+        // switch lives in the shared footer and is owned by main.js, which
+        // writes body[data-color-scheme]; this page's CSS (and CodeMirror, and
+        // the QR code) key off html[data-theme], so the two are mirrored here.
         var htmlEl = document.documentElement;
-        var theme = localStorage.getItem('theme') || 'auto';
-        function updateBtn() {
-            var icon = toggleBtn.querySelector('.icon i');
-            icon.classList.remove('fa-sun','fa-moon','fa-circle-half-stroke');
-            icon.classList.add(theme === 'light' ? 'fa-sun' : theme === 'dark' ? 'fa-moon' : 'fa-circle-half-stroke');
-        }
         function applyTheme() {
-            if (theme === 'light') htmlEl.setAttribute('data-theme','light');
-            else if (theme === 'dark') htmlEl.setAttribute('data-theme','dark');
-            else htmlEl.removeAttribute('data-theme');
-            updateBtn();
-            localStorage.setItem('theme', theme);
+            var scheme = document.body.getAttribute('data-color-scheme') || 'auto';
+            if (scheme === 'light') htmlEl.setAttribute('data-theme','light');
+            else if (scheme === 'dark') htmlEl.setAttribute('data-theme','dark');
+            else htmlEl.removeAttribute('data-theme');  // auto: follow the OS
         }
         applyTheme();
-        toggleBtn.addEventListener('click', function() {
-            theme = theme === 'auto' ? 'light' : theme === 'light' ? 'dark' : 'auto';
-            applyTheme();
-        });
+        // Called by name, not captured: the QR code block below swaps
+        // applyTheme for a wrapper that also redraws the code.
+        new MutationObserver(function() { applyTheme(); })
+            .observe(document.body, { attributes: true, attributeFilter: ['data-color-scheme'] });
 
         // CodeMirror theme depends on restored page theme
         var cmTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
@@ -473,6 +830,96 @@
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     })();
     </script>
+
+    <script>
+    /* Glass surface for the bottom nav --------------------------------------
+     * Port of the React Bits GlassSurface effect: a displacement map is drawn
+     * as an SVG data URI at the bar's measured size (a red horizontal ramp, a
+     * blue vertical one differenced over it, and a blurred grey core), then fed
+     * to the filter's three feDisplacementMap passes through backdrop-filter.
+     * Preset: backgroundOpacity 0.77, distortionScale -150, blur 30,
+     * displace 0.9.
+     */
+    (function(){
+        var container = document.querySelector('.navbar-container');
+        if (!container) return;
+        var feImage = document.getElementById('glass-map-navbar');
+        var channels = [
+            { el: document.getElementById('glass-red-navbar'), offset: 0 },
+            { el: document.getElementById('glass-green-navbar'), offset: 10 },
+            { el: document.getElementById('glass-blue-navbar'), offset: 20 }
+        ];
+        var gaussian = document.getElementById('glass-blur-navbar');
+
+        var DISTORTION_SCALE = -150;
+        var BLUR = 30;          // blur inside the map, not a backdrop blur
+        var DISPLACE = 0.9;
+        var BORDER_WIDTH = 0.07;
+        var BRIGHTNESS = 50;
+        var MAP_OPACITY = 0.93;
+        var RADIUS = 32;        // 2rem, matching .navbar-container
+
+        function buildMap(width, height) {
+            var edge = Math.min(width, height) * (BORDER_WIDTH * 0.5);
+            var svg =
+                '<svg viewBox="0 0 ' + width + ' ' + height + '" xmlns="http://www.w3.org/2000/svg">' +
+                '<defs>' +
+                '<linearGradient id="rg" x1="100%" y1="0%" x2="0%" y2="0%">' +
+                '<stop offset="0%" stop-color="#0000"/><stop offset="100%" stop-color="red"/></linearGradient>' +
+                '<linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">' +
+                '<stop offset="0%" stop-color="#0000"/><stop offset="100%" stop-color="blue"/></linearGradient>' +
+                '</defs>' +
+                '<rect x="0" y="0" width="' + width + '" height="' + height + '" fill="black"></rect>' +
+                '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="' + RADIUS + '" fill="url(#rg)"/>' +
+                '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="' + RADIUS + '" fill="url(#bg)" style="mix-blend-mode: difference"/>' +
+                '<rect x="' + edge + '" y="' + edge + '" width="' + (width - edge * 2) + '" height="' + (height - edge * 2) +
+                '" rx="' + RADIUS + '" fill="hsl(0 0% ' + BRIGHTNESS + '% / ' + MAP_OPACITY + ')" style="filter:blur(' + BLUR + 'px)"/>' +
+                '</svg>';
+            return 'data:image/svg+xml,' + encodeURIComponent(svg);
+        }
+
+        function update() {
+            var box = container.getBoundingClientRect();
+            if (!box.width || !box.height) return;
+            if (feImage) feImage.setAttribute('href', buildMap(box.width, box.height));
+            channels.forEach(function(channel) {
+                if (channel.el) channel.el.setAttribute('scale', String(DISTORTION_SCALE + channel.offset));
+            });
+            if (gaussian) gaussian.setAttribute('stdDeviation', String(DISPLACE));
+        }
+
+        // Safari and Firefox accept the declaration but do not render an SVG
+        // filter in backdrop-filter, so they take the plain-blur fallback.
+        function supportsSvgBackdrop() {
+            var ua = navigator.userAgent;
+            if ((/Safari/.test(ua) && !/Chrome/.test(ua)) || /Firefox/.test(ua)) return false;
+            var probe = document.createElement('div');
+            probe.style.backdropFilter = 'url(#glass-filter-navbar)';
+            return probe.style.backdropFilter !== '';
+        }
+
+        // Hide the bar while the footer is on screen.
+        var footEl = document.querySelector('.paper-doc-footer') || document.querySelector('footer');
+        if (footEl && typeof IntersectionObserver !== 'undefined') {
+            new IntersectionObserver(function(entries) {
+                container.classList.toggle('is-tucked', entries[0].isIntersecting);
+            }).observe(footEl);
+        }
+
+        if (supportsSvgBackdrop()) {
+            container.classList.add('glass-surface--svg');
+            update();
+            if (typeof ResizeObserver !== 'undefined') {
+                new ResizeObserver(function() { setTimeout(update, 0); }).observe(container);
+            } else {
+                window.addEventListener('resize', update);
+            }
+        } else {
+            container.classList.add('glass-surface--fallback');
+        }
+    })();
+    </script>
+
 </body>
 </html>
 

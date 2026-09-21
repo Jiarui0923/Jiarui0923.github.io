@@ -88,6 +88,12 @@
   
   
   
+  
+<link rel="stylesheet" href="/css/jelly-chips.css">
+
+  
+  
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
     <body
@@ -251,15 +257,9 @@
         .papers-index-container .pi-item-date { flex: 0 0 auto; margin-left: auto; font-size: 0.82rem; color: var(--card-time); white-space: nowrap; }
         .papers-index-container .pi-item-venue { margin-top: 0.35rem; font-size: 0.92rem; color: var(--black-4); overflow-wrap: break-word; }
         .papers-index-container .pi-item-authors { margin-top: 0.25rem; font-size: 0.9rem; color: var(--black-2); overflow-wrap: break-word; }
-        .papers-index-container .pi-item-links { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
-        .papers-index-container .pi-item-link {
-            display: inline-flex; align-items: center; gap: 0.3rem;
-            padding: 0.3rem 0.7rem; border-radius: 1rem; font-size: 0.8rem;
-            text-decoration: none; background: var(--white-2); color: var(--black-2);
-            transition: background-color 0.2s ease, color 0.2s ease;
-        }
-        .papers-index-container .pi-item-link:hover { background: var(--link); color: #fff; }
-        .papers-index-container .pi-item-link i { font-size: 0.85rem; }
+        /* The link pills are jelly chips (css/jelly-chips.css); the row only
+           needs its place in the entry. */
+        .papers-index-container .pi-item-links { flex-wrap: wrap; margin-top: 0.6rem; }
         .papers-index-container .pi-item-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
         .papers-index-container .pi-tag {
             font-size: 0.78rem; padding: 0.15rem 0.6rem; border-radius: 1rem;
@@ -403,8 +403,10 @@
                 var authors = (p.authors || []).map(function(a) { return escapeHtml(a.name); }).join(', ');
                 var linksHtml = '';
                 if (p.links && p.links.length > 0) {
-                    linksHtml = '<div class="pi-item-links">' + p.links.map(function(l) {
-                        return '<a class="pi-item-link" href="' + escapeHtml(l.link) + '"><i class="' + escapeHtml(l.icon) + '"></i>' + escapeHtml(l.name) + '</a>';
+                    linksHtml = '<div class="pi-item-links jelly-row">' + p.links.map(function(l) {
+                        return '<a class="jelly-chip" href="' + escapeHtml(l.link) + '">' +
+                            '<span class="jelly-chip__skin"><span class="jelly-chip__icon"><i class="' + escapeHtml(l.icon) + '"></i></span>' +
+                            '<span class="jelly-chip__label">' + escapeHtml(l.name) + '</span></span></a>';
                     }).join('') + '</div>';
                 }
                 var tagsHtml = '';
@@ -434,6 +436,9 @@
                 '</li>';
             }).join('');
         }
+        // The list is rebuilt on every search, filter and page change, so the
+        // fresh chip rows need hooking up again.
+        if (window.jellyChips) window.jellyChips.refresh();
         var pagEl = document.getElementById('pi-pagination');
         if (totalPages <= 1) { pagEl.innerHTML = ''; return; }
         var pag = '<button class="pi-page-btn" ' + (currentPage === 1 ? 'disabled' : '') + ' data-page="' + (currentPage - 1) + '">&laquo; Prev</button>';
@@ -509,6 +514,11 @@
 <script src="/js/rubber-segment.js"></script>
 
         
+        
+        
+        
+<script src="/js/jelly-chips.js"></script>
+
         
         
         

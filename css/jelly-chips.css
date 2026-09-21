@@ -1,0 +1,125 @@
+/* Jelly chips -------------------------------------------------------------
+ * A port of React Bits' Jelly Radio (reactbits.dev/micro/jelly-radio) at
+ * gap 4, barge 0. Upstream is a radio group driven by clicks; these chips are
+ * links, so hover takes the place of selection: the hovered chip swells and
+ * opens to show its label while its neighbours barge aside and shrink.
+ *
+ * The springs live in js/jelly-chips.js; these rules only describe the resting
+ * shape. The paper layout carries its own inlined copy of both, because paper
+ * pages are standalone and load none of the theme's assets.
+ */
+.jelly-row {
+    --jr-gap: 4px;
+    --jr-radius: 1rem;
+    --jr-h: 1.9rem;
+    --jr-font: 0.8rem;
+    --jr-px: 0.7rem;
+    --jr-pad-x: 0.5rem;   /* both recomputed by the script from the measured */
+    --jr-pad-y: 0.2rem;   /* chip size, as upstream does */
+    --jr-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --jr-chip: var(--white-2);
+    --jr-chip-hover: var(--link);
+    --jr-text: var(--black-2);
+    --jr-text-hover: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--jr-gap);
+    padding: var(--jr-pad-y) var(--jr-pad-x);
+    /* Pull the row's own padding back out so chips still line up with the text
+       above them; the padding only exists to give the swell room. */
+    margin: calc(var(--jr-pad-y) * -1) calc(var(--jr-pad-x) * -1);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.jelly-chip {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    transform-origin: 50% 50%;
+    will-change: transform;
+    -webkit-tap-highlight-color: transparent;
+}
+.jelly-chip:link,
+.jelly-chip:visited,
+.jelly-chip:hover,
+.jelly-chip:focus { text-decoration: none; }
+
+.jelly-chip__skin {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--jr-h);
+    padding: 0 var(--jr-px);
+    border-radius: var(--jr-radius);
+    background: var(--jr-chip);
+    color: var(--jr-text);
+    font-size: var(--jr-font);
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.jelly-chip:hover .jelly-chip__skin,
+.jelly-chip:focus-visible .jelly-chip__skin {
+    background: var(--jr-chip-hover);
+    color: var(--jr-text-hover);
+}
+
+.jelly-chip__icon { display: inline-flex; flex: 0 0 auto; }
+.jelly-chip__icon i { font-size: 1.05em; }
+
+/* Collapsed to nothing until the chip is hovered; max-width animates because
+   the label has no fixed width to transition from. */
+.jelly-chip__label {
+    display: inline-block;
+    /* The label is a flex item of the skin, and a flex item's automatic minimum
+       size would outrank max-width: 0 and keep it at full width. */
+    min-width: 0;
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.28s var(--jr-ease-out), opacity 0.2s ease,
+                margin-left 0.28s var(--jr-ease-out);
+}
+.jelly-chip:hover .jelly-chip__label,
+.jelly-chip:focus-visible .jelly-chip__label {
+    max-width: 14rem;
+    opacity: 1;
+    margin-left: 0.45em;
+}
+
+/* Resume socials: a taller pill, and the row wraps because there are many.
+   These carry no hover colour - the swell and the opening label are the whole
+   response. */
+.jelly-row--social {
+    --jr-chip-hover: var(--jr-chip);
+    --jr-text-hover: var(--jr-text);
+    --jr-h: 2.4rem;
+    --jr-font: 0.9rem;
+    --jr-px: 0.85rem;
+    --jr-radius: 1.2rem;
+    --jr-gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.jelly-row--social .jelly-chip__icon i { font-size: 1rem; }
+/* Scoped to the open state: unscoped, this outranks the collapsed
+   .jelly-chip__label rule and the chip never closes. */
+.jelly-row--social .jelly-chip:hover .jelly-chip__label,
+.jelly-row--social .jelly-chip:focus-visible .jelly-chip__label { max-width: 16rem; }
+
+/* No hover to open them with, so touch shows every label. */
+@media (hover: none) {
+    .jelly-chip__label { max-width: 14rem; opacity: 1; margin-left: 0.45em; }
+}
+
+@media screen and (max-width: 600px) {
+    .jelly-row--social { --jr-h: 2.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jelly-chip__label { transition: none; }
+}

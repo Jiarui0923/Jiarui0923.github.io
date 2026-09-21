@@ -88,6 +88,12 @@
   
   
   
+  
+<link rel="stylesheet" href="/css/jelly-chips.css">
+
+  
+  
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
     <body
@@ -204,63 +210,26 @@
             }
             .resume-pub-links { margin-top: 0.15rem; font-size: 0.95em; }
 
-            /* Socials: collapsed pill (icon only) that smoothly expands on hover to reveal the name */
+            /* Socials are jelly chips (css/jelly-chips.css): collapsed to their
+               icon, opening on hover while their neighbours barge aside. Only
+               the row's own placement lives here. */
             .resume-socials {
+                /* Overrides .jelly-row's inline-flex so `margin: auto` still
+                   centres the 800px block; the chips inside stay left aligned
+                   with the contact row above, which means dropping the row's
+                   left padding (it only exists to give the swell room). */
                 display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: 0.5rem;
+                justify-content: flex-start;
                 max-width: 800px;
                 margin: 0.5rem auto 1rem;
-                padding: 0;
+                padding-left: 0;
                 box-sizing: border-box;
-            }
-            a.resume-social,
-            a.resume-social:link,
-            a.resume-social:visited {
-                display: inline-flex;
-                align-items: center;
-                height: 2.4rem;
-                max-width: 2.4rem;
-                overflow: hidden;
-                border-radius: 1.2rem;
-                background: var(--white-2);
-                color: var(--black-2);
-                text-decoration: none;
-                transition: max-width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
-                            background-color 0.25s ease, color 0.25s ease;
-            }
-            a.resume-social .rs-icon {
-                flex: 0 0 2.4rem;
-                width: 2.4rem;
-                height: 2.4rem;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1rem;
-            }
-            a.resume-social .rs-label {
-                padding-right: 1rem;
-                font-size: 0.9rem;
-                white-space: nowrap;
-            }
-            a.resume-social:hover,
-            a.resume-social:focus {
-                max-width: 16rem;
-                background: var(--link);
-                color: #fff;
-                text-decoration: none;
             }
 
             @media screen and (max-width: 600px) {
-                .resume-contact,
-                .resume-socials { padding: 0 16px; }
+                .resume-contact { padding: 0 16px; }
                 .resume-contact { gap: 0.3rem 0.8rem; }
                 .resume-contact-item img { width: 4.5rem; }
-                a.resume-social,
-                a.resume-social:link,
-                a.resume-social:visited { height: 2.1rem; max-width: 2.1rem; }
-                a.resume-social .rs-icon { flex-basis: 2.1rem; width: 2.1rem; height: 2.1rem; }
             }
         </style>
 
@@ -287,46 +256,62 @@
         
 
         
-        <div class="resume-socials">
+        <div class="resume-socials jelly-row jelly-row--social">
             
-            <a class="resume-social" href="https://github.com/jiarui0923/" target="_blank" title="GitHub">
-                <span class="rs-icon"><i class="fab fa-github fa-lg"></i></span>
-                <span class="rs-label">GitHub</span>
+            <a class="jelly-chip" href="https://github.com/jiarui0923/" target="_blank" title="GitHub">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="fab fa-github fa-lg"></i></span>
+                    <span class="jelly-chip__label">GitHub</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn">
-                <span class="rs-icon"><i class="fab fa-linkedin fa-lg"></i></span>
-                <span class="rs-label">LinkedIn</span>
+            <a class="jelly-chip" href="https://www.linkedin.com/in/li-jiarui/" target="_blank" title="LinkedIn">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="fab fa-linkedin fa-lg"></i></span>
+                    <span class="jelly-chip__label">LinkedIn</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar">
-                <span class="rs-icon"><i class="ai ai-google-scholar"></i></span>
-                <span class="rs-label">Google Scholar</span>
+            <a class="jelly-chip" href="https://scholar.google.com/citations?user=9lcAfL8AAAAJ" target="_blank" title="Google Scholar">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="ai ai-google-scholar"></i></span>
+                    <span class="jelly-chip__label">Google Scholar</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="https://orcid.org/0009-0001-1055-4424" target="_blank" title="ORCID">
-                <span class="rs-icon"><i class="fab fa-orcid fa-lg"></i></span>
-                <span class="rs-label">ORCID</span>
+            <a class="jelly-chip" href="https://orcid.org/0009-0001-1055-4424" target="_blank" title="ORCID">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="fab fa-orcid fa-lg"></i></span>
+                    <span class="jelly-chip__label">ORCID</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="http://resume.jiarui.li" target="_blank" title="Resume">
-                <span class="rs-icon"><i class="fas fa-file-alt fa-lg"></i></span>
-                <span class="rs-label">Resume</span>
+            <a class="jelly-chip" href="http://resume.jiarui.li" target="_blank" title="Resume">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="fas fa-file-alt fa-lg"></i></span>
+                    <span class="jelly-chip__label">Resume</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="https://dblp.org/pid/177/2287-1.html" target="_blank" title="DBLP">
-                <span class="rs-icon"><i class="ai ai-dblp"></i></span>
-                <span class="rs-label">DBLP</span>
+            <a class="jelly-chip" href="https://dblp.org/pid/177/2287-1.html" target="_blank" title="DBLP">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="ai ai-dblp"></i></span>
+                    <span class="jelly-chip__label">DBLP</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="https://www.researchgate.net/profile/Jiarui-Li-89" target="_blank" title="ResearchGate">
-                <span class="rs-icon"><i class="ai ai-researchgate"></i></span>
-                <span class="rs-label">ResearchGate</span>
+            <a class="jelly-chip" href="https://www.researchgate.net/profile/Jiarui-Li-89" target="_blank" title="ResearchGate">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="ai ai-researchgate"></i></span>
+                    <span class="jelly-chip__label">ResearchGate</span>
+                </span>
             </a>
             
-            <a class="resume-social" href="https://www.semanticscholar.org/author/Jiarui-Li/2339547605" target="_blank" title="Semantic Scholar">
-                <span class="rs-icon"><i class="ai ai-semantic-scholar"></i></span>
-                <span class="rs-label">Semantic Scholar</span>
+            <a class="jelly-chip" href="https://www.semanticscholar.org/author/Jiarui-Li/2339547605" target="_blank" title="Semantic Scholar">
+                <span class="jelly-chip__skin">
+                    <span class="jelly-chip__icon"><i class="ai ai-semantic-scholar"></i></span>
+                    <span class="jelly-chip__label">Semantic Scholar</span>
+                </span>
             </a>
             
         </div>
@@ -720,6 +705,11 @@
 <script src="/js/rubber-segment.js"></script>
 
         
+        
+        
+        
+<script src="/js/jelly-chips.js"></script>
+
         
         
         
