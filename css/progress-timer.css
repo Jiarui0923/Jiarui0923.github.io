@@ -51,7 +51,11 @@
     align-items: baseline;
     font-size: var(--font-size);
     line-height: 1.2;
-    color: color-mix(in srgb, var(--accent-color) calc(var(--effect, 0) * 100%), var(--text-color));
+    /* Blended between --text-color and --accent-color by js/progress-timer.js.
+       This used to be a color-mix() on --effect, which Safari 16 resolves to
+       transparent at the 0% endpoint - every row but the highlighted one, so
+       the list rendered as a single line over its own empty height. */
+    color: var(--pt-color, var(--text-color));
     transform: translateX(calc(var(--effect, 0) * var(--max-shift)));
 }
 
@@ -72,7 +76,7 @@
     left: calc(-1 * var(--marker-length) - var(--marker-gap));
     height: 1px;
     width: var(--marker-length);
-    background-color: color-mix(in srgb, var(--accent-color) calc(var(--effect, 0) * 100%), var(--marker-color));
+    background-color: var(--pt-marker, var(--marker-color));
     transform-origin: left center;
     transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.5));
 }
@@ -215,6 +219,10 @@
 
 /* A mouse or trackpad drives the list directly; touch leaves it to the page. */
 .progress-timer.is-grabbable { cursor: grab; user-select: none; -webkit-user-select: none; }
+/* A finger drag has to reach the script as pointer events rather than being
+   swallowed by the page scroll, so the block takes the vertical axis. It is a
+   few rows tall, so the page is still scrollable everywhere around it. */
+.progress-timer.is-draggable { touch-action: pan-x; }
 .progress-timer.is-dragging { cursor: grabbing; }
 /* Touch-only screens pick by tapping, so the rows are targets. */
 .progress-timer.is-tappable .line-sidebar__item { cursor: pointer; }
@@ -291,6 +299,20 @@
         max-width: 100%;
     }
     .progress-timer .lattice-loader { --ll-font: 11px; --ll-cell: 5px; }
+    /* The status stacks as well: the label on one line, the count beneath it,
+       both beside the dots. Side by side the clock ran off the right edge. */
+    .progress-timer .lattice-loader {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas: 'dots label' 'dots timer';
+        align-items: center;
+        column-gap: 0.5em;
+        row-gap: 0.1em;
+    }
+    .progress-timer .lattice-loader__grid { grid-area: dots; }
+    .progress-timer .lattice-loader__label { grid-area: label; }
+    .progress-timer .lattice-loader__timer { grid-area: timer; }
+    .progress-timer__status { flex: 0 1 auto; min-width: 0; }
     .line-sidebar {
         --marker-length: 28px;
         --max-shift: 20px;

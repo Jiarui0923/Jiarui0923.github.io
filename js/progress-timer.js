@@ -65,6 +65,51 @@
         if (height > 0) root.style.height = height + 'px'
     }
 
+    // --- colours ------------------------------------------------------------
+    // The blend between the resting colour and the accent is worked out here
+    // rather than in CSS. It was a color-mix() on --effect, which Safari 16
+    // resolves to transparent at the 0% end - so on an iPhone every row except
+    // the highlighted one painted nothing at all, leaving one line above its
+    // own empty height. Reading the stops from CSS keeps the theme in charge.
+    var palette = { accent: [17, 17, 19], text: [121, 121, 121], marker: [201, 201, 205] }
+
+    function parseColor(value) {
+        var text = String(value || '').trim()
+        var hex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(text)
+        if (hex) {
+            var digits = hex[1]
+            if (digits.length === 3) digits = digits[0] + digits[0] + digits[1] + digits[1] + digits[2] + digits[2]
+            return [parseInt(digits.slice(0, 2), 16), parseInt(digits.slice(2, 4), 16), parseInt(digits.slice(4, 6), 16)]
+        }
+        var parts = text.replace(/^(rgba?|color)\(|\)$/g, '').replace(/^srgb\s+/, '').split(/[\s,/]+/).filter(Boolean)
+        if (parts.length < 3) return null
+        var channels = parts.slice(0, 3).map((part) => {
+            var n = parseFloat(part)
+            if (!isFinite(n)) return null
+            // color(srgb 1 1 1) gives fractions; rgb() gives 0-255.
+            return part.indexOf('%') >= 0 ? n * 2.55 : (n <= 1 && text.indexOf('color(') === 0 ? n * 255 : n)
+        })
+        return channels.indexOf(null) < 0 ? channels : null
+    }
+
+    function readPalette() {
+        var style = window.getComputedStyle(list)
+        var accent = parseColor(style.getPropertyValue('--accent-color'))
+        var text = parseColor(style.getPropertyValue('--text-color'))
+        var marker = parseColor(style.getPropertyValue('--marker-color'))
+        if (accent) palette.accent = accent
+        if (text) palette.text = text
+        if (marker) palette.marker = marker
+    }
+
+    function mix(from, to, t) {
+        var k = Math.max(0, Math.min(1, t))
+        return 'rgb(' +
+            Math.round(from[0] + (to[0] - from[0]) * k) + ',' +
+            Math.round(from[1] + (to[1] - from[1]) * k) + ',' +
+            Math.round(from[2] + (to[2] - from[2]) * k) + ')'
+    }
+
     function render() {
         // The window never scrolls past the point where it would run out of
         // milestones to show - that is what left one line over a field of white
@@ -90,8 +135,12 @@
             // --effect is the Line Sidebar's own 0..1 input: accent colour, the
             // shift and the marker length all read it.
             var effect = Math.max(0, 1 - Math.abs(chosen))
-            item.style.setProperty('--pt-opacity', opacity.toFixed(3))
+            // Set on the element, not through a custom property a stylesheet
+            // has to resolve: one less thing that can quietly not apply.
+            item.style.opacity = opacity.toFixed(3)
             item.style.setProperty('--effect', effect.toFixed(3))
+            item.style.setProperty('--pt-color', mix(palette.text, palette.accent, effect))
+            item.style.setProperty('--pt-marker', mix(palette.marker, palette.accent, effect))
             var active = Math.abs(chosen) < 0.5 && !item.hasAttribute('data-border')
             item.classList.toggle('is-active', active)
             item.setAttribute('aria-current', active ? 'true' : 'false')
@@ -117,7 +166,11 @@
         settleTO = window.setTimeout(() => setPosition(Math.round(position), true), 140)
     }
 
-    if (window.matchMedia('(any-pointer: fine)').matches) root.classList.add('is-grabbable')
+    if (!touchOnly) root.classList.add('is-grabbable')
+    // A finger drags the list too. That costs the page its vertical scroll over
+    // these few rows (touch-action: pan-x), which is the trade for the list
+    // being draggable at all on a phone - there is no gesture that is both.
+    if (maxStart) root.classList.add('is-draggable')
 
     root.addEventListener('wheel', (e) => {
         if (!maxStart) return
@@ -133,18 +186,19 @@
     }, { passive: false })
 
     var drag = null
+    var dragged = false       // the gesture moved, so the click that follows is not a tap
     root.addEventListener('pointerdown', (e) => {
-        // Touch drags belong to the page: grabbing them would cost the reader
-        // their way of scrolling past the section.
-        if (e.pointerType === 'touch' || e.button > 0 || !maxStart || !pitch) return
-        drag = { id: e.pointerId, y: e.clientY, from: position, moved: false }
+        if (e.button > 0 || !maxStart || !pitch) return
+        // A finger never holds still, so it needs more slack than a mouse
+        // before the hold counts as a drag rather than a tap.
+        drag = { id: e.pointerId, y: e.clientY, from: position, moved: false, slack: e.pointerType === 'touch' ? 8 : 3 }
         root.classList.add('is-dragging')
     })
     root.addEventListener('pointermove', (e) => {
         if (!drag || e.pointerId !== drag.id) return
         var dy = e.clientY - drag.y
         if (!drag.moved) {
-            if (Math.abs(dy) < 3) return
+            if (Math.abs(dy) < drag.slack) return
             drag.moved = true
             manual = true
             try { root.setPointerCapture(e.pointerId) } catch (err) { /* older pens */ }
@@ -155,6 +209,7 @@
     })
     function endDrag(e) {
         if (!drag || e.pointerId !== drag.id) return
+        dragged = drag.moved
         drag = null
         root.classList.remove('is-dragging')
         setPosition(Math.round(position), true)
@@ -162,20 +217,23 @@
     root.addEventListener('pointerup', endDrag)
     root.addEventListener('pointercancel', endDrag)
 
-    // With a mouse or trackpad in the room, page scroll also walks the window
-    // until the reader takes it over. On a touch-only screen it does not: the
-    // block came into view and the scroll had already carried the list to its
-    // end, so it simply holds still and a tap picks a milestone instead.
-    if (touchOnly) {
-        root.classList.add('is-tappable')
-        items.forEach((item, i) => {
-            if (item.hasAttribute('data-border')) return
-            item.addEventListener('click', () => {
-                manual = true
-                setPosition(i, true)
-            })
+    // A milestone can also just be picked. The click that ends a drag is not a
+    // pick, so it is swallowed.
+    root.classList.add('is-tappable')
+    items.forEach((item, i) => {
+        if (item.hasAttribute('data-border')) return
+        item.addEventListener('click', () => {
+            if (dragged) { dragged = false; return }
+            manual = true
+            setPosition(i, true)
         })
-    } else {
+    })
+
+    // With a mouse or trackpad in the room, page scroll also walks the window
+    // until the reader takes it over. On a touch-only screen it does not: by
+    // the time the block is on screen the scroll would have carried the list
+    // past its end, so it holds still and waits to be dragged or tapped.
+    if (!touchOnly) {
         var queued = false
         function follow() {
             queued = false
@@ -228,6 +286,17 @@
         workingTimer.remove()
     }
 
+    // The stops come from CSS, so they move with the theme: the switch writes
+    // body[data-color-scheme], and auto mode moves no attribute at all.
+    function repaint() { readPalette(); render() }
+    new MutationObserver(repaint).observe(document.body, {
+        attributes: true, attributeFilter: ['data-color-scheme']
+    })
+    var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    if (darkQuery.addEventListener) darkQuery.addEventListener('change', repaint)
+    else if (darkQuery.addListener) darkQuery.addListener(repaint)
+
+    readPalette()
     measure()
     setPosition(0, false)
     window.addEventListener('resize', () => {
