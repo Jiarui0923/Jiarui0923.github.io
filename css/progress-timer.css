@@ -1,0 +1,319 @@
+/* Progress timer ----------------------------------------------------------
+ * The <<progresstimer>> tag from source/_data/index.md, built from two React
+ * Bits components:
+ *   - Line Sidebar (reactbits.dev/components/line-sidebar) for the milestone
+ *     list, at itemGap 4, showIndex false, maxShift 42;
+ *   - Lattice Loader (reactbits.dev/micro/lattice-loader) at gap 3, glow true,
+ *     for the status of the highlighted milestone.
+ * Both are ported as static markup + CSS; js/progress-timer.js drives only the
+ * scrolling window and the live clock.
+ *
+ * The palette from the preset - accent #ffffff, text #797979, marker #1e1e1e -
+ * is a dark-on-dark set, so it is used as-is in dark mode and mirrored in light
+ * mode, where a white accent would be invisible against the page.
+ */
+
+/* --- Line Sidebar ------------------------------------------------------- */
+.line-sidebar {
+    --accent-color: #111113;
+    --text-color: #797979;
+    --marker-color: #c9c9cd;
+    --marker-length: 60px;
+    --marker-gap: 0px;
+    --tick-scale: 0.5;
+    --max-shift: 42px;
+    --item-gap: 4px;
+    --font-size: 1.1rem;
+
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.line-sidebar--markers { padding-left: calc(var(--marker-length) + var(--marker-gap)); }
+
+.line-sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--item-gap);
+}
+
+/* --effect (0..1) is set per item by the script; every derived property below
+   reads that one value so colour, shift and scale stay in step. */
+.line-sidebar__item { position: relative; }
+
+.line-sidebar__label {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    font-size: var(--font-size);
+    line-height: 1.2;
+    color: color-mix(in srgb, var(--accent-color) calc(var(--effect, 0) * 100%), var(--text-color));
+    transform: translateX(calc(var(--effect, 0) * var(--max-shift)));
+}
+
+/* The plain-language version of the milestone, kept quieter than the name it
+   follows so the list still reads as a sequence of names. */
+.line-sidebar__note {
+    margin-left: 0.55em;
+    font-size: 0.76em;
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.line-sidebar__marker {
+    position: absolute;
+    top: 50%;
+    left: calc(-1 * var(--marker-length) - var(--marker-gap));
+    height: 1px;
+    width: var(--marker-length);
+    background-color: color-mix(in srgb, var(--accent-color) calc(var(--effect, 0) * 100%), var(--marker-color));
+    transform-origin: left center;
+    transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.5));
+}
+
+/* Short static tick centred in the gap between two milestones. */
+.line-sidebar--markers .line-sidebar__item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + var(--item-gap) / 2);
+    left: calc(-1 * var(--marker-length) - var(--marker-gap));
+    height: 1px;
+    width: calc(var(--marker-length) * var(--tick-scale));
+    background-color: var(--marker-color);
+    opacity: 0.5;
+    transform: translateY(-50%);
+}
+.line-sidebar--scale-tick .line-sidebar__item:not(:last-child)::after {
+    transform-origin: left center;
+    transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.6));
+}
+
+/* --- Lattice Loader ----------------------------------------------------- */
+.lattice-loader {
+    --ll-n: 3;
+    --ll-cell: 6px;
+    --ll-gap: 3px;
+    --ll-font: 13px;
+    --ll-color: currentColor;
+    --ll-mark: #22c55e;
+    --ll-idle: 0.15;
+    --ll-glow: currentColor;
+    --ll-mark-glow: #22c55e;
+    --ll-peak: 1;
+    --ll-cycle: 864ms;
+    --ll-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ll-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--ll-font) * 0.625);
+    font-family: inherit;
+    font-size: var(--ll-font);
+    line-height: 1;
+}
+
+.lattice-loader__grid { display: grid; flex: none; }
+.lattice-loader__layer {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: repeat(var(--ll-n), var(--ll-cell));
+    gap: var(--ll-gap);
+}
+.lattice-loader__cell {
+    width: var(--ll-cell);
+    height: var(--ll-cell);
+    border-radius: 50%;
+    background: var(--ll-color);
+    opacity: var(--ll-idle);
+}
+.lattice-loader[data-glow] .lattice-loader__run .lattice-loader__cell:not([data-hole]) {
+    box-shadow: 0 0 calc(var(--ll-cell) * 1.2) calc(var(--ll-cell) * 0.12) var(--ll-glow);
+}
+.lattice-loader[data-glow] .lattice-loader__mark .lattice-loader__cell[data-on] {
+    box-shadow: 0 0 calc(var(--ll-cell) * 1.2) calc(var(--ll-cell) * 0.12) var(--ll-mark-glow);
+}
+.lattice-loader__run { transition: opacity 200ms ease; }
+.lattice-loader__run .lattice-loader__cell {
+    animation: lattice-on var(--ll-cycle) var(--ll-ease-in-out) infinite;
+}
+.lattice-loader__run .lattice-loader__cell[data-hole] {
+    animation: none;
+    opacity: calc(var(--ll-idle) * 0.47);
+}
+.lattice-loader__mark {
+    opacity: 0;
+    transform: scale(0.9);
+    transform-origin: center;
+    transition: opacity 160ms var(--ll-ease-out), transform 160ms var(--ll-ease-out);
+}
+.lattice-loader__mark .lattice-loader__cell {
+    transition: opacity 200ms ease, background-color 200ms ease;
+}
+.lattice-loader__mark .lattice-loader__cell[data-on] {
+    background: var(--ll-mark);
+    opacity: var(--ll-peak);
+}
+.lattice-loader:not([data-status='working']) .lattice-loader__run { opacity: 0; }
+.lattice-loader:not([data-status='working']) .lattice-loader__run .lattice-loader__cell {
+    animation-play-state: paused;
+}
+.lattice-loader:not([data-status='working']) .lattice-loader__mark {
+    opacity: 1;
+    transform: none;
+    transition: opacity 200ms ease, transform 200ms var(--ll-ease-out);
+}
+.lattice-loader__label { position: relative; display: inline-block; font-weight: 500; }
+.lattice-loader__text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    opacity: 0;
+    filter: blur(2px);
+    transition: opacity 200ms ease, filter 200ms ease;
+}
+.lattice-loader__text[data-active] { position: static; opacity: 1; filter: blur(0); }
+.lattice-loader__timer {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: calc(var(--ll-font) * 0.875);
+    font-variant-numeric: tabular-nums;
+    opacity: 0.6;
+}
+
+@keyframes lattice-on {
+    0%, 100% { opacity: var(--ll-idle); }
+    18%, 42% { opacity: var(--ll-peak); }
+    62% { opacity: var(--ll-idle); }
+}
+
+/* --- The timer itself --------------------------------------------------- */
+.progress-timer {
+    --pt-rows: 3;              /* JS overwrites from data-visible */
+    --pt-row-h: 2.3rem;
+    position: relative;
+    margin: 1.5rem 0 0.5rem;
+    /* A fixed window: the same number of milestones is on screen throughout,
+       whatever the list behind it is doing. The script replaces this with a
+       measured height once the rows exist; this is the pre-script fallback. */
+    height: calc(var(--pt-rows) * var(--pt-row-h) + (var(--pt-rows) - 1) * 4px);
+    overflow: hidden;
+}
+
+/* The border item closes the list off: it never accents, never carries a
+   status, and reads as scenery rather than as something that happened. */
+.progress-timer .line-sidebar__item[data-border] .line-sidebar__text {
+    font-style: italic;
+    opacity: 0.75;
+}
+
+/* A mouse or trackpad drives the list directly; touch leaves it to the page. */
+.progress-timer.is-grabbable { cursor: grab; user-select: none; -webkit-user-select: none; }
+.progress-timer.is-dragging { cursor: grabbing; }
+/* Touch-only screens pick by tapping, so the rows are targets. */
+.progress-timer.is-tappable .line-sidebar__item { cursor: pointer; }
+.progress-timer.is-tappable .line-sidebar__item[data-border] { cursor: default; }
+.progress-timer:focus-visible { outline: 2px solid var(--accent-color, currentColor); outline-offset: 4px; }
+
+.progress-timer .line-sidebar__list {
+    padding: 0;
+    /* The window slides by whole milestones; js/progress-timer.js sets the
+       offset from the measured item positions, not from a row constant. */
+    transform: translateY(calc(var(--pt-offset, 0px) * -1));
+}
+/* Easing is switched on only for a snap or a keypress - while a drag is in
+   hand the list has to sit under the pointer, not trail it. */
+.progress-timer.is-animating .line-sidebar__list {
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The name and its note take the room that is left; the status keeps its own,
+   so a long note truncates instead of pushing the status off the row. */
+.progress-timer .line-sidebar__label { flex: 1 1 auto; min-width: 0; }
+
+.progress-timer .line-sidebar__item {
+    min-height: var(--pt-row-h);
+    display: flex;
+    /* Name on the left, status on the right, on one line. */
+    flex-direction: row;
+    align-items: center;
+    gap: 0.9rem;
+    /* Opacity comes from the item's own distance from the top slot, which the
+       script recomputes as a float, so milestones fade one after another as
+       they travel rather than the list dimming as a block. */
+    opacity: var(--pt-opacity, 1);
+    transition: opacity 0.25s ease;
+}
+.progress-timer.is-dragging .line-sidebar__item { transition: none; }
+
+/* The status sits to the right of the milestone it belongs to, and shows only
+   for the one pinned at the top. It rides the same --effect shift as the name,
+   so the pair travels together. Its space is held in every row rather than
+   grown on the active one: a row that changed height would leave the window
+   holding a fraction of a milestone. */
+.progress-timer__status {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    opacity: 0;
+    transform: translateX(calc(var(--effect, 0) * var(--max-shift)));
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+.progress-timer .line-sidebar__item.is-active .progress-timer__status { opacity: 1; }
+
+.progress-timer .lattice-loader { color: var(--text-color); }
+.progress-timer .line-sidebar__item.is-active .lattice-loader { color: var(--accent-color); }
+
+@media screen and (max-width: 600px) {
+    /* Name and status share the first line, the note drops to its own beneath
+       it: on a phone all three side by side left the status half off the row
+       and the note truncated to nothing. Rows are taller to suit, and the
+       script measures that rather than assuming it. */
+    .progress-timer {
+        --pt-row-h: 3.2rem;
+    }
+    .progress-timer .line-sidebar__item { gap: 0.5rem; align-items: center; }
+    .progress-timer .line-sidebar__label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.15rem;
+    }
+    .line-sidebar__note {
+        margin-left: 0;
+        font-size: 0.78em;
+        max-width: 100%;
+    }
+    .progress-timer .lattice-loader { --ll-font: 11px; --ll-cell: 5px; }
+    .line-sidebar {
+        --marker-length: 28px;
+        --max-shift: 20px;
+        --font-size: 1rem;
+    }
+}
+
+/* Dark: the preset's own palette - white accent, grey text, near-black rules. */
+@media (prefers-color-scheme: dark) {
+    body[data-color-scheme="auto"] .line-sidebar {
+        --accent-color: #ffffff;
+        --text-color: #797979;
+        --marker-color: #1e1e1e;
+    }
+}
+body[data-color-scheme="dark"] .line-sidebar {
+    --accent-color: #ffffff;
+    --text-color: #797979;
+    --marker-color: #1e1e1e;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .progress-timer .line-sidebar__list,
+    .progress-timer .line-sidebar__item,
+    .progress-timer__status { transition: none; }
+}
