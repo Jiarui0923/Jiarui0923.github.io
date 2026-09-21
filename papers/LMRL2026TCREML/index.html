@@ -257,6 +257,49 @@
         .section-nav-link { display: inline-block; cursor: pointer; text-decoration: none; transition: all 0.3s ease-in-out; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 15vw; }
         .section-nav-link.is-active { transform: scale(1.05); max-width: 30vw; }
         #citation-content { white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%; box-sizing: border-box; }
+        /* Citation block: the format tabs cross-fade and the box eases to the
+           new height, instead of the text swapping and the page jumping. */
+        .citation-toolbar {
+            display: flex; align-items: flex-end; justify-content: space-between;
+            gap: 1rem; flex-wrap: wrap;
+        }
+        #citation-tabs a { transition: color 0.2s ease, border-bottom-color 0.2s ease; }
+        #citation-content-wrapper {
+            overflow: hidden;
+            transition: opacity 0.15s ease, height 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #citation-content-wrapper.is-switching { opacity: 0; }
+        #citation-content-wrapper .CodeMirror {
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.4rem 0.2rem;
+            font-size: 0.92rem;
+        }
+        .citation-copy {
+            display: inline-flex; align-items: center; gap: 0.45rem;
+            margin-bottom: 0.5rem; padding: 0.35rem 0.9rem;
+            border: 1px solid var(--border-color); border-radius: 2rem;
+            background: transparent; color: var(--black-4);
+            font-family: inherit; font-size: 0.85rem; line-height: 1.4;
+            cursor: pointer; white-space: nowrap;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .citation-copy:hover { color: var(--black-2); background: var(--white-2); }
+        .citation-copy.is-copied { color: var(--link); border-color: var(--link); }
+        /* QR: always dark-on-white on its own plate. An inverted code is not
+           reliably scannable, and theme-coloured codes were what made this
+           disappear against a matching background. */
+        .share-qr { display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .share-qr .share-qr-plate {
+            padding: 0.75rem; border-radius: 0.75rem;
+            background: #fff; box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+            line-height: 0;
+        }
+        .share-qr img, .share-qr canvas { display: block; width: 100%; height: auto; max-width: 200px; }
+        .share-qr-caption { margin: 0; font-size: 0.8rem; color: var(--black-4); }
+        @media (prefers-reduced-motion: reduce) {
+            #citation-content-wrapper { transition: none; }
+        }
         .hero-bordered { border-top: 2px solid #ccc; border-bottom: 2px solid #ccc; }
         /* Award badges — mirrors themes/cupertino/source/css/awards.css, inlined
            because paper pages are standalone and don't load the theme's CSS. */
@@ -614,19 +657,27 @@
             <h2 class="title is-4" id="cite">Cite This Work</h2>
             <div class="grid has-3-cols">
                 <div class="cell is-col-span-2">
-                    <div class="tabs mb-0" id="citation-tabs">
-                        <ul>
+                    <div class="citation-toolbar">
+                        <div class="tabs mb-0" id="citation-tabs">
+                            <ul>
 
-                            <li class="is-active"><a href="#">Bibtex</a></li>
+                                <li class="is-active"><a href="#">Bibtex</a></li>
 
-                            <li><a href="#">APA</a></li>
+                                <li><a href="#">APA</a></li>
 
-                        </ul>
+                            </ul>
+                        </div>
+                        <button type="button" class="citation-copy" id="citation-copy">
+                            <i class="fa-regular fa-copy" aria-hidden="true"></i><span class="citation-copy-label">Copy</span>
+                        </button>
                     </div>
                     <div id="citation-content-wrapper" style="min-height:100px;"></div>
                 </div>
                 <div class="cell has-text-centered is-flex is-justify-content-center is-align-items-center">
-                    <div id="share-col"></div>
+                    <div class="share-qr">
+                        <div class="share-qr-plate"><div id="share-col"></div></div>
+                        <p class="share-qr-caption">Scan to open this page</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -688,6 +739,10 @@
     
 <script src="/js/rubber-segment.js"></script>
 
+    
+    
+<script src="/js/jelly-chips.js"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.18/codemirror.min.js"></script>
@@ -716,7 +771,17 @@
             .observe(document.body, { attributes: true, attributeFilter: ['data-color-scheme'] });
 
         // CodeMirror theme depends on restored page theme
-        var cmTheme = htmlEl.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
+        // In auto mode there is no data-theme attribute at all - the CSS falls
+        // through to prefers-color-scheme - so reading the attribute alone would
+        // leave CodeMirror on its light theme over a dark page.
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        function pageIsDark() {
+            var attr = htmlEl.getAttribute('data-theme');
+            if (attr === 'dark') return true;
+            if (attr === 'light') return false;
+            return darkQuery.matches;
+        }
+        var cmTheme = pageIsDark() ? 'material-darker' : 'github';
         var cmInstances = [];
         var citCM = null;
 
@@ -740,20 +805,94 @@
         }
         var firstKey = Object.keys(citData)[0];
         initCitCM(firstKey);
+
+        // Switching format: fade the box out, swap the text, then ease from the
+        // old height to the new one so the section does not jump.
+        var citSwitchTO = null;
+        var citSettleTO = null;
+        function showCitation(tabName) {
+            if (!citCM) return;
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var apply = function() {
+                citCM.setValue(citData[tabName] || '');
+                citCM.setOption('mode', tabName === 'Bibtex' ? 'stex' : null);
+                citCM.refresh();
+            };
+            if (reduce) { apply(); return; }
+            var fromHeight = citWrapper.getBoundingClientRect().height;
+            citWrapper.classList.add('is-switching');
+            window.clearTimeout(citSwitchTO);
+            window.clearTimeout(citSettleTO);
+            citSwitchTO = window.setTimeout(function() {
+                citWrapper.style.height = fromHeight + 'px';
+                apply();
+                var toHeight = citCM.getWrapperElement().offsetHeight;
+                requestAnimationFrame(function() {
+                    citWrapper.style.height = toHeight + 'px';
+                    citWrapper.classList.remove('is-switching');
+                    // Back to auto once the transition is done, so later
+                    // reflows (a resize, a font load) are not pinned.
+                    citSettleTO = window.setTimeout(function() { citWrapper.style.height = ''; }, 280);
+                });
+            }, 150);
+        }
+
         tabsUl.addEventListener('click', function(e) {
             e.preventDefault();
             var a = e.target.closest('a');
             if (!a) return;
+            if (a.parentElement.classList.contains('is-active')) return;
             tabsUl.querySelectorAll('li').forEach(function(l){ l.classList.remove('is-active'); });
             a.parentElement.classList.add('is-active');
-            var tabName = a.textContent;
-            var newVal = citData[tabName] || '';
-            if (citCM) {
-                citCM.setValue(newVal);
-                citCM.setOption('mode', tabName === 'Bibtex' ? 'stex' : '');
-                setTimeout(function(){ citCM.refresh(); }, 10);
-            }
+            showCitation(a.textContent);
         });
+
+        // Copy the citation currently on show.
+        var copyBtn = document.getElementById('citation-copy');
+        if (copyBtn) {
+            var copyLabel = copyBtn.querySelector('.citation-copy-label');
+            var copyIcon = copyBtn.querySelector('i');
+            var copyResetTO = null;
+            function copyFeedback(ok) {
+                copyBtn.classList.toggle('is-copied', ok);
+                copyLabel.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+                copyIcon.className = ok ? 'fa-solid fa-check' : 'fa-regular fa-copy';
+                window.clearTimeout(copyResetTO);
+                copyResetTO = window.setTimeout(function() {
+                    copyBtn.classList.remove('is-copied');
+                    copyLabel.textContent = 'Copy';
+                    copyIcon.className = 'fa-regular fa-copy';
+                }, 1800);
+            }
+            copyBtn.addEventListener('click', function() {
+                var text = citCM ? citCM.getValue() : '';
+                if (!text) return;
+                // navigator.clipboard needs a secure context, which a paper page
+                // opened from disk does not have; fall back to a scratch
+                // textarea, and if even that is blocked, select the citation so
+                // the reader can copy it themselves.
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(function() { copyFeedback(true); },
+                                                            function() { selectCitation(); });
+                    return;
+                }
+                var scratch = document.createElement('textarea');
+                scratch.value = text;
+                scratch.setAttribute('readonly', '');
+                scratch.style.position = 'fixed';
+                scratch.style.opacity = '0';
+                document.body.appendChild(scratch);
+                scratch.select();
+                var ok = false;
+                try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+                document.body.removeChild(scratch);
+                if (ok) copyFeedback(true); else selectCitation();
+            });
+            function selectCitation() {
+                if (citCM) { citCM.focus(); citCM.execCommand('selectAll'); }
+                copyFeedback(false);
+            }
+        }
 
         // Section indicator (scroll nav)
         var sectionData = [];
@@ -803,20 +942,27 @@
             if (a) { e.preventDefault(); var el = document.getElementById(a.getAttribute('href').substring(1)); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
         });
 
-        // QR code — colors follow page theme
-        var isDark = htmlEl.getAttribute('data-theme') === 'dark';
-        var qrDark = isDark ? '#000' : '#fff';
-        var qrLight = isDark ? '#1a1a1a' : '#fff';
-        var qrEl = document.getElementById('share-col');
-        var qr = new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: qrDark, colorLight: qrLight, correctLevel: QRCode.CorrectLevel.H });
-        // Update QR on theme change
-        var origApply = applyTheme;
-        applyTheme = function() {
-            origApply();
-            var d = htmlEl.getAttribute('data-theme') === 'dark';
+        // QR code - drawn once, dark on white, on its own white plate. It used
+        // to be tinted per theme and redrawn on every switch, which is what made
+        // it vanish: the first draw asked for white modules on white in light
+        // mode, and near-black on #1a1a1a in dark mode. Scanners also want dark
+        // modules on a light field, so the plate is the robust answer.
+        (function initQR() {
+            var qrEl = document.getElementById('share-col');
+            if (!qrEl) return;
+            if (typeof QRCode === 'undefined') { setTimeout(initQR, 100); return; }
             qrEl.innerHTML = '';
-            qr = new QRCode(qrEl, { text: window.location.href, width: 200, height: 200, colorDark: d ? '#fff' : '#000', colorLight: d ? '#1a1a1a' : '#fff', correctLevel: QRCode.CorrectLevel.H });
-        };
+            new QRCode(qrEl, {
+                text: window.location.href,
+                width: 200,
+                height: 200,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            var img = qrEl.querySelector('img');
+            if (img) img.alt = 'QR code linking to this page';
+        })();
 
         // CodeMirror for code blocks with auto-height
         (function initCM() {
@@ -861,15 +1007,19 @@
         })();
 
         // Theme change: switch CodeMirror themes (including citation)
-        var observer = new MutationObserver(function() {
-            var newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'material-darker' : 'github';
-            if (newTheme !== cmTheme) {
-                cmTheme = newTheme;
-                cmInstances.forEach(function(cm) { cm.setOption('theme', cmTheme); });
-                if (citCM) citCM.setOption('theme', cmTheme);
-            }
-        });
+        function syncEditorTheme() {
+            var newTheme = pageIsDark() ? 'material-darker' : 'github';
+            if (newTheme === cmTheme) return;
+            cmTheme = newTheme;
+            cmInstances.forEach(function(cm) { cm.setOption('theme', cmTheme); });
+            if (citCM) citCM.setOption('theme', cmTheme);
+        }
+        var observer = new MutationObserver(syncEditorTheme);
         observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+        // Auto mode follows the OS, which can change while the page is open and
+        // moves no attribute for the observer to see.
+        if (darkQuery.addEventListener) darkQuery.addEventListener('change', syncEditorTheme);
+        else if (darkQuery.addListener) darkQuery.addListener(syncEditorTheme);
     })();
     </script>
 
